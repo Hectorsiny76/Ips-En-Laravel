@@ -6,4 +6,3 @@
         </div>
     </div>
 </body>
-@yield('footer');
