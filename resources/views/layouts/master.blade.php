@@ -9,7 +9,7 @@
 
 <div class="min-h-screen grid grid-cols-4 grid-rows-[auto_1fr_auto]">
 
-    <header class="col-span-4 bg-blue-600 text-white p-4">
+    <header class="col-span-4 bg-sky-950 text-white p-4">
         <h1 class="text-2xl font-bold">School Management System</h1>
     </header>
 
