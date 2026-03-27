@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Test</title>
+    <title>@yield('title', 'Default page')</title>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -15,19 +15,28 @@
     @endif
 
 </head>
-<body>
+<body class="bg-gray-100">
 
-<header>
-    <div class = "container">
+<div class="flex flex-col min-h-screen bg-gray-100">
 
+    <header class="h-16 flex items-center shadow bg-sky-950 text-white p-4">
+        <h1 class="text-2xl font-bold">MSI Admin Dashboard</h1>
+    </header>
+
+    <div class="flex-1 grid grid-cols-12">
+        <aside class="col-span-2 bg-gray-200 p-4 border-r">
+            <nav>
+                <h3 class="font-bold mb-3">Menu de navegación</h3>
+                <h2 class="font-bold mb-2">Ejemplo</h2>
+            </nav>
+        </aside>
+
+        <main class="col-span-10 p-6 bg-white shadow-md m-4 rounded">
+            @yield('content')
+        </main>
     </div>
-</header>
 
-<aside>
-    <div class="sm bg-blue-950">
-
-    </div>
-</aside>
+</div>
 
 </body>
 </html>

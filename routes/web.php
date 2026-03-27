@@ -1,11 +1,10 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('test');
 });
 
-Route::get('/dashboard', function () {
-    return view('layout.dashboard', );
-});
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('.layout.dashboard');

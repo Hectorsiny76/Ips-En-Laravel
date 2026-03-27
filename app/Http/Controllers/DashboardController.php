@@ -5,14 +5,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Establecimiento;
 use App\Models\Establecimientotipo;
+use App\Models\Pilotoprograma;
+use App\Models\Pilotoestablecimiento;
 
 class DashboardController extends Controller
 {
     public function index(){
-        $establecimientos = Establecimiento::all();
+        $establecimientos = Establecimiento::count();
+        $establecimientoTipos = Establecimientotipo::withCount('establecimientos')->get();
+        $programasPiloto = Pilotoprograma::count();
+        $pilotoEstablecimientos = Pilotoestablecimiento::count();
 
-        $tiendas = Establecimientotipo::withCount('tiendas')->get();
-
-        return view('layout.dashboard', compact('establecimientos'));
+        return view('layout.dashboard', compact('establecimientos', 'establecimientoTipos', 'programasPiloto', 'pilotoEstablecimientos'));
     }
 }

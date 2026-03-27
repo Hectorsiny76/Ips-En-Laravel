@@ -52,13 +52,6 @@ class Establecimientotipo extends Model
         );
     }
 
-    public function tiendas(){
-        return $this->establecimientos->where('establecimientotipos.nombre', 'Tienda');
-    }
-
-    public function estaciones(){
-        return $this->establecimientos->where('nombre', 'Tienda');
-    }
 
     public function autocobrotiendas(){
         return $this->hasManyDeep(
