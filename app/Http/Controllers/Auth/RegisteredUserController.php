@@ -44,8 +44,8 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
-        return redirect(route('admin_layout.dashboard', absolute: false));
+        return redirect(route('admin_layout.dashboard'))->with('success', 'Se ha registrado un nuevo usuario.');
     }
 }

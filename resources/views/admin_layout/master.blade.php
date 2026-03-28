@@ -19,19 +19,47 @@
 
 <div class="flex flex-col min-h-screen bg-gray-100">
 
-    <header class="h-16 flex items-center shadow bg-sky-950 text-white p-4">
+    <header class="h-16 flex items-center justify-between shadow bg-sky-950 text-white p-4">
         <h1 class="text-2xl font-bold">MSI Admin Dashboard</h1>
+        <div class="flex items center gap-4">
+            <span class="py-2 font-medium">Bienvenido, {{Auth::user()->name}}!</span>
+            <form method="post" action="{{route('logout')}}">
+                @csrf
+                <button type="submit" class="bg-red-50 text-red-900 px-4 py-2 rounded">Cerrar sesión</button>
+            </form>
+        </div>
     </header>
 
     <div class="flex-1 grid grid-cols-12">
         <aside class="col-span-2 bg-gray-200 p-4 border-r">
             <nav>
-                <h3 class="font-bold mb-3">Menu de navegación</h3>
-                <h2 class="font-bold mb-2">Ejemplo</h2>
+                <h1 class="font-bold text-2xl mb-3">Menu de navegación</h1>
+                <ul class="text-2xl">
+                    <li class="my-2">
+                        <a href="{{route('admin_layout.register')}}">Registrar</a>
+                    </li>
+                    <li class="my-2">
+                        <a href="{{route('admin_layout.dashboard')}}">Dashboard</a>
+                    </li>
+                </ul>
             </nav>
         </aside>
 
         <main class="col-span-10 p-6 bg-white shadow-md m-4 rounded overflow-y-auto">
+
+            @if(session('success'))
+                <div x-data="{show:true}"
+                     x-show="show"
+                     x-init="setTimeout(()=> show = false, 5000)"
+                     class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between p-4 min-w-[320px] text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 shadow-xl transition-all duration-300"
+                     role="alert">
+                    <div>
+                        <span class="font-medium">Hecho!</span> {{session('success')}}
+                    </div>
+                    <button @click="show = false" class="text-green-900 hover:text-green-950 font-bold ml-4">&times;</button>
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>
