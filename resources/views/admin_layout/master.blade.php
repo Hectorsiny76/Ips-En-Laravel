@@ -31,7 +31,7 @@
             </nav>
         </aside>
 
-        <main class="col-span-10 p-6 bg-white shadow-md m-4 rounded">
+        <main class="col-span-10 p-6 bg-white shadow-md m-4 rounded overflow-y-auto">
             @yield('content')
         </main>
     </div>

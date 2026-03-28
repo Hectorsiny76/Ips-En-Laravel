@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('admin_layout.master')
 
 @section('title', 'Admin Dashboard')
 

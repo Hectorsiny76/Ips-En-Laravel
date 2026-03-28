@@ -16,6 +16,6 @@ class DashboardController extends Controller
         $programasPiloto = Pilotoprograma::count();
         $pilotoEstablecimientos = Pilotoestablecimiento::count();
 
-        return view('layout.dashboard', compact('establecimientos', 'establecimientoTipos', 'programasPiloto', 'pilotoEstablecimientos'));
+        return view('admin_layout.dashboard', compact('establecimientos', 'establecimientoTipos', 'programasPiloto', 'pilotoEstablecimientos'));
     }
 }
