@@ -33,13 +33,13 @@
     <div class="flex-1 grid grid-cols-12">
         <aside class="col-span-2 bg-gray-200 p-4 border-r">
             <nav>
-                <h1 class="font-bold text-2xl mb-3">Menu de navegación</h1>
+                <h1 class="font-bold text-xl mb-3">Menu de navegación</h1>
                 <ul class="text-2xl">
-                    <li class="my-2">
-                        <a href="{{route('admin_layout.register')}}">Registrar</a>
+                    <li class="my-1">
+                        <a class="text-base hover:text-lg transition-all duration-300" href="{{route('admin_layout.register')}}">Registrar</a>
                     </li>
-                    <li class="my-2">
-                        <a href="{{route('admin_layout.dashboard')}}">Dashboard</a>
+                    <li class="my-1">
+                        <a class="text-base hover:text-lg transition-all duration-300" href="{{route('admin_layout.dashboard')}}">Dashboard</a>
                     </li>
                 </ul>
             </nav>
