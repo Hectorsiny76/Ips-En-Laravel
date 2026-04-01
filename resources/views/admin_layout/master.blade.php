@@ -20,12 +20,12 @@
 <div class="flex flex-col min-h-screen bg-gray-100">
 
     <header class="h-16 flex items-center justify-between shadow bg-sky-950 text-white p-4">
-        <h1 class="text-2xl font-bold">MSI Admin Dashboard</h1>
+        <h1 class="text-2xl font-bold">@yield('page-title', 'MSI')</h1>
         <div class="flex items center gap-4">
             <span class="py-2 font-medium">Bienvenido, {{Auth::user()->name}}!</span>
             <form method="post" action="{{route('logout')}}">
                 @csrf
-                <button type="submit" class="bg-red-50 text-red-900 px-4 py-2 rounded">Cerrar sesión</button>
+                <button type="submit" class="bg-red-50 text-red-900 px-4 py-2 rounded transition-all duration-200 hover:bg-red-900 hover:text-red-50">Cerrar sesión</button>
             </form>
         </div>
     </header>
@@ -35,12 +35,8 @@
             <nav>
                 <h1 class="font-bold text-xl mb-3">Menu de navegación</h1>
                 <ul class="text-2xl">
-                    <li class="my-1">
-                        <a class="text-base hover:text-lg transition-all duration-300" href="{{route('admin_layout.register')}}">Registrar</a>
-                    </li>
-                    <li class="my-1">
-                        <a class="text-base hover:text-lg transition-all duration-300" href="{{route('admin_layout.dashboard')}}">Dashboard</a>
-                    </li>
+                    <x-link-aside href="{{route('admin_layout.register')}}">Registrar</x-link-aside>
+                    <x-link-aside href="{{route('admin_layout.dashboard')}}">Dashboard</x-link-aside>
                 </ul>
             </nav>
         </aside>
