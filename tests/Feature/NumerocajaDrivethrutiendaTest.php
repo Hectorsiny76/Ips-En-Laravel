@@ -36,7 +36,7 @@ test('Puede existir una caja drivethru sin tienda', function(){
     $this->assertDatabaseCount('drivethrutiendas', 1);
 });
 
-test('Un número de caja puede ver todas sus tiendas con drivethru', function(){
+test('Un número de caja puede ver todas sus establecimientotipo con drivethru', function(){
     $num = Numerocaja::factory()->create();
 
     Drivethrutienda::factory()->count(5)->create(['numerocaja_id'=>$num->id]);

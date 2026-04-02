@@ -17,7 +17,7 @@
 </head>
 <body class="bg-gray-100">
 
-<div class="flex flex-col min-h-screen bg-gray-100">
+<div class="flex flex-col h-dvh overflow-hidden bg-gray-100">
 
     <header class="h-16 flex items-center justify-between shadow bg-sky-950 text-white p-4">
         <h1 class="text-2xl font-bold">@yield('page-title', 'MSI')</h1>
@@ -30,18 +30,23 @@
         </div>
     </header>
 
-    <div class="flex-1 grid grid-cols-12">
-        <aside class="col-span-2 bg-gray-200 p-4 border-r">
+    <div class="flex-1 grid overflow-hidden grid-cols-12">
+        <aside class="col-span-2 flex-shrink-0 overflow-y-auto bg-gray-200 p-4 border-r">
             <nav>
                 <h1 class="font-bold text-xl mb-3">Menu de navegación</h1>
                 <ul class="text-2xl">
                     <x-link-aside href="{{route('admin_layout.register')}}">Registrar</x-link-aside>
                     <x-link-aside href="{{route('admin_layout.dashboard')}}">Dashboard</x-link-aside>
+                    @foreach($navEstablecimientos as $est)
+                        <x-link-aside href='/admin/establecimientotipo/{{ $est->id }}'>{{$est->nombre}}</x-link-aside>
+                    @endforeach
+                    <x-link-aside href="{{route('estados.index')}}">Estados</x-link-aside>
+                    <x-link-aside href="{{route('establecimientotipo.index')}}">Tipos de establecimientos</x-link-aside>
                 </ul>
             </nav>
         </aside>
 
-        <main class="col-span-10 p-6 bg-white shadow-md m-4 rounded overflow-y-auto">
+        <main class="col-span-10 flex-1 flex flex-col p-6 bg-white shadow-md m-4 rounded overflow-hidden relative">
 
             @if(session('success'))
                 <div x-data="{show:true}"
@@ -55,6 +60,19 @@
                     <button @click="show = false" class="text-green-900 hover:text-green-950 font-bold ml-4">&times;</button>
                 </div>
             @endif
+
+                @if(session('error'))
+                    <div x-data="{show:true}"
+                         x-show="show"
+                         x-init="setTimeout(()=> show = false, 5000)"
+                         class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between p-4 min-w-[320px] text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 shadow-xl transition-all duration-300"
+                         role="alert">
+                        <div>
+                            <span class="font-medium">Alto!</span> {{session('error')}}
+                        </div>
+                        <button @click="show = false" class="text-red-900 hover:text-red-950 font-bold ml-4">&times;</button>
+                    </div>
+                @endif
 
             @yield('content')
         </main>
