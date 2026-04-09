@@ -1,22 +1,25 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\EstadoController;
-use App\Http\Controllers\MercadogerenteController;
-use App\Http\Controllers\EstablecimientotipoController;
-use App\Http\Controllers\MercadoController;
-use App\Http\Controllers\CampoController;
-use App\Http\Controllers\CampogerenteController;
-use App\Http\Controllers\EstablecimientoController;
+use App\Http\Controllers\Admin\EstadoController;
+use App\Http\Controllers\Admin\MercadogerenteController;
+use App\Http\Controllers\Admin\EstablecimientotipoController;
+use App\Http\Controllers\Admin\MercadoController;
+use App\Http\Controllers\Admin\CampoController;
+use App\Http\Controllers\Admin\CampogerenteController;
+use App\Http\Controllers\Admin\EstablecimientoController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->middleware('auth')->group(function () {
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
     // Registro
     Route::get('register', [RegisteredUserController::class, 'create'])->name('admin_layout.register');

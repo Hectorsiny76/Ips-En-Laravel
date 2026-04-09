@@ -11,7 +11,7 @@
     nuevoProgramaTidel: {{ old('nuevo_programa_tidel') ? 'true' : 'false' }}
     }">
 
-        <form action="{{ route('establecimientos.store') }}" method="POST">
+        <form action="{{ route('admin.establecimientos.store') }}" method="POST">
             @csrf
 
             <div class="mb-4">

@@ -1,18 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Campogerente;
+use App\Models\Clasificacione;
 use Illuminate\Http\Request;
 
-class CampogerenteController extends Controller
+class ClasificacioneController extends AdminController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $clasificaciones = Clasificacione::with(['categoria', 'subcategoria', 'servicio', 'microservicio'])->get();
+
+        return view('clasificaciones', compact('clasificaciones'));
     }
 
     /**
@@ -34,7 +36,7 @@ class CampogerenteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Campogerente $campogerente)
+    public function show(Clasificacione $clasificacione)
     {
         //
     }
@@ -42,7 +44,7 @@ class CampogerenteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Campogerente $campogerente)
+    public function edit(Clasificacione $clasificacione)
     {
         //
     }
@@ -50,7 +52,7 @@ class CampogerenteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Campogerente $campogerente)
+    public function update(Request $request, Clasificacione $clasificacione)
     {
         //
     }
@@ -58,7 +60,7 @@ class CampogerenteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Campogerente $campogerente)
+    public function destroy(Clasificacione $clasificacione)
     {
         //
     }

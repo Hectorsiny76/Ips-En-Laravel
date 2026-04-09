@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Estado;
 use Illuminate\Http\Request;
 
-class EstadoController extends Controller
+class EstadoController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class EstadoController extends Controller
 
         $columnasDb = ['nombre'];
 
-        return view('estados.index', compact('estados', 'columnas', 'columnasDb'));
+        return view('admin.estados.index', compact('estados', 'columnas', 'columnasDb'));
     }
 
     /**
@@ -26,7 +26,7 @@ class EstadoController extends Controller
      */
     public function create()
     {
-        return view('estados.create');
+        return view('admin.estados.create');
     }
 
     /**
@@ -56,7 +56,7 @@ class EstadoController extends Controller
      */
     public function edit(Estado $estado)
     {
-        return view('estados.edit', compact('estado'));
+        return view('admin.estados.edit', compact('estado'));
     }
 
     /**

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Establecimientotipo;
 use Illuminate\Http\Request;
 
-class EstablecimientotipoController extends Controller
+class EstablecimientotipoController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +18,7 @@ class EstablecimientotipoController extends Controller
 
         $columnasDb = ['nombre'];
 
-        return view('establecimientotipo.index', compact('estTipos', 'columnas', 'columnasDb'));
+        return view('admin.establecimientotipo.index', compact('estTipos', 'columnas', 'columnasDb'));
     }
 
     /**
@@ -26,7 +26,7 @@ class EstablecimientotipoController extends Controller
      */
     public function create()
     {
-        return view('establecimientotipo.create');
+        return view('admin.establecimientotipo.create');
     }
 
     /**
@@ -74,13 +74,13 @@ class EstablecimientotipoController extends Controller
             $columnasDb[] = 'correo';
         }
 
-        return view('establecimientotipo.show', compact('estTipo','establecimientos', 'columnas', 'columnasDb'));
+        return view('admin.establecimientotipo.show', compact('estTipo','establecimientos', 'columnas', 'columnasDb'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Establecimiento $establecimiento)
+    public function edit(Establecimientotipo $establecimiento)
     {
         //
     }
@@ -88,7 +88,7 @@ class EstablecimientotipoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Establecimiento $establecimiento)
+    public function update(Request $request, Establecimientotipo $establecimiento)
     {
         //
     }
@@ -96,7 +96,7 @@ class EstablecimientotipoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Establecimiento $establecimiento)
+    public function destroy(Establecimientotipo $establecimiento)
     {
         //
     }

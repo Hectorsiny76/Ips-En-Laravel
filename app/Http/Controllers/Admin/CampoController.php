@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Categoria;
+use App\Models\Campo;
 use Illuminate\Http\Request;
 
-class CategoriaController extends Controller
+class CampoController extends AdminController
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categorias = Categoria::all();
-
-        return view('index', compact('categorias'));
+        //
     }
 
     /**
@@ -36,7 +34,7 @@ class CategoriaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Categoria $categoria)
+    public function show(Campo $campo)
     {
         //
     }
@@ -44,7 +42,7 @@ class CategoriaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categoria $categoria)
+    public function edit(Campo $campo)
     {
         //
     }
@@ -52,7 +50,7 @@ class CategoriaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categoria $categoria)
+    public function update(Request $request, Campo $campo)
     {
         //
     }
@@ -60,7 +58,7 @@ class CategoriaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categoria $categoria)
+    public function destroy(Campo $campo)
     {
         //
     }

@@ -35,13 +35,13 @@
             <nav>
                 <h1 class="font-bold text-xl mb-3">Menu de navegación</h1>
                 <ul class="text-2xl">
-                    <x-link-aside href="{{route('admin_layout.register')}}">Registrar</x-link-aside>
-                    <x-link-aside href="{{route('admin_layout.dashboard')}}">Dashboard</x-link-aside>
+                    <x-link-aside href="{{route('admin.admin_layout.register')}}">Registrar</x-link-aside>
+                    <x-link-aside href="{{route('admin.admin_layout.dashboard')}}">Dashboard</x-link-aside>
                     @foreach($navEstablecimientos as $est)
                         <x-link-aside href='/admin/establecimientotipo/{{ $est->id }}'>{{$est->nombre}}</x-link-aside>
                     @endforeach
-                    <x-link-aside href="{{route('estados.index')}}">Estados</x-link-aside>
-                    <x-link-aside href="{{route('establecimientotipo.index')}}">Tipos de establecimientos</x-link-aside>
+                    <x-link-aside href="{{route('admin.estados.index')}}">Estados</x-link-aside>
+                    <x-link-aside href="{{route('admin.establecimientotipo.index')}}">Tipos de establecimientos</x-link-aside>
                 </ul>
             </nav>
         </aside>

@@ -7,7 +7,7 @@
 @section('content')
     <div class="flex justify-between">
         <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Estos son los estados actuales</h1>
-        <a href="{{ route('estados.create')}}" class="bg-indigo-300  px-4 py-2 rounded">
+        <a href="{{ route('admin.estados.create')}}" class="bg-indigo-300  px-4 py-2 rounded">
             Agregar Estado
         </a>
     </div>
@@ -36,11 +36,11 @@
                     @endforeach
                     <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
 
-                        <a href="{{route('estados.edit', $estado->id)}}" class="text-indigo-600 hover:text-indigo-900 mr-4">
+                        <a href="{{route('admin.estados.edit', $estado->id)}}" class="text-indigo-600 hover:text-indigo-900 mr-4">
                             Editar
                         </a>
 
-                        <form action="{{ route('estados.destroy', $estado->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de que desea eliminar este estado?');">
+                        <form action="{{ route('admin.estados.destroy', $estado->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de que desea eliminar este estado?');">
                             @csrf
                             @method('DELETE')
 
@@ -52,7 +52,7 @@
                     </td>
                         <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                            <a href="{{ route('estados.gerentes-mercado.index', $estado->id) }}" class="text-blue-600 hover:text-blue-900 mr-4 font-bold">
+                            <a href="{{ route('admin.estados.gerentes-mercado.index', $estado->id) }}" class="text-blue-600 hover:text-blue-900 mr-4 font-bold">
                                 Gerentes de Mercado
                             </a>
 

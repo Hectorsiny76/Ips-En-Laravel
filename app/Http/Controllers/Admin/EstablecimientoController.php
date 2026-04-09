@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Models\Estado;
@@ -13,7 +13,7 @@ use App\Models\Tidelprograma;
 use App\Models\Tiendaformato;
 use App\Models\Establecimiento;
 
-class EstablecimientoController extends Controller
+class EstablecimientoController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class EstablecimientoController extends Controller
         $campoGerentes = Campogerente::all();
         $tiendaformatos = Tiendaformato::all();
 
-        return view('establecimientos.create', compact('estTipo', 'campoGerentes', 'tiendaformatos'));
+        return view('admin.establecimientos.create', compact('estTipo', 'campoGerentes', 'tiendaformatos'));
     }
 
     /**
@@ -62,7 +62,7 @@ class EstablecimientoController extends Controller
         $campoGerentes = Campogerente::all();
         $tiendaformatos = Tiendaformato::all();
 
-        return view('establecimientos.create', compact('estTipo', 'campoGerentes', 'tiendaformatos'));
+        return view('admin.establecimientos.create', compact('estTipo', 'campoGerentes', 'tiendaformatos'));
     }
 
     /**

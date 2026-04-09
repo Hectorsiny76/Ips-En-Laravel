@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Mercadogerente;
 use Illuminate\Http\Request;
 use App\Models\Estado;
 
-class MercadogerenteController extends Controller
+class MercadogerenteController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,13 @@ class MercadogerenteController extends Controller
     public function index(Estado $estado)
     {
 
-        $columnas = ['nombre'];
+        $columnas = ['Nombre', 'Mercado'];
 
-        $columnasDb = ['nombre'];
+        $columnasDb = ['nombre', 'mercado.numero'];
 
-        $mercadoGerentes = $estado->mercadoGerentes;
+        $mercadoGerentes = $estado->mercadoGerentes()->with('mercado')->get();
 
-        return view('gerentes-mercado.index', compact('estado', 'mercadoGerentes', 'columnas', 'columnasDb'));
+        return view('admin.gerentes-mercado.index', compact('estado', 'mercadoGerentes', 'columnas', 'columnasDb'));
 
     }
 
@@ -29,7 +29,7 @@ class MercadogerenteController extends Controller
      */
     public function create(Estado $estado)
     {
-        return view('gerentes-mercado.create', compact('estado'));
+        return view('admin.gerentes-mercado.create', compact('estado'));
     }
 
     /**
@@ -59,10 +59,9 @@ class MercadogerenteController extends Controller
      */
     public function edit($id)
     {
-
         $mercadoGerente = Mercadogerente::findOrfail($id);
 
-        return view('gerentes-mercado.edit', compact('mercadoGerente'));
+        return view('admin.gerentes-mercado.edit', compact('mercadoGerente'));
     }
 
     /**

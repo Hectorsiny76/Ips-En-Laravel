@@ -5,13 +5,26 @@
 @section('page-title', 'Mercado ' . $mercado->numero)
 
 @section('content')
+    <nav class="flex text-sm text-gray-500 font-medium mb-6" aria-label="Breadcrumb">
+        <ol class="inline-flex items-center space-x-1 md:space-x-3">
 
-    <div class="flex justify-between">
-        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Mercado de {{$mercadoGerente->nombre}}</h1>
-        <a href="" class="bg-indigo-300  px-4 py-2 rounded">
-            Agregar Gerente de Mercado
-        </a>
-    </div>
+            <li class="inline-flex items-center">
+                <a href="{{ route('admin.estados.index') }}" class="hover:text-indigo-600 transition-colors">
+                    Estados
+                </a>
+            </li>
+
+            <li>
+                <div class="flex items-center">
+                    <svg class="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                    <a href="{{ route('admin.estados.gerentes-mercado.index', $mercado->mercadogerente->estado) }}" class="hover:text-indigo-600 transition-colors">
+                        Gerentes de mercado de {{ $mercado->mercadogerente->estado->nombre }}
+                    </a>
+                </div>
+            </li>
+
+        </ol>
+    </nav>
 
     <div class="flex-1 overflow-auto bg-white shadow rounded-lg">
         <table class="min-w-full divide-y divide-gray-200 relative">
@@ -36,11 +49,11 @@
                     @endforeach
                     <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
 
-                        <a href="{{route('gerentes-mercado.edit', $mercado->id)}}" class="text-indigo-600 hover:text-indigo-900 mr-4">
+                        <a href="{{route('admin.mercados.edit', $mercado->id)}}" class="text-indigo-600 hover:text-indigo-900 mr-4">
                             Editar
                         </a>
 
-                        <form action="{{ route('gerentes-mercado.destroy', $mercado->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de que desea eliminar este gerente de mercado?');">
+                        <form action="{{ route('admin.mercados.destroy', $mercado->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de que desea eliminar este mercado?');">
                             @csrf
                             @method('DELETE')
 
@@ -51,8 +64,8 @@
 
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="{{ route('gerentes-mercado.mercados.index', $mercadoGerente->id) }}" class="text-blue-600 hover:text-blue-900 mr-4 font-bold">
-                            Mercado
+                        <a href="{{ route('admin.gerentes-mercado.mercados.index', $mercadoGerente->id) }}" class="text-blue-600 hover:text-blue-900 mr-4 font-bold">
+                            Campos
                         </a>
                     </td>
                 </tr>
