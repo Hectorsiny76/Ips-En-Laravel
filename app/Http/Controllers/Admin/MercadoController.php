@@ -93,7 +93,7 @@ class MercadoController extends AdminController
 
         $mercado->update($validacion);
 
-        return redirect()->route('gerentes-mercado.mercados.index', $mercado->id)->with('success', 'Mercado actualizado correctamente');
+        return redirect()->route('admin.gerentes-mercado.mercados.index', $mercado->id)->with('success', 'Mercado actualizado correctamente');
     }
 
     /**

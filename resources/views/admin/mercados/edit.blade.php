@@ -20,7 +20,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{route('mercados.update', $mercado->id)}}" method="POST">
+        <form action="{{route('admin.mercados.update', $mercado->id)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-6">
@@ -54,7 +54,7 @@
 
             </div>
             <div class="flex justify-center space-x-3 mt-8 pt-4 border-t border-gray-500">
-                <a href="{{route('estados.gerentes-mercado.index', $mercado->mercadogerente->estado)}}" class="px-6 py-2 text-lg font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <a href="{{route('admin.estados.gerentes-mercado.index', $mercado->mercadogerente->estado)}}" class="px-6 py-2 text-lg font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Cancelar
                 </a>
                 <button

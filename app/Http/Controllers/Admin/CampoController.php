@@ -4,15 +4,22 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Campo;
 use Illuminate\Http\Request;
+use App\Models\Mercado;
 
 class CampoController extends AdminController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
+        $mercado = Mercado::find($id);
+
+        $mercado->load('campos.campogerente');
+
+        $campos = $mercado->campos;
+
+        return view('admin.campos.index', compact('campos', 'mercado'));
     }
 
     /**
