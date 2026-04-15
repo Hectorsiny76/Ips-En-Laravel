@@ -24,7 +24,7 @@ class MercadoController extends AdminController
 
         if ($mercadoGerente->mercado()->count() == 0) {
             // No permite que sea eliminado pues está ligado a un mercado
-            return redirect()->route('gerentes-mercado.mercados.create', $mercadoGerente->id)
+            return redirect()->route('admin.gerentes-mercado.mercados.create', $mercadoGerente->id)
                 ->with('error', 'Este gerente de mercado no tiene ningún mercado a su nombre. Agregue uno.');
         }
 
@@ -60,7 +60,7 @@ class MercadoController extends AdminController
 
         $mercado = $mercadoGerente->load('mercado');
 
-        return redirect()->route('gerentes-mercado.mercados.index', $mercado->id)->with('success', 'Mercado creado correctamente');
+        return redirect()->route('admin.gerentes-mercado.mercados.index', $mercado->id)->with('success', 'Mercado creado correctamente');
     }
 
     /**
@@ -93,7 +93,7 @@ class MercadoController extends AdminController
 
         $mercado->update($validacion);
 
-        return redirect()->route('admin.gerentes-mercado.mercados.index', $mercado->id)->with('success', 'Mercado actualizado correctamente');
+        return redirect()->route('admin.gerentes-mercado.mercados.index', $mercado->mercadogerente->id)->with('success', 'Mercado actualizado correctamente');
     }
 
     /**

@@ -35,8 +35,8 @@ Route::middleware('auth')
     //Mercadogerentes & Mercado
     Route::resource('gerentes-mercado.mercados', MercadoController::class)->shallow();
 
-    //Mercado y Campo
-        Route::resource('mercados.campos', CampoController::class)->shallow();
+    //Mercados y campos
+    Route::resource('mercados.campos', CampoController::class)->shallow();
 
 
     // Establecimientotipos

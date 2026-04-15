@@ -43,7 +43,7 @@ class MercadogerenteController extends AdminController
 
         $estado->mercadogerentes()->create($validacion);
 
-        return redirect()->route('estados.gerentes-mercado.index', $estado->id)->with('success', 'Gerente de mercado creado satisfactoriamente!');
+        return redirect()->route('admin.estados.gerentes-mercado.index', $estado->id)->with('success', 'Gerente de mercado creado satisfactoriamente!');
     }
 
     /**
@@ -78,7 +78,7 @@ class MercadogerenteController extends AdminController
 
         $mercadoGerente->update($validacion);
 
-        return redirect()->route('estados.gerentes-mercado.index', $mercadoGerente->estado_id)->with('success', 'Gerente de mercado editado satisfactoriamente!');
+        return redirect()->route('admin.estados.gerentes-mercado.index', $mercadoGerente->estado_id)->with('success', 'Gerente de mercado editado satisfactoriamente!');
     }
 
     /**
@@ -92,13 +92,13 @@ class MercadogerenteController extends AdminController
 
         if ($mercadoGerente->mercado()->count() > 0) {
             // No permite que sea eliminado pues está ligado a un mercado
-            return redirect()->route('estados.gerentes-mercado.index', $estadoId)
+            return redirect()->route('admin.estados.gerentes-mercado.index', $estadoId)
                 ->with('error', 'No puedes eliminar este gerente de mercado debido a que tiene un mercado asignado. Favor de reasignar el mercado a otro gerente.');
         }
 
         $mercadoGerente->delete();
 
-        return redirect()->route('estados.gerentes-mercado.index', $estadoId)
+        return redirect()->route('admin.estados.gerentes-mercado.index', $estadoId)
             ->with('success', 'Gerente de mercado eliminado satisfactoriamente!');
     }
 }

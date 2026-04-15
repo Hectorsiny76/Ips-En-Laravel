@@ -51,7 +51,7 @@ class CampoController extends AdminController
      */
     public function edit(Campo $campo)
     {
-        //
+        return view('admin.campos.edit', compact('campo'));
     }
 
     /**

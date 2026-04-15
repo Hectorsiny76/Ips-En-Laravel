@@ -40,7 +40,7 @@ class EstablecimientotipoController extends AdminController
 
         Establecimientotipo::create($validacion);
 
-        return redirect()->route('establecimientotipo.index')->with('success', 'Nuevo tipo de establecimiento creado satisfactoriamente! Recuerda agregar las columnas a definir en el controlador.');
+        return redirect()->route('admin.establecimientotipo.index')->with('success', 'Nuevo tipo de establecimiento creado satisfactoriamente! Recuerda agregar las columnas a definir en el controlador.');
     }
 
     /**

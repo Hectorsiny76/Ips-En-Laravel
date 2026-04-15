@@ -40,7 +40,7 @@ class EstadoController extends AdminController
 
         Estado::create($validacion);
 
-        return redirect()->route('estados.index')->with('success', 'Estado creado satisfactoriamente!');
+        return redirect()->route('admin.estados.index')->with('success', 'Estado creado satisfactoriamente!');
     }
 
     /**
@@ -70,7 +70,7 @@ class EstadoController extends AdminController
 
         $estado->update($validacion);
 
-        return redirect()->route('estados.index')->with('success', 'Estado actualizado satisfactoriamente!');
+        return redirect()->route('admin.estados.index')->with('success', 'Estado actualizado satisfactoriamente!');
     }
 
     /**
@@ -80,12 +80,12 @@ class EstadoController extends AdminController
     {
         if ($estado->mercadogerentes()->count() > 0) {
             // Bounce them back with an error message instead of deleting
-            return redirect()->route('estados.index')
+            return redirect()->route('admin.estados.index')
                 ->with('error', 'No puedes eliminar este estado debido a que tiene gerentes de mercado asignados. Favor de reasignarlos a otro estado.');
         }
 
         $estado->delete();
 
-        return redirect()->route('estados.index')->with('success', 'Estado eliminado satisfactoriamente!');
+        return redirect()->route('admin.estados.index')->with('success', 'Estado eliminado satisfactoriamente!');
     }
 }
