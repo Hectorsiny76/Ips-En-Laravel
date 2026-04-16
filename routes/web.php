@@ -38,7 +38,6 @@ Route::middleware('auth')
     //Mercados y campos
     Route::resource('mercados.campos', CampoController::class)->shallow();
 
-
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);
     //Route::get('/tipoestablecimiento/{id}', [EstablecimientotipoController::class, 'show'])->name('establecimientotipo.show');

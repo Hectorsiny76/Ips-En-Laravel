@@ -1,13 +1,13 @@
 @extends('admin_layout.master')
 
-@section('title', 'Editar campo '.$campo->numero)
+@section('title', 'Crear un campo del mercado '.$mercado->numero)
 
-@section('page-title', 'Editar campo '.$campo->numero)
+@section('page-title', 'Crear un campo del mercado '.$mercado->numero)
 
 @section('content')
 
     <div class="flex justify-between">
-        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Editar campo {{$campo->numero}}</h1>
+        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Crear campo del mercado {{$mercado->numero}}</h1>
     </div>
 
     <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
@@ -20,7 +20,7 @@
                 </ul>
             </div>
         @endif
-        <form action="{{route('admin.campos.update', $campo->id)}}" method="POST">
+        <form action="{{route('admin.mercados.campos.store', $mercado->id)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-6">

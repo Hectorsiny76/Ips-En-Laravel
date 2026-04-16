@@ -25,9 +25,9 @@ class CampoController extends AdminController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Mercado $mercado)
     {
-        //
+        return view('admin.mercados.create', compact('mercado'));
     }
 
     /**
@@ -35,7 +35,7 @@ class CampoController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
