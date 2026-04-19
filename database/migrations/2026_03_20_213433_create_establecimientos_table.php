@@ -24,7 +24,7 @@ return new class extends Migration
             $table->foreignId('tidelprograma_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('tiendaformato_id')->nullable()->constrained()->nullOnDelete();
 
-            $table->string('centrodecostos')->nullable();
+            $table->string('centrodecostos')->nullable()->unique();
             $table->string('tel')->nullable();
             $table->string('correo')->nullable();
 

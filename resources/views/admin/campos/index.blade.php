@@ -27,7 +27,7 @@
             <li>
                 <div class="flex items-center">
                     <svg class="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                    <a href="{{ route('admin.gerentes-mercado.mercados.index', $mercado->id) }}" class="hover:text-indigo-600 transition-colors">
+                    <a href="{{ route('admin.gerentes-mercado.mercados.index', $mercado->mercadogerente->id) }}" class="hover:text-indigo-600 transition-colors">
                         Mercado {{ $mercado->numero }}
                     </a>
                 </div>
@@ -85,8 +85,12 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
 
-                        <a href="{{ route('admin.estados.gerentes-mercado.index', $mercado->id) }}" class="text-blue-600 hover:text-blue-900 mr-4 font-bold">
-                            Gerente de Campo
+                        <a href="{{ route('admin.campo.campo-gerente.index', $campo->id) }}" class="text-blue-600 hover:text-blue-900 mr-4 font-bold">
+                            @if($campo->campogerente()->exists())
+                                Gerente de Campo
+                            @else
+                                Asignar gerente de campo
+                            @endif
                         </a>
 
                     </td>

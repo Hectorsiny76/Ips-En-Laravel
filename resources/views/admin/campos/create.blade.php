@@ -1,13 +1,13 @@
 @extends('admin_layout.master')
 
-@section('title', 'Crear un campo del mercado '.$mercado->numero)
+@section('title', 'Crear un campo del Mercado '.$mercado->numero)
 
-@section('page-title', 'Crear un campo del mercado '.$mercado->numero)
+@section('page-title', 'Crear un campo del Mercado '.$mercado->numero)
 
 @section('content')
 
     <div class="flex justify-between">
-        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Crear campo del mercado {{$mercado->numero}}</h1>
+        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Crear campo del Mercado {{$mercado->numero}}</h1>
     </div>
 
     <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
@@ -22,37 +22,36 @@
         @endif
         <form action="{{route('admin.mercados.campos.store', $mercado->id)}}" method="POST">
             @csrf
-            @method('PUT')
             <div class="mb-6">
-                <label for="nombre" class="block text-lg font-medium text-gray-700 my-2">Número</label>
+                <label for="numero" class="block text-lg font-medium text-gray-700 my-2">Número</label>
 
                 <input
                     type="number"
                     name="numero"
                     placeholder="2"
-                    value="{{old('numero', $campo->numero)}}"
+                    value="{{old('numero')}}"
                     min="1"
                     step="1"
                     class="w-full rounded-md shadow-sm focus:ring-sky-700 focus:border-sky-700"
                     required>
 
-                <label for="Gerente de mercado" class="block text-lg font-medium text-gray-700 my-2">Mercado</label>
+                <label for="Mercado" class="block text-lg font-medium text-gray-700 my-2">Mercado</label>
 
                 <input
-                    type="text"
-                    value="{{$campo->mercado->numero}}"
+                    type="number"
+                    value="{{$mercado->numero}}"
                     class="w-full rounded-md shadow-sm focus:ring-sky-700 focus:border-sky-700"
                     readonly>
 
             </div>
             <div class="flex justify-center space-x-3 mt-8 pt-4 border-t border-gray-500">
-                <a href="{{route('admin.mercados.campos.index', $campo->mercado->id)}}" class="px-6 py-2 text-lg font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                <a href="{{route('admin.mercados.campos.index', $mercado->id)}}" class="px-6 py-2 text-lg font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                     Cancelar
                 </a>
                 <button
                     type="submit"
                     class="px-6 py-2 text-lg font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Actualizar
+                    Crear
                 </button>
             </div>
         </form>

@@ -62,7 +62,12 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <a href="{{ route('admin.gerentes-mercado.mercados.index', $mercadoGerente->id) }}" class="text-blue-600 hover:text-blue-900 mr-4 font-bold">
-                            Mercado
+                            @if($mercadoGerente->mercado()->exists())
+                                Mercado
+                            @else
+                                Asignar Mercado
+                            @endif
+
                         </a>
                     </td>
                 </tr>

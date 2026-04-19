@@ -50,9 +50,9 @@ class MercadoController extends AdminController
     public function store(Request $request, $id)
     {
         $validacion = $request->validate([
-            'numero' => 'required|string|min:1|max:10',
+            'numero' => 'required|string|min:1|max:10|unique:mercados,numero',
             'establecimientotipo_id' => 'required|integer',
-        ]);
+        ],['numero.unique' => 'Este número de mercado ya está registrado.']);
 
         $mercadoGerente = Mercadogerente::findOrFail($id);
 
@@ -87,9 +87,9 @@ class MercadoController extends AdminController
     public function update(Request $request, Mercado $mercado)
     {
         $validacion = $request->validate([
-            'numero' => 'required|string|min:1|max:10',
+            'numero' => 'required|string|min:1|max:10|unique:mercados,numero,'.$mercado->id,
             'establecimientotipo_id' => 'required|integer',
-        ]);
+        ],['numero.unique' => 'Este número de mercado ya está registrado.']);
 
         $mercado->update($validacion);
 

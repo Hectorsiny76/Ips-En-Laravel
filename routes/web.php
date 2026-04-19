@@ -16,6 +16,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::post('/', [RegisteredUserController::class, 'index'])->name('register');
+
 Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
@@ -37,6 +39,9 @@ Route::middleware('auth')
 
     //Mercados y campos
     Route::resource('mercados.campos', CampoController::class)->shallow();
+
+    //Campo y Campogerente
+    Route::resource('campo.campo-gerente', CampogerenteController::class)->shallow();
 
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);
