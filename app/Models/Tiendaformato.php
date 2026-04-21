@@ -16,7 +16,7 @@ class Tiendaformato extends Model
 
     use SoftDeletes;
 
-    public function tiendasformato(){
+    public function establecimientos(){
         return $this->hasMany(Establecimiento::class);
     }
 }

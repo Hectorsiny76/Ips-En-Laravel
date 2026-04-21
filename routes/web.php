@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TidelprogramaController;
+use App\Http\Controllers\Admin\TiendaformatoController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -17,7 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/', [RegisteredUserController::class, 'index'])->name('register');
+//Route::post('/', [RegisteredUserController::class, 'index'])->name('register');
 
 Route::middleware('auth')
     ->prefix('admin')
@@ -46,6 +47,9 @@ Route::middleware('auth')
 
     //Tidelprogramas
     Route::resource('tidel-programas', TidelprogramaController::class);
+
+    //Tiendaformatos
+    Route::resource('tienda-formatos', TiendaformatoController::class);
 
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);
