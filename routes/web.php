@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\TidelprogramaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -42,6 +43,9 @@ Route::middleware('auth')
 
     //Campo y Campogerente
     Route::resource('campo.campo-gerente', CampogerenteController::class)->shallow();
+
+    //Tidelprogramas
+    Route::resource('tidel-programas', TidelprogramaController::class);
 
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);

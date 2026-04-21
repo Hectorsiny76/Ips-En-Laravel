@@ -42,6 +42,7 @@
                     @endforeach
                     <x-link-aside href="{{route('admin.estados.index')}}">Estados</x-link-aside>
                     <x-link-aside href="{{route('admin.establecimientotipo.index')}}">Tipos de establecimientos</x-link-aside>
+                    <x-link-aside href="{{route('admin.tidel-programas.index')}}">Migraciones Tidel</x-link-aside>
                 </ul>
             </nav>
         </aside>

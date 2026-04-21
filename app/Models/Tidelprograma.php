@@ -16,7 +16,7 @@ class Tidelprograma extends Model
 
     use SoftDeletes;
 
-    public function tidelprograma(){
+    public function establecimiento(){
         return $this->hasOne(Establecimiento::class);
     }
 }
