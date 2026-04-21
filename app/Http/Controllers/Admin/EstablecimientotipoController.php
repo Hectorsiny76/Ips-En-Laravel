@@ -34,13 +34,7 @@ class EstablecimientotipoController extends AdminController
      */
     public function store(Request $request)
     {
-        $validacion = $request->validate([
-            'nombre' => 'required|string|max:255',
-        ]);
-
-        Establecimientotipo::create($validacion);
-
-        return redirect()->route('admin.establecimientotipo.index')->with('success', 'Nuevo tipo de establecimiento creado satisfactoriamente! Recuerda agregar las columnas a definir en el controlador.');
+        //
     }
 
     /**
@@ -54,7 +48,7 @@ class EstablecimientotipoController extends AdminController
 
         $estTipo = Establecimientotipo::findOrFail($id);
 
-        $establecimientos = $estTipo->establecimientos()->with(['campogerente', 'tidelprograma', 'tiendaformato'])->get();
+        $establecimientos = $estTipo->establecimientos()->with(['campogerente', 'tidelprograma', 'tiendaformato', 'avaloncontrato'])->get();
 
         if($estTipo->nombre == 'Tienda'){
             $columnas[] = 'Ip Tidel';
@@ -64,7 +58,7 @@ class EstablecimientotipoController extends AdminController
             $columnasDb[] = 'tiendaformato.nombre';
         }
         else if($estTipo->nombre == 'Estacion'){
-            $columnas[] = 'Centro de Costos';
+            $columnas[] = 'CDC';
             $columnasDb[] = 'centrodecostos';
 
             $columnas[] = 'Tel';
@@ -72,6 +66,9 @@ class EstablecimientotipoController extends AdminController
 
             $columnas[] = 'Correo';
             $columnasDb[] = 'correo';
+
+            $columnas[] = 'Contrato Ávalon';
+            $columnasDb[] = 'avaloncontrato.numero';
         }
 
         return view('admin.establecimientotipo.show', compact('estTipo','establecimientos', 'columnas', 'columnasDb'));

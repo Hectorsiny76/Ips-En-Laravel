@@ -1,63 +1,68 @@
 @extends('admin_layout.master')
 
-@section('title', 'Crear '.$estTipo->nombre)
+@section('title', 'Crear '.$estTipo->nombre.' para el campo '.$campogerente->campo->numero)
 
-@section('page-title', 'Crear '.$estTipo->nombre)
+@section('page-title', 'Crear '.$estTipo->nombre.' para el campo '.$campogerente->campo->numero)
 
 @section('content')
 
-    <div x-data="{
-    tipoEstablecimiento: '{{ old('area_id') }}',
-    nuevoProgramaTidel: {{ old('nuevo_programa_tidel') ? 'true' : 'false' }}
-    }">
+    <x-div-edit-create-title>Crear {{$estTipo->nombre}} para el campo {{$campogerente->campo->numero}}</x-div-edit-create-title>
 
-        <form action="{{ route('admin.establecimientos.store') }}" method="POST">
+    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+        <x-form-errors/>
+        <form action="{{route('admin.campo-gerente.establecimientos.store', $campogerente->id)}}" method="POST">
             @csrf
+            <div class="mb-6">
+                <x-input-form-label for="nombre">Nombre</x-input-form-label>
 
-            <div class="mb-4">
-                <label>Tipo de establecimiento</label>
-                <select name="establecimientotipo_id" x-model="tipoEstablecimiento" class="...">
-                    <option value="">Selecciona el tipo de establecimiento...</option>
-                    @foreach($estTipos as $estTipo)
-                        <option value="{{ $estTipo->id }}">{{ $estTipo->name }}</option>
-                    @endforeach
-                </select>
+                <x-input-form
+                    type="text"
+                    name="nombre"
+                    placeholder="Agua Caliente"
+                    value="{{old('nombre')}}"
+                    required/>
+
+                <x-input-form-label for="numero">Numero</x-input-form-label>
+
+                <x-input-form
+                    type="number"
+                    name="numero"
+                    placeholder="192"
+                    value="{{old('numero')}}"
+                    min="1"
+                    required/>
+
+                <x-input-form-label for="cajas_tpvs">
+                    @if($estTipoNombre == 'tienda')
+                        Cajas
+                    @elseif($estTipoNombre == 'estacion')
+                        TPV's
+                    @endif
+                </x-input-form-label>
+
+                <x-input-form
+                    type="number"
+                    name="cajas_tpvs"
+                    placeholder="4"
+                    value="{{old('cajas_tpvs')}}"
+                    min="1"
+                    required/>
+
+                <x-input-form-label for="idred">Id de Red</x-input-form-label>
+
+                <x-input-form
+                    type="text"
+                    name="idred"
+                    placeholder="8.8.8"
+                    value="{{old('idred')}}"
+                    required/>
+
+                @includeIf('admin.establecimientos.partials.'.$estTipoNombre)
+
             </div>
-
-            <div class="mb-4" x-show="selectedArea == '1'" x-cloak>
-                <label>Industrial Certifications</label>
-                <input type="text" name="industrial_certifications" value="{{ old('industrial_certifications') }}">
-            </div>
-
-            <div class="mb-4" x-show="selectedArea == '2'" x-cloak>
-                <label>Portfolio Link</label>
-                <input type="url" name="art_portfolio_link" value="{{ old('art_portfolio_link') }}">
-            </div>
-            <div class="mb-4 p-4 border rounded bg-gray-50">
-
-                <label class="flex items-center space-x-2 mb-4">
-                    <input type="checkbox" x-model="isNewTeacher">
-                    <span class="text-sm font-medium text-gray-700">This is a new teacher (Not in the system yet)</span>
-                </label>
-
-                <div x-show="!isNewTeacher">
-                    <label>Select Teacher</label>
-                    <select name="teacher_id" class="...">
-                        <option value="">Choose...</option>
-                        @foreach($teachers as $teacher)
-                            <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-
-                <div x-show="isNewTeacher" x-cloak>
-                    <label>New Teacher Name</label>
-                    <input type="text" name="new_teacher_name" value="{{ old('new_teacher_name') }}" placeholder="e.g. Mr. Smith">
-                </div>
-
-            </div>
-
-            <button type="submit">Save Student</button>
+            <x-form-create-buttons href="{{route('admin.campo-gerente.establecimientos.index', $campogerente->id)}}"/>
         </form>
     </div>
+
 @endsection
+

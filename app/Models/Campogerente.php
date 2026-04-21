@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Znck\Eloquent\Traits\BelongsToThrough;
 
 class Campogerente extends Model
 {
@@ -14,6 +15,8 @@ class Campogerente extends Model
     use HasFactory;
 
     use SoftDeletes;
+
+    use BelongsToThrough;
 
     protected $table = 'campogerentes';
 
@@ -49,5 +52,11 @@ class Campogerente extends Model
                 Establecimiento::class
             ]
         );
+    }
+
+    public function establecimientotipo(){
+        return $this->belongsToThrough(Establecimientotipo::class,[
+            Mercado::class,
+            Campo::class]);
     }
 }

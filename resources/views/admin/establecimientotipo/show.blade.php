@@ -7,7 +7,7 @@
 @section('content')
     <div class="flex justify-between">
         <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Tipo de establecimiento: {{$estTipo->nombre}}</h1>
-        <a href="{{ route('admin.establecimientos.create', ['establecimientotipo_id' => $estTipo->id]) }}" class="bg-indigo-300  px-4 py-2 rounded">
+        <a href="{{ route('admin.estados.index') }}" class="bg-indigo-300  px-4 py-2 rounded">
             Agregar {{ $estTipo->nombre }}
         </a>
     </div>

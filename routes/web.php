@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TidelprogramaController;
 use App\Http\Controllers\Admin\TiendaformatoController;
@@ -51,12 +52,16 @@ Route::middleware('auth')
     //Tiendaformatos
     Route::resource('tienda-formatos', TiendaformatoController::class);
 
+    //Avalon contratos
+    Route::resource('avalon-contratos', AvaloncontratoController::class);
+
+    //Campogerente y Establecimientos
+    Route::resource('campo-gerente.establecimientos', EstablecimientoController::class)->shallow();
+
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);
     //Route::get('/tipoestablecimiento/{id}', [EstablecimientotipoController::class, 'show'])->name('establecimientotipo.show');
 
-    // Establecimientos
-    Route::resource('establecimientos', EstablecimientoController::class);
 });
 
 Route::middleware('auth')->group(function () {

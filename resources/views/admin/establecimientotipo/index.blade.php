@@ -7,7 +7,7 @@
 @section('content')
     <div class="flex justify-between">
         <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Estos son los tipos de establecimientos actuales</h1>
-        <a href="{{ route('admin.establecimientotipo.create')}}" class="bg-indigo-300  px-4 py-2 rounded">
+        <a href="{{ route('admin.estados.index')}}" class="bg-indigo-300  px-4 py-2 rounded">
             Agregar nuevo tipo de establecimiento
         </a>
     </div>

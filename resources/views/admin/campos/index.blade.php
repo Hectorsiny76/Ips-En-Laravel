@@ -6,36 +6,25 @@
 
 @section('content')
 
-    <nav class="flex text-sm text-gray-500 font-medium mb-6" aria-label="Breadcrumb">
-        <ol class="inline-flex items-center space-x-1 md:space-x-3">
-
-            <li class="inline-flex items-center">
-                <a href="{{ route('admin.estados.index') }}" class="hover:text-indigo-600 transition-colors">
-                    Estados
+    <x-nav-ol-estado>
+        <li>
+            <div class="flex items-center">
+                <svg class="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                <a href="{{ route('admin.estados.gerentes-mercado.index', $mercado->mercadogerente->estado) }}" class="hover:text-indigo-600 transition-colors">
+                    Gerentes de mercado de {{ $mercado->mercadogerente->estado->nombre }}
                 </a>
-            </li>
+            </div>
+        </li>
 
-            <li>
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                    <a href="{{ route('admin.estados.gerentes-mercado.index', $mercado->mercadogerente->estado) }}" class="hover:text-indigo-600 transition-colors">
-                        Gerentes de mercado de {{ $mercado->mercadogerente->estado->nombre }}
-                    </a>
-                </div>
-            </li>
-
-            <li>
-                <div class="flex items-center">
-                    <svg class="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                    <a href="{{ route('admin.gerentes-mercado.mercados.index', $mercado->mercadogerente->id) }}" class="hover:text-indigo-600 transition-colors">
-                        Mercado {{ $mercado->numero }}
-                    </a>
-                </div>
-            </li>
-
-        </ol>
-    </nav>
-
+        <li>
+            <div class="flex items-center">
+                <svg class="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                <a href="{{ route('admin.gerentes-mercado.mercados.index', $mercado->mercadogerente->id) }}" class="hover:text-indigo-600 transition-colors">
+                    Mercado {{ $mercado->numero }} ({{$mercado->establecimientotipo->nombre}})
+                </a>
+            </div>
+        </li>
+    </x-nav-ol-estado>
     <div class="flex justify-between">
         <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Estos son los campos del mercado {{$mercado->numero}}</h1>
         <a href="{{ route('admin.mercados.campos.create', $mercado)}}" class="bg-indigo-300  px-4 py-2 rounded">
