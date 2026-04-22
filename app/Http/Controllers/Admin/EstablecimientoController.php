@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Avaloncontrato;
+use App\Models\Cluster;
 use App\Models\Estatus;
 use Illuminate\Http\Request;
 use App\Models\Estado;
@@ -69,17 +70,19 @@ class EstablecimientoController extends AdminController
     {
         $campogerente = Campogerente::findOrFail($id);
 
-        $campogerente->load(['establecimientotipo'])->get();
+        $campogerente->load(['establecimientotipo']);
 
         $estTipo = $campogerente->establecimientotipo;
 
         $tiendaformatos = Tiendaformato::all();
 
+        $clusters = Cluster::all();
+
         $tidelprogramas = Tidelprograma::doesntHave('establecimiento')->pluck('ip', 'id');
 
         $estTipoNombre = Str::slug($estTipo->nombre);
 
-        return view('admin.establecimientos.create', compact('campogerente', 'estTipo', 'estTipoNombre', 'tiendaformatos', 'tidelprogramas'));
+        return view('admin.establecimientos.create', compact('campogerente', 'estTipo', 'estTipoNombre', 'tiendaformatos', 'tidelprogramas', 'clusters'));
     }
 
     /**
@@ -89,7 +92,7 @@ class EstablecimientoController extends AdminController
     {
         $campogerente = Campogerente::findOrFail($id);
 
-        $campogerente->load(['establecimientotipo'])->get();
+        $campogerente->load(['establecimientotipo']);
 
         $estTipo = $campogerente->establecimientotipo;
 
@@ -106,6 +109,7 @@ class EstablecimientoController extends AdminController
             'tienda' => [
                 'tiendaformato_id' => 'required|numeric|exists:tiendaformatos,id',
                 'tidelprograma_id' => 'required|numeric|exists:tidelprogramas,id',
+                'cluster_id' => 'required|numeric|exists:clusters,id',
             ],
             'estacion' => [
                 'centrodecostos' => 'required|numeric|min:1|unique:establecimientos,centrodecostos',
@@ -134,9 +138,23 @@ class EstablecimientoController extends AdminController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id, Request $request)
+    public function edit($id)
     {
-        //
+        $establecimiento = Establecimiento::findOrFail($id);
+
+        $establecimiento->load(['establecimientotipo', 'tiendaformato', 'tidelprograma', 'cluster']);
+
+        $estTipo = $establecimiento->establecimientotipo;
+
+        $tiendaformatos = Tiendaformato::all();
+
+        $clusters = Cluster::all();
+
+        $tidelprogramas = Tidelprograma::doesntHave('establecimiento')->orWhere('id', $establecimiento->tidelprograma?->id)->pluck('ip', 'id');
+
+        $estTipoNombre = Str::slug($estTipo->nombre);
+
+        return view('admin.establecimientos.edit', compact('establecimiento', 'estTipo', 'tiendaformatos', 'tidelprogramas', 'clusters', 'estTipoNombre' ));
     }
 
     /**
@@ -144,7 +162,41 @@ class EstablecimientoController extends AdminController
      */
     public function update(Request $request, $id)
     {
-        //
+        $establecimiento = Establecimiento::findOrFail($id);
+
+        $establecimiento->load(['establecimientotipo']);
+
+        $estTipo = $establecimiento->establecimientotipo;
+
+        $estTipoNombre = Str::slug($estTipo->nombre);
+
+        $validacionesBase = [
+            'nombre' => 'required|string|max:255',
+            'numero' => 'required|string|min:1|max:10',
+            'cajas_tpvs' => 'required|numeric|min:1',
+            'idred' => 'required|ip',
+        ];
+
+        $validacionesXEstablecimiento = [
+            'tienda' => [
+                'tiendaformato_id' => 'required|numeric|exists:tiendaformatos,id',
+                'tidelprograma_id' => 'required|numeric|exists:tidelprogramas,id',
+                'cluster_id' => 'required|numeric|exists:clusters,id',
+            ],
+            'estacion' => [
+                'centrodecostos' => 'required|numeric|min:1|unique:establecimientos,centrodecostos,'.$establecimiento->id,
+                'tel' => 'required|min:10|max:15',
+                'correo' => 'required|string|email',
+            ]
+        ];
+
+        $validacionFinal = array_merge($validacionesBase, $validacionesXEstablecimiento[$estTipoNombre] ?? []);
+
+        $validacion = $request->validate($validacionFinal);
+
+        $establecimiento->update($validacion);
+
+        return redirect()->route('admin.campo-gerente.establecimientos.index', $establecimiento->campogerente->id)->with('success', 'El establecimiento '.$establecimiento->nombre.' se ha actualizado correctamente.');
     }
 
     /**

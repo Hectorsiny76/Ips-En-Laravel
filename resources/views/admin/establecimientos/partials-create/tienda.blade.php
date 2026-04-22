@@ -13,3 +13,11 @@
         <option value="{{$id}}">{{$ip}}</option>
     @endforeach
 </x-input-form-select>
+
+<x-input-form-label for="cluster">Cluster</x-input-form-label>
+
+<x-input-form-select name="cluster_id" id="cluster" initialvalue="-- Clusters --">
+    @foreach($clusters as $cluster)
+        <option value="{{$cluster->id}}">{{$cluster->nombre}}</option>
+    @endforeach
+</x-input-form-select>

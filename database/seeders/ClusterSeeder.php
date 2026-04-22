@@ -13,7 +13,7 @@ class ClusterSeeder extends Seeder
      */
     public function run(): void
     {
-        $clusters = ['Express', 'Familiar', 'Esquematico', 'Comercial', 'Completo'];
+        $clusters = ['Express', 'Apetito', 'Hogar', 'Social'];
 
         foreach ($clusters as $cluster) {
             Cluster::create([

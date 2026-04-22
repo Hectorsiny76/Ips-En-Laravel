@@ -57,7 +57,7 @@
                     value="{{old('idred')}}"
                     required/>
 
-                @includeIf('admin.establecimientos.partials.'.$estTipoNombre)
+                @includeIf('admin.establecimientos.partials-create.'.$estTipoNombre)
 
             </div>
             <x-form-create-buttons href="{{route('admin.campo-gerente.establecimientos.index', $campogerente->id)}}"/>

@@ -14,7 +14,7 @@ class TidelprogramaController extends AdminController
     {
         $tidelprogramas  = Tidelprograma::all();
 
-        $tidelprograma = $tidelprogramas->load('establecimiento');
+        $tidelprogramas->load('establecimiento');
 
         return view('admin.tidel-programas.index', compact('tidelprogramas'));
     }

@@ -11,7 +11,7 @@ class Establecimiento extends Model
 {
     protected $table = 'establecimientos';
 
-    protected $fillable = ['numero', 'nombre', 'cajas_tpvs', 'idred', 'campogerente_id', 'tidelprograma_id', 'tiendaformato_id', 'centrodecostos', 'tel', 'correo'];
+    protected $fillable = ['numero', 'nombre', 'cajas_tpvs', 'idred', 'campogerente_id', 'tidelprograma_id', 'tiendaformato_id', 'centrodecostos', 'cluster_id', 'tel', 'correo'];
 
     use HasFactory;
 
