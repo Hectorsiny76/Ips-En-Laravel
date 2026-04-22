@@ -23,6 +23,7 @@ return new class extends Migration
             $table->foreignId('campogerente_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('tidelprograma_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('tiendaformato_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('cluster_id')->nullable()->constrained()->nullOnDelete();
 
             $table->string('centrodecostos')->nullable()->unique();
             $table->string('tel')->nullable();

@@ -45,6 +45,7 @@ class DatabaseSeeder extends Seeder
             CampogerenteSeeder::class,
             TidelprogramaSeeder::class,
             TiendaformatoSeeder::class,
+            ClusterSeeder::class,
             EstablecimientoSeeder::class,
             NumerocajaSeeder::class,
             PilotoprogramaSeeder::class,

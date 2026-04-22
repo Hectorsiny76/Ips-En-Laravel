@@ -34,13 +34,17 @@ class Establecimiento extends Model
     public function autocobrocajas(){
         return $this->hasMany(Autocobrotienda::class);
     }
-    
+
     public function drivethrucajas(){
         return $this->hasMany(Drivethrutienda::class);
     }
 
     public function avaloncontrato(){
         return $this->hasOne(Avaloncontrato::class);
+    }
+
+    public function cluster(){
+        return $this->belongsTo(Cluster::class);
     }
 
     public function binomiotienda(){
@@ -92,4 +96,17 @@ class Establecimiento extends Model
             Campogerente::class,
         ]);
     }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        return $query->where(function ($q) use($termino){
+            $q->where('numero','LIKE', '%{$termino}%')
+                ->orWhere('centrodecostos','LIKE', '%{$termino}%')
+                ->orWhere('nombre','LIKE', '%{$termino}%');
+        });
+    }
+
 }

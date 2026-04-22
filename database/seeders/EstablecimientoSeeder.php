@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cluster;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Establecimiento;
@@ -23,6 +24,8 @@ class EstablecimientoSeeder extends Seeder
 
             $randFormato = Tiendaformato::inRandomOrder()->first();
 
+            $randCluster = Cluster::inRandomOrder()->first();
+
             $randCDC = rand(6000, 9000);
 
             Establecimiento::create([
@@ -34,6 +37,7 @@ class EstablecimientoSeeder extends Seeder
                 'tidelprograma_id'=>fake()->randomElement([null, $randTidelip->id]),
                 'tiendaformato_id'=>fake()->randomElement([null, $randFormato->id]),
                 'centrodecostos'=>fake()->randomElement([null, $randCDC]),
+                'cluster_id'=>fake()->randomElement([null, $randCluster->id]),
                 'tel'=>fake()->phoneNumber(),
                 'correo'=>fake()->email(),
             ]);

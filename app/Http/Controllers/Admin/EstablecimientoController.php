@@ -25,7 +25,7 @@ class EstablecimientoController extends AdminController
     {
         $campogerente = Campogerente::findOrFail($id);
 
-        $campogerente->load(['establecimientotipo', 'establecimientos'])->get();
+        $campogerente->load(['establecimientotipo', 'establecimientos.cluster', 'establecimientos.tidelprograma', 'establecimientos.tiendaformato', 'establecimientos.avaloncontrato']);
 
         $columnas = ['Nombre', 'Numero', 'Cajas/TPVS', 'IP'];
 
@@ -41,6 +41,9 @@ class EstablecimientoController extends AdminController
 
             $columnas[] = 'Formato de Tienda';
             $columnasDb[] = 'tiendaformato.nombre';
+
+            $columnas[] = 'Cluster';
+            $columnasDb[] = 'cluster.nombre';
         }
         else if($estTipo->nombre == 'Estacion'){
             $columnas[] = 'CDC';

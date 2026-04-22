@@ -48,7 +48,9 @@ class EstablecimientotipoController extends AdminController
 
         $estTipo = Establecimientotipo::findOrFail($id);
 
-        $establecimientos = $estTipo->establecimientos()->with(['campogerente', 'tidelprograma', 'tiendaformato', 'avaloncontrato'])->get();
+        $estTipo->load(['establecimientos.avaloncontrato', 'establecimientos.campogerente', 'establecimientos.cluster', 'establecimientos.tidelprograma', 'establecimientos.tiendaformato']);
+
+        $establecimientos = $estTipo->establecimientos;
 
         if($estTipo->nombre == 'Tienda'){
             $columnas[] = 'Ip Tidel';
@@ -56,6 +58,9 @@ class EstablecimientotipoController extends AdminController
 
             $columnas[] = 'Formato de Tienda';
             $columnasDb[] = 'tiendaformato.nombre';
+
+            $columnas[] = 'Cluster';
+            $columnasDb[] = 'cluster.nombre';
         }
         else if($estTipo->nombre == 'Estacion'){
             $columnas[] = 'CDC';
