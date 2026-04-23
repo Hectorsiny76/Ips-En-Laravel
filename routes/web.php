@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AvaloncontratoController;
+use App\Http\Controllers\Admin\BinomioestablecimientoController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\TidelprogramaController;
 use App\Http\Controllers\Admin\TiendaformatoController;
@@ -57,6 +58,8 @@ Route::middleware('auth')
 
     //Campogerente y Establecimientos
     Route::resource('campo-gerente.establecimientos', EstablecimientoController::class)->shallow();
+
+    Route::resource('binomioestablecimientos', BinomioestablecimientoController::class);
 
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);

@@ -34,22 +34,19 @@
                                 {{data_get($establecimiento, $columnaDb) ?? 'N/A'}}
                             </td>
                         @endforeach
-                            <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                        <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                            <a href="{{route('admin.establecimientos.edit', $establecimiento->id)}}" class="text-indigo-600 hover:text-indigo-900 mr-4">
+                                Editar
+                            </a>
+                            <form action="{{route('admin.establecimientos.destroy', $establecimiento->id)}}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de que desea eliminar el establecimiento {{$establecimiento->nombre}}?');">
+                                @csrf
+                                @method('DELETE')
 
-                                <a href="admin/establecimientos/{{ $establecimiento->id }}/edit" class="text-indigo-600 hover:text-indigo-900 mr-4">
-                                    Editar
-                                </a>
-
-                                <form action="/students/{{ $establecimiento->id }}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de que desea eliminar la {{$estTipo->nombre}}?');">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" class="text-red-600 hover:text-red-900">
+                                <button type="submit" class="text-red-600 hover:text-red-900">
                                         Eliminar
-                                    </button>
-                                </form>
-
-                            </td>
+                                </button>
+                            </form>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
