@@ -36,9 +36,9 @@ class BinomioestablecimientoController extends Controller
 
         $estacionesTot = $estEstaciones->establecimientos;
 
-        $tiendas = $tiendasTot->filter(fn($tienda) => is_null($tienda -> binomioestacion))->pluck('nombre', 'id');
+        $tiendas = $tiendasTot->filter(fn($tienda) => is_null($tienda -> binomiotienda))->pluck('nombre', 'id');
 
-        $estaciones = $estacionesTot->filter(fn($estacion) => is_null($estacion -> binomiotienda))->pluck('nombre', 'id');
+        $estaciones = $estacionesTot->filter(fn($estacion) => is_null($estacion -> binomioestacion))->pluck('nombre', 'id');
 
         return view('admin.binomioestablecimientos.create', compact('tiendas', 'estaciones'));
 
@@ -70,9 +70,27 @@ class BinomioestablecimientoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Binomioestablecimiento $binomioestablecimiento)
-    {
-        //
+    public function edit($id){
+
+        $estBinomio = Binomioestablecimiento::findOrFail($id);
+
+        $estTiendas = Establecimientotipo::findOrFail(1);
+
+        $estEstaciones = Establecimientotipo::findOrFail(2);
+
+        $estTiendas->load('establecimientos');
+
+        $estEstaciones->load('establecimientos');
+
+        $tiendasTot = $estTiendas->establecimientos;
+
+        $estacionesTot = $estEstaciones->establecimientos;
+
+        $tiendas = $tiendasTot->filter(fn($tienda) => is_null($tienda -> binomiotienda) || $tienda->id == $estBinomio->tienda_id)->pluck('nombre', 'id');
+
+        $estaciones = $estacionesTot->filter(fn($estacion) => is_null($estacion -> binomioestacion) || $estacion->id == $estBinomio->estacion_id)->pluck('nombre', 'id');
+
+        return view('admin.binomioestablecimientos.edit', compact('tiendas', 'estaciones', 'estBinomio'));
     }
 
     /**
@@ -80,7 +98,14 @@ class BinomioestablecimientoController extends Controller
      */
     public function update(Request $request, Binomioestablecimiento $binomioestablecimiento)
     {
-        //
+        $validacion = $request->validate([
+            'tienda_id' => 'required|numeric|exists:establecimientos,id',
+            'estacion_id' => 'required|numeric|exists:establecimientos,id',
+        ]);
+
+        $binomioestablecimiento->update($validacion);
+
+        return redirect()->route('admin.binomioestablecimientos.index')->with('success', '¡Se ha actualizado el duo de establecimientos '.$binomioestablecimiento->id.'!');
     }
 
     /**
@@ -88,6 +113,8 @@ class BinomioestablecimientoController extends Controller
      */
     public function destroy(Binomioestablecimiento $binomioestablecimiento)
     {
-        //
+        $binomioestablecimiento->delete();
+
+        return redirect()->route('admin.binomioestablecimientos.index')->with('success', '¡Se ha eliminado el duo de establecimientos!');
     }
 }

@@ -1,28 +1,36 @@
 @extends('admin_layout.master')
 
-@section('title', 'Crear un nuevo formato de tienda')
+@section('title', 'Actualizar el DUO '. $estBinomio->id)
 
-@section('page-title', 'Crear un nuevo formato de tienda')
+@section('page-title', 'Actualizar el DUO '. $estBinomio->id)
 
 @section('content')
 
-    <x-div-edit-create-title>Crear un nuevo formato de tienda</x-div-edit-create-title>
+    <x-div-edit-create-title>Actualizar el DUO {{$estBinomio->id}}</x-div-edit-create-title>
 
     <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
         <x-form-errors/>
-        <form action="{{route('admin.tienda-formatos.store')}}" method="POST">
+        <form action="{{route('admin.binomioestablecimientos.update', $estBinomio->id)}}" method="POST">
             @csrf
+            @method('PUT')
             <div class="mb-6">
-                <x-input-form-label for="nombre">Nombre</x-input-form-label>
+                <x-input-form-label for="tienda">Tiendas sin estación</x-input-form-label>
 
-                <x-input-form
-                    type="text"
-                    name="nombre"
-                    placeholder="Espacial"
-                    value="{{old('nombre')}}"
-                    required></x-input-form>
+                <x-input-form-select name="tienda_id" id="tiendas" initialvalue="--> Tiendas No Binomio <--">
+                    @foreach($tiendas as $id => $name)
+                        <option value="{{$id}}" @selected(old('tienda_id', $estBinomio->tienda_id ?? "") == $id)>{{$name}}</option>
+                    @endforeach
+                </x-input-form-select>
+
+                <x-input-form-label for="estacion">Estaciones sin tienda</x-input-form-label>
+
+                <x-input-form-select name="estacion_id" id="estacion" initialvalue="--> Estaciones No Binomio <--">
+                    @foreach($estaciones as $id => $name)
+                        <option value="{{$id}}" @selected(old('estacion_id', $estBinomio->estacion_id ?? "") == $id)>{{$name}}</option>
+                    @endforeach
+                </x-input-form-select>
             </div>
-            <x-form-create-buttons href="{{ route('admin.tienda-formatos.index') }}"/>
+            <x-form-update-buttons href="{{ route('admin.binomioestablecimientos.index') }}"/>
         </form>
     </div>
 

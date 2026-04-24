@@ -1,3 +1,4 @@
+
 @extends('admin_layout.master')
 
 @section('title', 'Lista de Establecimientos Binomio')
@@ -50,8 +51,8 @@
                         {{$estBinomio->estacion->numero}}
                     </td>
                     <x-table-td-actions
-                        ahref="{{route('admin.tienda-formatos.edit', $estBinomio->id)}}"
-                        formaction="{{ route('admin.tienda-formatos.destroy', $estBinomio->id) }}"
+                        ahref="{{route('admin.binomioestablecimientos.edit', $estBinomio->id)}}"
+                        formaction="{{ route('admin.binomioestablecimientos.destroy', $estBinomio->id) }}"
                         formconfirm="¿Esta seguro de eliminar esta duo de establecimientos de la lista?"
                     />
                 </tr>
