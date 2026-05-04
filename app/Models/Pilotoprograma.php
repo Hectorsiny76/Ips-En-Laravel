@@ -10,13 +10,13 @@ class Pilotoprograma extends Model
 {
     protected $table = 'pilotoprogramas';
 
-    protected $fillable = ['titulo'];
+    protected $fillable = ['titulo', 'descripcion_corta', 'descripcion_larga'];
 
     use HasFactory;
 
     use SoftDeletes;
 
     public function establecimientos(){
-        return $this->hasMany(Pilotoestablecimiento::class, 'pilotoprograma_id', 'id');
+        return $this->belongsToMany(Establecimiento::class, 'pilotoestablecimientos');
     }
 }

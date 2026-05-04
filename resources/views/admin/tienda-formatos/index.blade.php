@@ -1,62 +1,42 @@
 @extends('admin_layout.master')
 
-@section('title', 'Lista de formatos de tienda')
+@section('title', 'Lista de migraciones tidel')
 
-@section('page-title', 'Lista de formatos de tienda')
+@section('page-title', 'Lista de migraciones tidel')
 
 @section('content')
 
     <x-div-index-title-create-button
-        title="Estos son los formatos de tienda existentes"
+        title="Estos son los Formatos de Tienda actuales"
         url="{{route('admin.tienda-formatos.create')}}"
-        button="Agregar un nuevo formato de tienda"
-    />
+        button="Agregar un nuevo Formato de Tienda"/>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200 relative">
-            <thead class="bg-gray-50">
-            <tr>
-                <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
-                    Nombre
-                </th>
-                <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
-                    Tiendas Relacionadas
-                </th>
-                <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm text-gray-500 uppercase">
-                    Acciones
-                </th>
-            </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-            @foreach($tiendaformatos as $tiendaformato)
-                <tr>
-                    <td>
-                        {{$tiendaformato->nombre}}
-                    </td>
-                    <td>
-                        {{$tiendaformato->establecimientos_count}}
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+    <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>Nombre</x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>Establecimientos relacionados</x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
 
-                        <a href="{{route('admin.tienda-formatos.edit', $tiendaformato->id)}}" class="text-indigo-600 hover:text-indigo-900 mr-4">
-                            Editar
-                        </a>
+            <x-index-div-table-tbody>
+                @foreach($tiendaformatos as $tiendaformato)
+                    <tr>
+                        <td>
+                            {{$tiendaformato->nombre}}
+                        </td>
 
-                        <form action="{{ route('admin.tienda-formatos.destroy', $tiendaformato->id) }}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de que desea eliminar este estado?');">
-                            @csrf
-                            @method('DELETE')
+                        <td>
+                            {{$tiendaformato->establecimientos_count}}
+                        </td>
 
-                            <button type="submit" class="text-red-600 hover:text-red-900">
-                                Eliminar
-                            </button>
-                        </form>
-
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    </div>
+                    <x-table-td-actions
+                        ahref="{{route('admin.tienda-formatos.edit', $tiendaformato->id)}}"
+                        formaction="{{route('admin.tienda-formatos.destroy', $tiendaformato->id)}}"
+                        formconfirm="¿Esta seguro de que desea eliminar este formato de tienda?"
+                    />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+    </x-index-div-table>
 
 @endsection
-

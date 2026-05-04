@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\BinomioestablecimientoController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PilotoprogramaController;
 use App\Http\Controllers\Admin\TidelprogramaController;
 use App\Http\Controllers\Admin\TiendaformatoController;
 use App\Http\Controllers\ProfileController;
@@ -59,7 +60,10 @@ Route::middleware('auth')
     //Campogerente y Establecimientos
     Route::resource('campo-gerente.establecimientos', EstablecimientoController::class)->shallow();
 
+    //Establecimientos Binomio
     Route::resource('binomioestablecimientos', BinomioestablecimientoController::class);
+
+    Route::resource('programas-piloto', PilotoprogramaController::class);
 
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);

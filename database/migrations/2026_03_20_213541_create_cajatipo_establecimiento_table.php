@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('autocobrotiendas', function (Blueprint $table) {
+        Schema::create('cajatipo_establecimiento', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
             $table->foreignId('establecimiento_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('numerocaja_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('cajatipo_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('numcaja');
             $table->softDeletes();
         });
     }

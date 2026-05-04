@@ -31,12 +31,8 @@ class Establecimiento extends Model
         return $this->belongsTo(Tidelprograma::class);
     }
 
-    public function autocobrocajas(){
-        return $this->hasMany(Autocobrotienda::class);
-    }
-
-    public function drivethrucajas(){
-        return $this->hasMany(Drivethrutienda::class);
+    public function cajatipos(){
+        return $this->belongsToMany(CajaTipo::class, 'cajatipo_establecimiento');
     }
 
     public function avaloncontrato(){
@@ -56,7 +52,7 @@ class Establecimiento extends Model
     }
 
     public function pilotoprogramas(){
-        return $this->hasMany(Pilotoestablecimiento::class);
+        return $this->belongsToMany(Pilotoprograma::class, 'pilotoestablecimientos');
     }
 
     public function estado(){

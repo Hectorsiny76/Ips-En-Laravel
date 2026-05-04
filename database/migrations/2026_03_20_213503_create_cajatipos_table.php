@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('numerocajas', function (Blueprint $table) {
+        Schema::create('cajatipos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->unsignedInteger('caja')->unique();
+            $table->string('nombre')->unique();
             $table->softDeletes();
         });
     }

@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\QueryException;
-use App\Models\Numerocaja;
+use App\Models\Cajatipo;
 use App\Models\Drivethrutienda;
 use App\Models\Establecimiento;
 use Database\Factories\DrivethrutiendaFactory;
@@ -10,7 +10,7 @@ use Database\Factories\DrivethrutiendaFactory;
 uses(RefreshDatabase::class);
 
 test('Una caja puede existir en la base de datos', function(){
-    Numerocaja::factory()->create();
+    Cajatipo::factory()->create();
 
     $this->assertDatabaseCount('numerocajas', 1);
 });
@@ -22,8 +22,8 @@ test('Una caja drivethru puede existir en la base de datos', function(){
 });
 
 test('No pueden haber 2 cajas numero "2" en la tabla numerocajas', function(){
-    Numerocaja::factory()->create(['caja'=>2]);
-    Numerocaja::factory()->create(['caja'=>2]);
+    Cajatipo::factory()->create(['caja'=>2]);
+    Cajatipo::factory()->create(['caja'=>2]);
 })->throws(QueryException::class);
 
 test('No puede existir una caja drivethru sin numero de caja', function(){
@@ -37,7 +37,7 @@ test('Puede existir una caja drivethru sin tienda', function(){
 });
 
 test('Un número de caja puede ver todas sus establecimientotipo con drivethru', function(){
-    $num = Numerocaja::factory()->create();
+    $num = Cajatipo::factory()->create();
 
     Drivethrutienda::factory()->count(5)->create(['numerocaja_id'=>$num->id]);
 

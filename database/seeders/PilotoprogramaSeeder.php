@@ -18,6 +18,8 @@ class PilotoprogramaSeeder extends Seeder
         foreach($programas as $programa){
             Pilotoprograma::create([
                 'titulo'=>$programa,
+                'descripcion_corta'=>fake()->text(),
+                'descripcion_larga'=>fake()->paragraph(),
             ]);
         }
     }

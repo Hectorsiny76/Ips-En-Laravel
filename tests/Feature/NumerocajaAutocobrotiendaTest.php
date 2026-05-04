@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\QueryException;
-use App\Models\Numerocaja;
+use App\Models\Cajatipo;
 use App\Models\Autocobrotienda;
 use App\Models\Establecimiento;
 use Database\Factories\DrivethrutiendaFactory;
@@ -36,7 +36,7 @@ test('Un establecimiento puede ver sus cajas autocobro',function(){
 });
 
 test('Un numero de caja puede ver sus derivados de autocobro', function(){
-    $num = Numerocaja::factory()->create();
+    $num = Cajatipo::factory()->create();
 
     Autocobrotienda::factory()->count(5)->create(['numerocaja_id'=>$num->id]);
 

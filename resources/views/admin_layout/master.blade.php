@@ -46,6 +46,7 @@
                     <x-link-aside href="{{route('admin.tienda-formatos.index')}}">Formatos de Tienda</x-link-aside>
                     <x-link-aside href="{{route('admin.avalon-contratos.index')}}">Contratos Ávalon</x-link-aside>
                     <x-link-aside href="{{route('admin.binomioestablecimientos.index')}}">Establecimientos Binomio</x-link-aside>
+                    <x-link-aside href="{{route('admin.programas-piloto.index')}}">Programas Piloto</x-link-aside>
                 </ul>
             </nav>
         </aside>

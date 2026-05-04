@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Numerocaja>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cajatipo>
  */
 class NumerocajaFactory extends Factory
 {
