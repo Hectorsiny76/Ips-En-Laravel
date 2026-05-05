@@ -13,6 +13,7 @@
         <form action="{{route('admin.programas-piloto.update', $pilotoPrograma->id)}}" method="POST">
             @csrf
             @method('PUT')
+
             <div class="mb-6">
                 <x-input-form-label for="tienda">Titulo</x-input-form-label>
 
@@ -41,6 +42,7 @@
                     value="{{old('descripcion_larga', $pilotoPrograma->descripcion_larga)}}"
                     id="descripcion_corta"/>
 
+                @livewire('admin::livewire.search-est', ['estAdded' => $pilotoPrograma->establecimientos])
             </div>
             <x-form-update-buttons href="{{ route('admin.programas-piloto.index') }}"/>
         </form>

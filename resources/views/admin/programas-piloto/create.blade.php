@@ -40,6 +40,7 @@
                     value="{{old('descripcion_larga')}}"
                     id="descripcion_corta"/>
 
+                <livewire:admin::livewire.search-est/>
             </div>
             <x-form-create-buttons href="{{ route('admin.programas-piloto.index') }}"/>
         </form>

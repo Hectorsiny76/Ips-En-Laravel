@@ -31,13 +31,21 @@ class PilotoprogramaController extends AdminController
      */
     public function store(Request $request)
     {
-        $validacion = $request->validate([
+        $request->validate([
             'titulo' => 'required|string|max:50',
             'descripcion_corta' => 'required|string|max:100',
             'descripcion_larga' => 'required|string|max:255',
+            'establecimientos' => 'nullable|array',
+            'establecimientos.*' => 'exists:establecimientos,id',
         ]);
 
-        Pilotoprograma::create($validacion);
+        $progPiloto = Pilotoprograma::create([
+            'titulo' => $request->titulo,
+            'descripcion_corta' => $request->descripcion_corta,
+            'descripcion_larga' => $request->descripcion_larga,
+        ]);
+
+        $progPiloto->establecimientos()->sync($request->input('establecimientos', []));
 
         return redirect()->route('admin.programas-piloto.index')->with('success', 'El Programa Piloto '.$request->titulo.' fue creado exitosamente!');
     }
@@ -57,6 +65,8 @@ class PilotoprogramaController extends AdminController
     {
         $pilotoPrograma = Pilotoprograma::find($id);
 
+        $pilotoPrograma->load('establecimientos');
+
         return view('admin.programas-piloto.edit', compact('pilotoPrograma'));
     }
 
@@ -67,13 +77,21 @@ class PilotoprogramaController extends AdminController
     {
         $pilotoPrograma = Pilotoprograma::find($id);
 
-        $validacion = $request->validate([
+        $request->validate([
             'titulo' => 'required|string|max:50',
             'descripcion_corta' => 'required|string|max:100',
             'descripcion_larga' => 'required|string|max:255',
+            'establecimientos' => 'nullable|array',
+            'establecimientos.*' => 'exists:establecimientos,id',
         ]);
 
-        $pilotoPrograma->update($validacion);
+        $pilotoPrograma->update([
+            'titulo' => $request->titulo,
+            'descripcion_corta' => $request->descripcion_corta,
+            'descripcion_larga' => $request->descripcion_larga,
+        ]);
+
+        $pilotoPrograma->establecimientos()->sync($request->input('establecimientos', []));
 
         return redirect()->route('admin.programas-piloto.index')->with('success', 'El Programa Piloto '.$pilotoPrograma->titulo.' fue actualizado exitosamente!');
     }

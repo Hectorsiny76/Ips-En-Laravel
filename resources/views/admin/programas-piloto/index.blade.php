@@ -49,9 +49,6 @@
                         formaction="{{ route('admin.programas-piloto.destroy', $pilotoPrograma->id) }}"
                         formconfirm="¿Esta seguro de eliminar esta duo de establecimientos de la lista?"
                     />
-                    <x-table-td-fd-routing href="{{route('admin.programas-piloto.index'), $pilotoPrograma->id}}">
-                        Establecimientos
-                    </x-table-td-fd-routing>
                 </tr>
             @endforeach
         </x-index-div-table-tbody>

@@ -99,9 +99,9 @@ class Establecimiento extends Model
         }
 
         return $query->where(function ($q) use($termino){
-            $q->where('numero','LIKE', '%{$termino}%')
-                ->orWhere('centrodecostos','LIKE', '%{$termino}%')
-                ->orWhere('nombre','LIKE', '%{$termino}%');
+            $q->where('numero','LIKE', "%{$termino}%")
+                ->orWhere('centrodecostos','LIKE', "%{$termino}%")
+                ->orWhere('nombre','LIKE', "%{$termino}%");
         });
     }
 
