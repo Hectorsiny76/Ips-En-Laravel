@@ -16,7 +16,7 @@
     <x-index-div-table>
         <x-index-div-table-thead>
             <x-index-div-table-thead-th-column>
-                Fila
+                No
             </x-index-div-table-thead-th-column>
             <x-index-div-table-thead-th-column>
                 Titulo

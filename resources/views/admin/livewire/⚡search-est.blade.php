@@ -68,11 +68,11 @@ new class extends Component
                 </button>
             </div>
         @if(!empty($searchText))
-            <ul class="z-10 w-full mt-1 rounded shadow-lg">
+            <ul class="w-full my-2 border rounded shadow-lg">
                 @foreach($results as $est)
                     <li
                         wire:click="addEst({{$est->id}}, '{{$est->nombre}}')"
-                        class="mt-4">
+                        class="my-2 mx-2 hover:text-gray-500 cursor-pointer">
                         {{$est->numero.' '.$est->nombre.' '.$est->centrodecostos ?? ''}}
                     </li>
                 @endforeach
@@ -89,7 +89,7 @@ new class extends Component
                 >
                     {{$name}}
                     <button
-                        class="ml-2 text-white hover:text-red-300 font-bold"
+                        class="ml-2 text-white hover:text-red-400 font-bold"
                         wire:click.prevent="removeEst({{$id}})"
                         type="button"
                     >
