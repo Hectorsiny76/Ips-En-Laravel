@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\PilotoprogramaController;
 use App\Http\Controllers\Admin\TidelprogramaController;
 use App\Http\Controllers\Admin\TiendaformatoController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\CajatipoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\EstadoController;
@@ -32,6 +33,11 @@ Route::middleware('auth')
     Route::get('register', [RegisteredUserController::class, 'create'])->name('admin_layout.register');
     Route::post('register', [RegisteredUserController::class, 'store']);
 
+    // Perfil
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     // Dashboard
     Route::get('/', [DashboardController::class, 'index'])->name('admin_layout.dashboard');
 
@@ -39,42 +45,38 @@ Route::middleware('auth')
     Route::resource('estados', EstadoController::class);
     Route::resource('estados.gerentes-mercado', MercadogerenteController::class)->shallow();
 
-    //Mercadogerentes & Mercado
+    // Mercadogerentes & Mercado
     Route::resource('gerentes-mercado.mercados', MercadoController::class)->shallow();
 
-    //Mercados y campos
+    // Mercados y campos
     Route::resource('mercados.campos', CampoController::class)->shallow();
 
-    //Campo y Campogerente
+    // Campo y Campogerente
     Route::resource('campo.campo-gerente', CampogerenteController::class)->shallow();
 
-    //Tidelprogramas
+    // Tidelprogramas
     Route::resource('tidel-programas', TidelprogramaController::class);
 
-    //Tiendaformatos
+    // Tiendaformatos
     Route::resource('tienda-formatos', TiendaformatoController::class);
 
-    //Avalon contratos
+    // Avalon contratos
     Route::resource('avalon-contratos', AvaloncontratoController::class);
 
-    //Campogerente y Establecimientos
+    // Campogerente y Establecimientos
     Route::resource('campo-gerente.establecimientos', EstablecimientoController::class)->shallow();
 
-    //Establecimientos Binomio
+    // Establecimientos Binomio
     Route::resource('binomioestablecimientos', BinomioestablecimientoController::class);
 
+    // Programas Piloto
     Route::resource('programas-piloto', PilotoprogramaController::class);
+
+    // Caja Tipos (Ej: Autocobro)
+    Route::resource('caja-tipos', CajatipoController::class);
 
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);
-    //Route::get('/tipoestablecimiento/{id}', [EstablecimientotipoController::class, 'show'])->name('establecimientotipo.show');
-
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

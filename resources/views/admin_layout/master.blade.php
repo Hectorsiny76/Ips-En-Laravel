@@ -22,7 +22,11 @@
     <header class="h-16 flex items-center justify-between shadow bg-sky-950 text-white p-4">
         <h1 class="text-2xl font-bold">@yield('page-title', 'MSI')</h1>
         <div class="flex items center gap-4">
-            <span class="py-2 font-medium">Bienvenido, {{Auth::user()->name}}!</span>
+            <div class="my-2 font-medium">
+                <span >Bienvenido,</span>
+                <span class="hover:text-teal-600 underline text-teal-700"><a href="{{route('admin.profile.edit')}}">{{Auth::user()->name}}</a></span>
+                <span>!</span>
+            </div>
             <form method="post" action="{{route('logout')}}">
                 @csrf
                 <button type="submit" class="bg-red-50 text-red-900 px-4 py-2 rounded transition-all duration-200 hover:bg-red-900 hover:text-red-50">Cerrar sesión</button>
@@ -47,6 +51,7 @@
                     <x-link-aside href="{{route('admin.avalon-contratos.index')}}">Contratos Ávalon</x-link-aside>
                     <x-link-aside href="{{route('admin.binomioestablecimientos.index')}}">Establecimientos Binomio</x-link-aside>
                     <x-link-aside href="{{route('admin.programas-piloto.index')}}">Programas Piloto</x-link-aside>
+                    <x-link-aside href="{{route('admin.caja-tipos.index')}}">Tipos de Caja</x-link-aside>
                 </ul>
             </nav>
         </aside>

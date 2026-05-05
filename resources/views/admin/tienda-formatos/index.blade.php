@@ -1,8 +1,8 @@
 @extends('admin_layout.master')
 
-@section('title', 'Lista de migraciones tidel')
+@section('title', 'Lista Formatos de Tienda')
 
-@section('page-title', 'Lista de migraciones tidel')
+@section('page-title', 'Lista de Formatos de Tienda')
 
 @section('content')
 
