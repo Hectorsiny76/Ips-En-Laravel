@@ -10,11 +10,11 @@ class Cajatipo extends Model
 {
     protected $table = 'cajatipos';
 
-    protected $fillable = ['establecimiento_id', 'cajatipo_id', 'numcaja'];
+    protected $fillable = ['nombre'];
 
     use SoftDeletes;
 
     public function establecimientos(){
-        return $this->belongsToMany(Establecimiento::class, 'cajatipo_establecimiento');
+        return $this->belongsToMany(Establecimiento::class, 'cajatipo_establecimiento')->withPivot('numcaja');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Establecimientotipo;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::share('navEstablecimientos', Establecimientotipo::all());
+        if (Schema::hasTable('establecimientotipos')) {
+            View::share('navEstablecimientos', Establecimientotipo::all());
+        }
     }
 }

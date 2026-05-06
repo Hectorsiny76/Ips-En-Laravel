@@ -23,7 +23,7 @@ class CajatipoController extends AdminController
      */
     public function create()
     {
-        //
+        return view('admin.caja-tipos.create');
     }
 
     /**
@@ -31,7 +31,20 @@ class CajatipoController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|unique:cajatipos',
+            'establecimientos' => 'nullable|array',
+            'establecimientos.*' => 'required|exists:establecimientos,id',
+            'establecimientos.*.numcaja' => 'required|string|min:1',
+        ]);
+
+        $cajatipo = Cajatipo::create([
+            'nombre' => $request->nombre,
+        ]);
+
+        $cajatipo->establecimientos()->sync($request->input('establecimientos'), []);
+
+        return redirect()->route('admin.caja-tipos.index')->with('success', 'Nuevo tipo de caja creado satisfactoriamente');
     }
 
     /**
@@ -45,24 +58,47 @@ class CajatipoController extends AdminController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Cajatipo $cajatipo)
+    public function edit($id)
     {
-        //
+        $cajatipo = Cajatipo::findOrFail($id);
+
+        $cajatipo->load('establecimientos');
+
+        return view('admin.caja-tipos.edit', compact('cajatipo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Cajatipo $cajatipo)
+    public function update(Request $request, $id)
     {
-        //
+        $cajatipo = Cajatipo::findOrFail($id);
+
+        $request->validate([
+            'nombre' => 'required|string|unique:cajatipos,nombre,'.$cajatipo->id,
+            'establecimientos' => 'nullable|array',
+            'establecimientos.*' => 'required|exists:establecimientos,id',
+            'establecimientos.*.numcaja' => 'required|string|min:1',
+        ]);
+
+        $cajatipo->update([
+            'nombre' => $request->nombre,
+        ]);
+
+        $cajatipo->establecimientos()->sync($request->input('establecimientos'), []);
+
+        return redirect()->route('admin.caja-tipos.index')->with('success', 'Tipo de caja actualizado satisfactoriamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cajatipo $cajatipo)
+    public function destroy($id)
     {
-        //
+        $cajatipo = Cajatipo::findOrFail($id);
+
+        $cajatipo->delete();
+
+        return redirect()->route('admin.caja-tipos.index')->with('success', 'Tipo de caja eliminado');
     }
 }

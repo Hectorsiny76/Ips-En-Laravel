@@ -41,7 +41,7 @@
                     <x-table-td-actions
                         ahref="{{route('admin.caja-tipos.edit', $cajatipo->id)}}"
                         formaction="{{ route('admin.caja-tipos.destroy', $cajatipo->id) }}"
-                        formconfirm="¿Esta seguro de eliminar esta duo de establecimientos de la lista?"
+                        formconfirm="¿Esta seguro de eliminar este tipo de caja?"
                     />
                 </tr>
             @endforeach
