@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\BinomioestablecimientoController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FoliotipoController;
 use App\Http\Controllers\Admin\PilotoprogramaController;
 use App\Http\Controllers\Admin\TidelprogramaController;
 use App\Http\Controllers\Admin\TiendaformatoController;
@@ -77,6 +78,9 @@ Route::middleware('auth')
 
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);
+
+    // Foliotipos
+    Route::resource('foliotipos', FoliotipoController::class);
 });
 
 require __DIR__.'/auth.php';
