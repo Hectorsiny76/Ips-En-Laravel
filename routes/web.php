@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\CampoController;
 use App\Http\Controllers\Admin\CampogerenteController;
 use App\Http\Controllers\Admin\EstablecimientoController;
 use App\Http\Controllers\Admin\DespliegueController;
+use App\Http\Controllers\Admin\AsociadoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -90,6 +91,9 @@ Route::middleware('auth')
 
     // Areas
     Route::resource('areas', AreaController::class);
+
+    // Asociados
+    Route::resource('areas.asociados', AsociadoController::class)->shallow();
 
     // Despligues
     Route::resource('despliegues', DespliegueController::class);

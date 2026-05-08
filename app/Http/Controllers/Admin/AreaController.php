@@ -13,7 +13,7 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::all();
+        $areas = Area::withCount('asociados')->get();
 
         return view('admin.areas.index', compact('areas'));
     }
