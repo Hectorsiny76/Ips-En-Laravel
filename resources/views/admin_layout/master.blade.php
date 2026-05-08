@@ -22,7 +22,7 @@
     <header class="h-16 flex items-center justify-between shadow bg-sky-950 text-white p-4">
         <h1 class="text-2xl font-bold">@yield('page-title', 'MSI')</h1>
         <div class="flex items center gap-4">
-            <div class="my-2 font-medium">
+            <div class="py-2 font-medium">
                 <span >Bienvenido,</span>
                 <span class="hover:text-teal-600 underline text-teal-700"><a href="{{route('admin.profile.edit')}}">{{Auth::user()->name}}</a></span>
                 <span>!</span>
@@ -53,6 +53,7 @@
                     <x-link-aside href="{{route('admin.programas-piloto.index')}}">Programas Piloto</x-link-aside>
                     <x-link-aside href="{{route('admin.caja-tipos.index')}}">Tipos de Caja</x-link-aside>
                     <x-link-aside href="{{route('admin.foliotipos.index')}}">Tipos de Folios</x-link-aside>
+                    <x-link-aside href="{{route('admin.areas.index')}}">Áreas</x-link-aside>
                 </ul>
             </nav>
         </aside>

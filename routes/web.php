@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\BinomioestablecimientoController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -83,7 +84,11 @@ Route::middleware('auth')
     // Foliotipos
     Route::resource('foliotipos', FoliotipoController::class);
 
+    // Folios
     Route::resource('foliotipos.folios', FolioController::class)->shallow();
+
+    // Areas
+    Route::resource('areas', AreaController::class);
 });
 
 require __DIR__.'/auth.php';
