@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\BinomioestablecimientoController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FolioController;
 use App\Http\Controllers\Admin\FoliotipoController;
 use App\Http\Controllers\Admin\PilotoprogramaController;
 use App\Http\Controllers\Admin\TidelprogramaController;
@@ -81,6 +82,8 @@ Route::middleware('auth')
 
     // Foliotipos
     Route::resource('foliotipos', FoliotipoController::class);
+
+    Route::resource('foliotipos.folios', FolioController::class)->shallow();
 });
 
 require __DIR__.'/auth.php';

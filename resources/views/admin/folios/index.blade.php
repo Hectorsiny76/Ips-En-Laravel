@@ -1,49 +1,49 @@
-
 @extends('admin_layout.master')
 
-@section('title', 'Tipos de Folios')
+@section('title', 'Folios Tipo'.$folioTipo->tipo)
 
-@section('page-title', 'Tipos de Folios')
+@section('page-title', 'Folios Tipo'.$folioTipo->tipo)
 
 @section('content')
 
+    <x-nav-ol-first href="{{route('admin.foliotipos.index')}}" nombre="Tipos de Folios"/>
+
     <x-div-index-title-create-button
-        title="Estos son los tipos de folio actuales"
-        url="{{route('admin.foliotipos.create')}}"
-        button="Agregar un nuevo tipo de folio"
+        title="Folios Tipo {{$folioTipo->tipo}} actuales"
+        url="{{route('admin.foliotipos.folios.create', $folioTipo->id)}}"
+        button="Agregar un nuevo {{$folioTipo->tipo}}"
     />
 
     <x-index-div-table>
         <x-index-div-table-thead>
             <x-index-div-table-thead-th-column>
-                No
+                Numero
             </x-index-div-table-thead-th-column>
             <x-index-div-table-thead-th-column>
-                Tipo
+                Titulo
             </x-index-div-table-thead-th-column>
             <x-index-div-table-thead-th-column>
-                Folios existentes
+                Descripcion
             </x-index-div-table-thead-th-column>
             <x-index-div-table-thead-th-actions-column/>
         </x-index-div-table-thead>
         <x-index-div-table-tbody>
-            @foreach($foliotipos as $foliotipo)
+            @foreach($folios as $folio)
                 <tr>
                     <td>
-                        {{$loop->iteration}}
+                        {{$folio->numero}}
                     </td>
                     <td>
-                        {{$foliotipo->tipo}}
+                        {{$folio->titulo}}
                     </td>
                     <td>
-                        {{$foliotipo->folios_count}}
+                        {{$folio->descripcion}}
                     </td>
                     <x-table-td-actions
-                        ahref="{{route('admin.foliotipos.edit', $foliotipo->id)}}"
-                        formaction="{{ route('admin.foliotipos.destroy', $foliotipo->id) }}"
-                        formconfirm="¿Esta seguro de eliminar este tipo de folio?"
+                        ahref="{{route('admin.folios.edit', $folio->id)}}"
+                        formaction="{{ route('admin.folios.destroy', $folio->id) }}"
+                        formconfirm="¿Esta seguro de eliminar este folio?"
                     />
-                    <x-table-td-fd-routing href="{{route('admin.foliotipos.folios.index',$foliotipo->id)}}">Folios</x-table-td-fd-routing>
                 </tr>
             @endforeach
         </x-index-div-table-tbody>

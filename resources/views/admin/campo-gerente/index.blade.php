@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <x-nav-ol-estado>
+    <x-nav-ol-first href="{{route('admin.estados.index')}}" nombre="Estados">
         <li>
             <div class="flex items-center">
                 <svg class="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
@@ -33,7 +33,7 @@
                 </a>
             </div>
         </li>
-    </x-nav-ol-estado>
+    </x-nav-ol-first>
 
     <div class="flex-1 overflow-auto bg-white shadow rounded-lg">
         <table class="min-w-full divide-y divide-gray-200 relative">

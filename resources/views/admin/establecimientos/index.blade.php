@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <x-nav-ol-estado>
+    <x-nav-ol-first href="{{route('admin.estados.index')}}" nombre="Estados">
 
         <x-nav-ol-li-component
             href="{{ route('admin.estados.gerentes-mercado.index', $campogerente->campo->mercado->mercadogerente->estado) }}">
@@ -28,7 +28,7 @@
             Gerente de Campo {{$campogerente->nombre}}
         </x-nav-ol-li-component>
 
-    </x-nav-ol-estado>
+    </x-nav-ol-first>
     <x-div-index-title-create-button
         title="Estos son los establecimientos de {{$campogerente->nombre}}"
         url="{{route('admin.campo-gerente.establecimientos.create', $campogerente->id)}}"

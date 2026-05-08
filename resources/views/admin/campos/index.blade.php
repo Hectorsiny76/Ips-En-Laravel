@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <x-nav-ol-estado>
+    <x-nav-ol-first href="{{route('admin.estados.index')}}" nombre="Estados">
         <li>
             <div class="flex items-center">
                 <svg class="w-4 h-4 text-gray-400 mx-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
@@ -24,7 +24,7 @@
                 </a>
             </div>
         </li>
-    </x-nav-ol-estado>
+    </x-nav-ol-first>
     <div class="flex justify-between">
         <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Estos son los campos del mercado {{$mercado->numero}}</h1>
         <a href="{{ route('admin.mercados.campos.create', $mercado)}}" class="bg-indigo-300  px-4 py-2 rounded">
