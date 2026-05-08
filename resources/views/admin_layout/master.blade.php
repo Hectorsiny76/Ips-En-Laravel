@@ -54,6 +54,7 @@
                     <x-link-aside href="{{route('admin.caja-tipos.index')}}">Tipos de Caja</x-link-aside>
                     <x-link-aside href="{{route('admin.foliotipos.index')}}">Tipos de Folios</x-link-aside>
                     <x-link-aside href="{{route('admin.areas.index')}}">Áreas</x-link-aside>
+                    <x-link-aside href="{{route('admin.despliegues.index')}}">Despliegues</x-link-aside>
                 </ul>
             </nav>
         </aside>

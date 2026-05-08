@@ -32,7 +32,7 @@ class AvaloncontratoController extends AdminController
 
         $tipoEstacion = Establecimientotipo::findOrFail(2);
 
-        $tipoEstacion->load('establecimientos')->get();
+        $tipoEstacion->load('establecimientos');
 
         $estaciones = $tipoEstacion->establecimientos;
 

@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\MercadoController;
 use App\Http\Controllers\Admin\CampoController;
 use App\Http\Controllers\Admin\CampogerenteController;
 use App\Http\Controllers\Admin\EstablecimientoController;
+use App\Http\Controllers\Admin\DespliegueController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -89,6 +90,9 @@ Route::middleware('auth')
 
     // Areas
     Route::resource('areas', AreaController::class);
+
+    // Despligues
+    Route::resource('despliegues', DespliegueController::class);
 });
 
 require __DIR__.'/auth.php';

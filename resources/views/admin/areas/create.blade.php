@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <x-div-edit-create-title>Crear un nueva Área</x-div-edit-create-title>
+    <x-div-edit-create-title>Crear una nueva Área</x-div-edit-create-title>
 
     <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
         <x-form-errors/>
@@ -23,7 +23,7 @@
                     id="nombre"
                     required></x-input-form>
 
-                <x-input-form-label for="nombre">Descripcion</x-input-form-label>
+                <x-input-form-label for="descripcion">Descripcion</x-input-form-label>
 
                 <x-input-form
                     type="text"
