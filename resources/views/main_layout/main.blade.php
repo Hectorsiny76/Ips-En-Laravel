@@ -18,10 +18,10 @@
 <body>
 
 <div class="flex flex-col h-dvh">
-    <header class="flex items-center justify-between p-8 bg-green-800 text-white border-b border-4 border-red-600">
+    <header class="flex items-center justify-between p-5 bg-green-800 text-white border-b">
         <div class="flex">
             <div class="shadow-xl/55 mr-2 h-14 w-14">
-                <img src="{{ asset('images/descarga.png') }}" alt="Logo">
+                <a href="{{ route('main.index')}}"><img src="{{ asset('images/descarga.png') }}" alt="Logo"></a>
             </div>
             <div class="grid items-center">
                 <h1 class="text-lg italic">MS</h1>
@@ -33,29 +33,39 @@
         </div>
 
     <div class="drop-shadow-mg flex justify-around p-2">
-        <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/30 hover:bg-green-600 transition-colors duration-300">
+        <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20 hover:bg-green-600 transition-colors duration-300">
             <a href="http://10.60.200.8/MSI1N/complementos/contactos.html" target="2N" class="border-amber-950"><span class="icon">👥</span> Contactos</a>
         </div>
-        <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/30">
+        <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20">
             <a href="http://10.60.200.8/MSI1N/complementos/index.html" target="2N" class="nav-btn"><span class="icon">🔼</span> Escalación</a>
         </div>
-        <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/30">
+        <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20">
             <a href="http://10.60.200.8/MSI1N/tidel/tidel.php" target="2N" class="nav-btn"><span class="icon">📋</span> TIDEL</a>
         </div>
-        <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/30">
+        <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20">
             <a href="http://10.60.200.8/MSI1N/ritms/listaRitm.php" target="2N" class="w-full"><span class="icon">📑</span> RITM</a>
         </div>
     </div>
     </header>
 
-    <div class="flex-1 grid-cols-12 pt-8 bg-gray-300 grid justify-center gap-12">
+    <div class="flex-1 grid-cols-12 pt-8 bg-green-100 grid justify-center gap-12">
 
-        <main class="flex col-span-7 col-start-2 flex-col bg-amber-400 min-h-screen">
+        <main class="flex col-span-7 col-start-2 flex-col bg-white min-h-screen rounded-xl p-6">
             @yield('contenido')
+
+            
         </main>
 
 
-        <aside class="flex col-span-3 bg-violet-500 min-h-screen">
+        <aside class="flex col-span-3 bg-white min-h-screen b-8 rounded-xl">
+
+            <div class=" grid-rows-3 gap-4 p-4">
+                <div class="inset-shadow-sm bg-green-800 m-4 p-4 rounded-lg">
+                    <p class="text-lg font-bold mb-2 text-white text-center">
+                        Acceso rápido
+                    </p>
+                    
+                </div>
             
             <div class="grid grid-flow-col grid-rows-3 gap-4 p-4">
                 <div class="inset-shadow-sm inset-shadow-green-500 bg-green-200 m-4 p-4 rounded-lg">

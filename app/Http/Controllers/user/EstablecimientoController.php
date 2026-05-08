@@ -3,65 +3,29 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
-use App\Models\Establecimiento;
-use Illuminate\Http\Request;
+use App\Http\Requests\BuscarSucursalRequest;
+use App\Services\SucursalService;
 
 class EstablecimientoController extends Controller
 {
+    public function __construct(private SucursalService $service) {}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $est = Establecimiento::find(2);
-        return view('user.main.index', compact('est'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('user.main.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Establecimiento $establecimiento)
+    public function show(BuscarSucursalRequest $request)
     {
-        //
-    }
+        $est = $this->service->buscar($request);
+        $columnas = $est ? $this->service->columnas($est) : [];
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Establecimiento $establecimiento)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Establecimiento $establecimiento)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Establecimiento $establecimiento)
-    {
-        //
+        return view('user.main.show', compact('est', 'columnas'));
     }
 }

@@ -92,4 +92,24 @@ class Establecimiento extends Model
             Campogerente::class,
         ]);
     }
+
+    /**
+     * Filtra sólo establecimientos de tipo "tienda".
+     */
+    public function scopeTiendas($query)
+    {
+        return $query->whereHas('establecimientotipo', fn($q) =>
+            $q->where('nombre', 'like', '%tienda%')
+        );
+    }
+
+    /**
+     * Filtra sólo establecimientos de tipo "estación".
+     */
+    public function scopeEstaciones($query)
+    {
+        return $query->whereHas('establecimientotipo', fn($q) =>
+            $q->where('nombre', 'like', '%estacion%')
+        );
+    }
 }
