@@ -26,8 +26,8 @@
                 <x-input-form-label for="es_link">¿Es un link?</x-input-form-label>
 
                 <x-input-form-select name="es_link" id="es_link" initialvalue="-- ¿Es link? --">
-                    <option value="true">Sí</option>
-                    <option value="false">No</option>
+                    <option value="1">Sí</option>
+                    <option value="0">No</option>
                 </x-input-form-select>
 
                 <x-input-form-label for="mimes_permitidos">Extensiones Permitidas</x-input-form-label>
@@ -38,7 +38,7 @@
                     placeholder="pdf"
                     value="{{old('mimes_permitidos')}}"
                     id="mimes_permitidos"
-                    required/>
+                    />
 
                 <x-input-form-label for="tam_max_kb">Tamaño máximo de KB</x-input-form-label>
 
@@ -49,7 +49,7 @@
                     value="{{old('tam_max_kb')}}"
                     id="tam_max_kb"
                     min="1"
-                    required/>
+                    />
 
             </div>
             <x-form-create-buttons href="{{ route('admin.archivo-tipo.index') }}"/>

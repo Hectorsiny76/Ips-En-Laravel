@@ -15,7 +15,7 @@ class Archivotipo extends Model
 
     protected $table = 'archivotipos';
 
-    protected $fillable = ['nombre'];
+    protected $fillable = ['nombre', 'es_link', 'mimes_permitidos', 'tam_max_kb'];
 
     public function archivos(){
         return $this->hasMany(Archivo::class);

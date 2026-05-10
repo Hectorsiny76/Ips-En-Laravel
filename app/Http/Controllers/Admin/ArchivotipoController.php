@@ -31,7 +31,16 @@ class ArchivotipoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validacion = $request->validate([
+            'nombre' => 'required|string|min:3',
+            'es_link' => 'required|boolean',
+            'mimes_permitidos' => 'nullable|string',
+            'tam_max_kb' => 'nullable|string',
+        ]);
+
+        $archivotipo = Archivotipo::create($validacion);
+
+        return redirect()->route('admin.archivo-tipo.index')->with('success', 'El tipo de archivo '.$archivotipo->nombre.' se ha creado correctamente');
     }
 
     /**
@@ -45,24 +54,43 @@ class ArchivotipoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Archivotipo $archivotipo)
+    public function edit($id)
     {
-        //
+        $archivoTipo = Archivotipo::findOrFail($id);
+
+        return view('admin.archivo-tipos.edit', compact('archivoTipo'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Archivotipo $archivotipo)
+    public function update(Request $request, $id)
     {
-        //
+        $validacion = $request->validate([
+            'nombre' => 'required|string|min:3',
+            'es_link' => 'required|boolean',
+            'mimes_permitidos' => 'nullable|string',
+            'tam_max_kb' => 'nullable|string',
+        ]);
+
+        $archivoTipo = Archivotipo::findOrFail($id);
+
+        $archivoTipo->update($validacion);
+
+        return redirect()->route('admin.archivo-tipo.index')->with('success', 'El tipo de archivo '.$archivoTipo->nombre.' se ha actualizado correctamente');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Archivotipo $archivotipo)
+    public function destroy($id)
     {
-        //
+        $archivoTipo = Archivotipo::findOrFail($id);
+
+        $archivoTipoEliminado = $archivoTipo;
+
+        $archivoTipo->delete();
+
+        return redirect()->route('admin.archivo-tipo.index')->with('success', 'El tipo de archivo '.$archivoTipoEliminado->nombre.' se ha eliminado correctamente');
     }
 }
