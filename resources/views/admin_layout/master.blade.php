@@ -24,7 +24,7 @@
         <div class="flex items center gap-4">
             <div class="py-2 font-medium">
                 <span >Bienvenido,</span>
-                <span class="hover:text-teal-600 underline text-teal-700"><a href="{{route('admin.profile.edit')}}">{{Auth::user()->name}}</a></span>
+                <span class="hover:text-gray-300 underline text-gray-400"><a href="{{route('admin.profile.edit')}}">{{Auth::user()->name}}</a></span>
                 <span>!</span>
             </div>
             <form method="post" action="{{route('logout')}}">
@@ -55,6 +55,7 @@
                     <x-link-aside href="{{route('admin.foliotipos.index')}}">Tipos de Folios</x-link-aside>
                     <x-link-aside href="{{route('admin.areas.index')}}">Áreas</x-link-aside>
                     <x-link-aside href="{{route('admin.despliegues.index')}}">Despliegues</x-link-aside>
+                    <x-link-aside href="{{route('admin.archivo-tipo.index')}}">Tipos de Archivo</x-link-aside>
                 </ul>
             </nav>
         </aside>

@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\CampogerenteController;
 use App\Http\Controllers\Admin\EstablecimientoController;
 use App\Http\Controllers\Admin\DespliegueController;
 use App\Http\Controllers\Admin\AsociadoController;
+use App\Http\Controllers\Admin\ArchivotipoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -97,6 +98,9 @@ Route::middleware('auth')
 
     // Despligues
     Route::resource('despliegues', DespliegueController::class);
+
+    // Archivo Tipo
+    Route::resource('archivo-tipo', ArchivotipoController::class);
 });
 
 require __DIR__.'/auth.php';

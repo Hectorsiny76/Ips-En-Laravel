@@ -15,6 +15,12 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nombre')->unique();
+
+            $table->boolean('es_link')->default(false);
+
+            $table->string('mimes_permitidos')->nullable();
+            $table->string('tam_max_kb')->nullable();
+
             $table->softDeletes();
         });
     }

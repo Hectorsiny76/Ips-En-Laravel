@@ -87,6 +87,6 @@ class Establecimientotipo extends Model
     }
 
     public function archivos(){
-        return $this->hasMany(Archivo::class);
+        return $this->belongsToMany(Archivotipo::class, 'archivos')->withPivot('titulo', 'ruta');
     }
 }

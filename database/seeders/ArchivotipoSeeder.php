@@ -18,6 +18,9 @@ class ArchivotipoSeeder extends Seeder
         foreach($tipos as $tipo){
             Archivotipo::create([
                 'nombre'=>$tipo,
+                'es_link'=>fake()->randomElement([true,false]),
+                'mimes_permitidos'=>fake()->randomElement(['pdf','docx', 'xls', 'xlsx']),
+                'tam_max_kb'=>fake()->numberBetween(1,6000),
             ]);
         }
     }
