@@ -85,9 +85,9 @@ class EstablecimientotipoController extends AdminController
      */
     public function edit($id)
     {
-        $establecimientoTipo = Establecimientotipo::findOrFail($id);
+        $estTipo = Establecimientotipo::findOrFail($id);
 
-        return view('admin.establecimientotipo.edit', compact('establecimientoTipo'));
+        return view('admin.establecimientotipo.edit', compact('estTipo'));
     }
 
     /**

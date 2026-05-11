@@ -33,7 +33,7 @@
                             {{data_get($estTipo, $columnaDb) ?? 'N/A'}}
                         </td>
                     @endforeach
-                    <x-table-td-partial-edit href="{{'admin.establecimientotipo.edit', $estTipo->id}}" value="Agregar Archivos Relacionados"/>
+                    <x-table-td-partial-edit href="{{route('admin.establecimientotipo.edit', $estTipo->id)}}" value="Agregar Archivos Relacionados"/>
                 </tr>
             @endforeach
             </tbody>

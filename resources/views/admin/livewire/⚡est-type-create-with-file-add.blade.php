@@ -59,10 +59,13 @@ new class extends Component
                 if($tipo['es_link']){
                     $reglas["arrayArchivos.{$index}.linkUrl"] = 'required|url|max:2048';
                 } else {
+
+                    $extensiones = str_replace('  ', ' ', $tipo['mimes_permitidos']);
+
                     $reglas["arrayArchivos.{$index}.archivoSubido"] = [
                         'required',
                         'file',
-                        'mimes:' . $tipo['mimes_permitidos'],
+                        'extensions:' . $extensiones,
                         'max:'. $tipo['tam_max_kb']
                     ];
                 }

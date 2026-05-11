@@ -42,4 +42,62 @@ class GuardadoDeArchivosService
         // Se utiliza el metodo syncWithoutDetaching para no borrar los archivos previamente guardados
         $estTipo->archivos()->syncWithoutDetaching($archivoIds);
     }
+
+    public function actualizarArchivosParaEsttipo(Establecimientotipo $estTipo, array $archivoDatos, array $archivosParaEliminar)
+    {
+        if(!empty($archivosParaEliminar)) {
+            $archivosParaEliminar =  Archivo::whereIn('id', $archivosParaEliminar)->get();
+
+            foreach ($archivosParaEliminar as $archivo) {
+                if(!$archivo->archivotipo->es_link) {
+                    Storage::disk('local')->delete($archivo->ruta);
+                }
+                $archivo->delete();
+            }
+        }
+
+        $archivoIds = [];
+
+        foreach ($archivoDatos as $datos) {
+
+            if(empty($datos['archivo_id'])){
+                $ruta = null;
+
+                if(isset($datos['archivoSubido']) && $datos['archivoSubido']) {
+                    $ruta = $datos['archivoSubido']->store('archivos_esttipo', 'local');
+                } else {
+                    $ruta = $datos['linkUrl'];
+                }
+
+                $archivoNuevo = Archivo::create([
+                    'titulo'        => $datos['titulo'],
+                    'ruta'    => $ruta,
+                    'archivotipo_id' => $datos['archivotipo_id'],
+                ]);
+
+                $archivoIds[] = $archivoNuevo->id;
+            }
+
+            else {
+                $archivoExistente = Archivo::findOrFail($datos['archivo_id']);
+
+                $archivoExistente->titulo = $datos['titulo'];
+
+                if(isset($datos['archivoSubido']) && $datos['archivoSubido']) {
+                    Storage::disk('local')->delete($archivoExistente->ruta);
+
+                    $archivoExistente->ruta = $datos['archivoSubido'];
+                } elseif(isset($datos['linkUrl']) && $datos['linkUrl'] !== '') {
+                    $archivoExistente->ruta = $datos['linkUrl'];
+                }
+
+                $archivoExistente->save();
+
+                $archivosIds[] = $archivoExistente->id;
+
+            }
+        }
+
+        $estTipo->archivos()->syncWithoutDetaching($archivoIds);
+    }
 }
