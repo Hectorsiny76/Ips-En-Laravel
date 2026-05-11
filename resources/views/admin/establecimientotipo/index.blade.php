@@ -5,9 +5,10 @@
 @section('page-title', 'Tipos de establecimientos')
 
 @section('content')
+
     <div class="flex justify-between">
         <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Estos son los tipos de establecimientos actuales</h1>
-        <a href="{{ route('admin.estados.index')}}" class="bg-indigo-300  px-4 py-2 rounded">
+        <a href="{{ route('admin.establecimientotipo.create')}}" class="bg-indigo-300  px-4 py-2 rounded">
             Agregar nuevo tipo de establecimiento
         </a>
     </div>
@@ -21,6 +22,7 @@
                         {{$columna}}
                     </th>
                 @endforeach
+                <x-index-div-table-thead-th-actions-column/>
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -31,6 +33,7 @@
                             {{data_get($estTipo, $columnaDb) ?? 'N/A'}}
                         </td>
                     @endforeach
+                    <x-table-td-partial-edit href="{{'admin.establecimientotipo.edit', $estTipo->id}}" value="Agregar Archivos Relacionados"/>
                 </tr>
             @endforeach
             </tbody>

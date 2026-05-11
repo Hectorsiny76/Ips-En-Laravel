@@ -11,16 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('archivos', function (Blueprint $table) {
+        Schema::create('archivo_esttipo', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->string('titulo');
-            $table->string('ruta');
-
-            $table->foreignId('archivotipo_id')->constrained()->cascadeOnDelete();
-
-            $table->softDeletes();
+            $table->foreignId('establecimientotipo_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('archivo_id')->constrained()->cascadeOnDelete();
         });
     }
 
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('archivos');
+        Schema::dropIfExists('archivo_esttipo');
     }
 };

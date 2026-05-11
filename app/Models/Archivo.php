@@ -21,7 +21,7 @@ class Archivo extends Model
         return $this->belongsTo(Archivotipo::class);
     }
 
-    public function establecimientotipo(){
-        return $this->belongsTo(Establecimientotipo::class);
+    public function establecimientotipos(){
+        return $this->belongsToMany(Establecimientotipo::class, 'archivo_esttipo');
     }
 }

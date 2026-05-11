@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Archivotipo;
 use App\Models\Establecimientotipo;
 use Illuminate\Http\Request;
 
@@ -82,9 +83,11 @@ class EstablecimientotipoController extends AdminController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Establecimientotipo $establecimiento)
+    public function edit($id)
     {
-        //
+        $establecimientoTipo = Establecimientotipo::findOrFail($id);
+
+        return view('admin.establecimientotipo.edit', compact('establecimientoTipo'));
     }
 
     /**

@@ -17,12 +17,10 @@ class ArchivoSeeder extends Seeder
     {
         for($i=0; $i<5; $i++){
             $randArch = Archivotipo::inRandomOrder()->first();
-            $randEstTipo = Establecimientotipo::inRandomOrder()->first();
 
             Archivo::create([
                 'titulo'=>fake()->word(),
                 'ruta'=>fake()->word().'/'.fake()->word().'/'.fake()->word(),
-                'establecimientotipo_id'=>$randEstTipo->id,
                 'archivotipo_id'=>$randArch->id,
             ]);
         }
