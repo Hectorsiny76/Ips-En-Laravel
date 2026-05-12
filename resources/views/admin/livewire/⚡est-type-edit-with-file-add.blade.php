@@ -5,7 +5,6 @@ use App\Models\Archivotipo;
 use App\Models\Establecimientotipo;
 use Livewire\WithFileUploads;
 use App\Services\GuardadoDeArchivosService;
-use Closure;
 
 new class extends Component
 {
@@ -86,23 +85,27 @@ new class extends Component
                     $reglas["arrayArchivos.{$index}.linkUrl"] = 'required|url|max:2048';
                 } else {
 
-                    $extensiones = str_replace('  ', ' ', $tipo['mimes_permitidos']);
+                    $archivoString = str_replace('  ', ' ', $tipo['mimes_permitidos']);
 
-                    if(empty($archivoDatos['archivo_id'])) {
-                        $reglas["arrayArchivos.{$index}.archivoSubido"] = [
-                            'required',
-                            'file',
-                            'extensions:' . $extensiones,
-                            'max:' . $tipo['tam_max_kb']
-                        ];
-                    } else {
-                        $reglas["arrayArchivos.{$index}.archivoSubido"] = [
-                            'nullable',
-                            'file',
-                            'extensions:'. $extensiones,
-                            'max:' . $tipo['tam_max_kb']
-                        ];
-                    }
+                    $extensiones = explode(',', strtolower($archivoString));
+
+                    $esRequerido = empty($archivoDatos['archivo_id'] ? 'required' : 'nullable');
+
+
+                    $reglas['arrayArchivos.{$index}.archivoSubido'] = [
+                        $esRequerido,
+                        'file',
+                        function( string $atributo, $valor, \Closure $fallo) use ($extensiones) {
+                            if($valor){
+                                $extensionActual = strtolower($valor->getClientOriginalExtension());
+
+                                if(!in_array($extensionActual, $extensiones)) {
+                                    $fail("El archivo debe de ser un: " . implode(', ', $extensiones));
+                                }
+                            }
+                        },
+                        'max:' . $tipo['tam_max_kb'],
+                    ];
                 }
             }
         }
@@ -122,13 +125,13 @@ new class extends Component
 };
 ?>
 
-<div class="w-full">
+<div class="w-full overflow-auto">
 
     <x-form-errors/>
 
     <x-div-edit-create-title>Actualizar archivos del establecimiento {{$estTipo->nombre}}</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <div class="flex-1 bg-white shadow rounded-lg p-3">
         <form wire:submit="guardar" class="space-y-6" method="POST">
             @csrf
             <div class="mb-6">
@@ -157,22 +160,23 @@ new class extends Component
                 </div>
 
                 @foreach($arrayArchivos as $index => $archivoDatos)
-                    <div wire:key="fila-archivo-{{$index}}" class="w-full border p-3 mb-3 flex gap-4 items-start bg-white">
+                    <div wire:key="fila-archivo-{{$index}}" class="w-full border p-3 mb-3 grid grid-cols-[1fr_1fr_1fr_10%] gap-4 bg-white">
 
-                        <div>
+                        <div class="p-2">
                             <x-input-form-label for="titulo">Titulo</x-input-form-label>
 
                             <input
                                 placeholder="Escalacion a..."
                                 type="text"
                                 wire:model="arrayArchivos.{{$index}}.titulo"
+                                class="w-full"
                             />
                         </div>
 
-                        <div>
+                        <div class="p-2">
                             <x-input-form-label for="archivotipo_id">Tipo de Archivo</x-input-form-label>
 
-                            <select wire:model.live="arrayArchivos.{{$index}}.archivotipo_id" wire:key="select-{{$index}}">
+                            <select wire:model.live="arrayArchivos.{{$index}}.archivotipo_id" wire:key="select-{{$index}}" class="w-full">
                                 <option value="">Selecciona un Tipo de Archivo</option>
 
                                 @foreach($archivoTipos as $tipo)
@@ -184,7 +188,7 @@ new class extends Component
                             </select>
                         </div>
 
-                        <div wire:key="inputs-condicionales-{{$index}}">
+                        <div wire:key="inputs-condicionales-{{$index}}" class="p-2">
                             @php
                                 $idTipoActual = $archivoDatos['archivotipo_id'];
                                 $tipoSeleccionado = collect($archivoTipos)->firstWhere('id', '==', $idTipoActual);
@@ -197,6 +201,7 @@ new class extends Component
                                         type="url"
                                         placeholder="google.com"
                                         wire:model="arrayArchivos.{{$index}}.linkUrl"
+                                        class="w-full"
                                     />
                                 @else
                                     @if($archivoDatos['ruta_existente'])
@@ -213,6 +218,7 @@ new class extends Component
                                             value=""
                                             wire:model="arrayArchivos.{{$index}}.archivoSubido"
                                             wire:key="archivo-{{$index}}"
+                                            class="w-full"
                                         />
                                     @else
                                         <x-input-form-label for="archivo">Subir un archivo</x-input-form-label>
@@ -223,18 +229,23 @@ new class extends Component
                                             value=""
                                             wire:model="arrayArchivos.{{$index}}.archivoSubido"
                                             wire:key="archivo-{{$index}}"
+                                            class="w-full"
                                         />
                                     @endif
                                 @endif
+                            @else
+                                <div class="text-center flex justify-center items-center border-2 border-dashed border-gray-700 rounded-md h-full flex-1">
+                                    <h1 class="text-gray-600">Selecciona un tipo de archivo para poder agregarlo</h1>
+                                </div>
                             @endif
 
                         </div>
 
-                        <div>
+                        <div class="text-center flex items-center justify-center p-2">
                             <button
                                 type="button"
                                 wire:click="eliminarFilaArchivo({{$index}})"
-                                class="border border-red-600 text-red-500 mt-8 p-2"
+                                class="border text-xl border-red-600 text-red-500 p-2"
                             >
                                 Eliminar
                             </button>
