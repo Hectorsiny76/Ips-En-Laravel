@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FolioController;
 use App\Http\Controllers\Admin\FoliotipoController;
 use App\Http\Controllers\Admin\PilotoprogramaController;
+use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\Admin\SubcategoriaController;
 use App\Http\Controllers\Admin\TidelprogramaController;
 use App\Http\Controllers\Admin\TiendaformatoController;
@@ -109,6 +110,9 @@ Route::middleware('auth')
 
     // Subcategorias
     Route::resource('subcategorias', SubcategoriaController::class);
+
+    // Servicios
+    Route::resource('servicios', ServicioController::class);
 });
 
 require __DIR__.'/auth.php';

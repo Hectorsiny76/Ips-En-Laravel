@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Subcategoria;
+use App\Models\Servicio;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -16,18 +16,18 @@ new class extends Component {
 
     public function render()
     {
-        $query = Subcategoria::query();
+        $query = Servicio::query();
 
         if($this->search !== ''){
             $query->whereRaw('LOWER(nombre) like ?', ['%'.strtolower($this->search).'%']);
         }
 
-        $subcategorias = $query->latest()->paginate(10);
+        $servicios = $query->latest()->paginate(10);
 
-        $subcategorias->loadCount('clasificaciones');
+        $servicios->loadCount('clasificaciones');
 
-        return view('admin.livewire.subcategorias.⚡index-table',[
-            'subcategorias' => $subcategorias
+        return view('admin.livewire.servicios.⚡index-table',[
+            'servicios' => $servicios
         ]);
     }
 };
@@ -36,15 +36,15 @@ new class extends Component {
 <div class="overflow-auto">
 
     <div class="mb-4">
-        <x-input-form-label for="subcategoria">Buscar Subcategoría</x-input-form-label>
+        <x-input-form-label for="servicio">Buscar Servicio</x-input-form-label>
 
         <x-input-form
             type="text"
-            name="subcategoria"
-            placeholder="Manejo de..."
+            name="servicio"
+            placeholder="Soportar..."
             value=""
             wire:model.live.debounce="search"
-            id="subcategoria"
+            id="servicio"
         />
 
     </div>
@@ -63,21 +63,21 @@ new class extends Component {
             <x-index-div-table-thead-th-actions-column/>
         </x-index-div-table-thead>
         <x-index-div-table-tbody>
-            @foreach($subcategorias as $subcategoria)
+            @foreach($servicios as $servicio)
                 <tr>
                     <td>
                         {{$loop->iteration}}
                     </td>
                     <td>
-                        {{$subcategoria->nombre}}
+                        {{$servicio->nombre}}
                     </td>
                     <td>
-                        {{$subcategoria->clasificaciones_count}}
+                        {{$servicio->clasificaciones_count}}
                     </td>
                     <x-table-td-actions
-                        ahref="{{route('admin.subcategorias.edit', $subcategoria->id)}}"
-                        formaction="{{ route('admin.subcategorias.destroy', $subcategoria->id) }}"
-                        formconfirm="¿Esta seguro de eliminar esta subcategoría?"
+                        ahref="{{route('admin.servicios.edit', $servicio->id)}}"
+                        formaction="{{ route('admin.servicios.destroy', $servicio->id) }}"
+                        formconfirm="¿Esta seguro de eliminar este servicio?"
                     />
                 </tr>
             @endforeach
@@ -85,7 +85,7 @@ new class extends Component {
     </x-index-div-table>
 
     <div class="mt-4">
-        {{ $subcategorias->links() }}
+        {{ $servicios->links() }}
     </div>
 
 </div>

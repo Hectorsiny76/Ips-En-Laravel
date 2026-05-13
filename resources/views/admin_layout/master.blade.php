@@ -58,6 +58,7 @@
                     <x-link-aside href="{{route('admin.archivo-tipo.index')}}">Tipos de Archivo</x-link-aside>
                     <x-link-aside href="{{route('admin.categorias.index')}}">Categorías</x-link-aside>
                     <x-link-aside href="{{route('admin.subcategorias.index')}}">Subcategorías</x-link-aside>
+                    <x-link-aside href="{{route('admin.servicios.index')}}">Servicios</x-link-aside>
                 </ul>
             </nav>
         </aside>
