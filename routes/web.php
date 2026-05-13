@@ -3,10 +3,12 @@
 use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\BinomioestablecimientoController;
+use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FolioController;
 use App\Http\Controllers\Admin\FoliotipoController;
 use App\Http\Controllers\Admin\PilotoprogramaController;
+use App\Http\Controllers\Admin\SubcategoriaController;
 use App\Http\Controllers\Admin\TidelprogramaController;
 use App\Http\Controllers\Admin\TiendaformatoController;
 use App\Http\Controllers\ProfileController;
@@ -101,6 +103,12 @@ Route::middleware('auth')
 
     // Archivo Tipo
     Route::resource('archivo-tipo', ArchivotipoController::class);
+
+    // Categorias
+    Route::resource('categorias', CategoriaController::class);
+
+    // Subcategorias
+    Route::resource('subcategorias', SubcategoriaController::class);
 });
 
 require __DIR__.'/auth.php';

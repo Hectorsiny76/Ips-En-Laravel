@@ -85,7 +85,7 @@ class CajatipoController extends AdminController
             'nombre' => $request->nombre,
         ]);
 
-        $cajatipo->establecimientos()->sync($request->input('establecimientos'), []);
+        $cajatipo->establecimientos()->sync($request->input('establecimientos', []));
 
         return redirect()->route('admin.caja-tipos.index')->with('success', 'Tipo de caja actualizado satisfactoriamente');
     }

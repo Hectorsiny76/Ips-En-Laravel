@@ -21,11 +21,4 @@ class Categoria extends Model
         return $this->hasMany(Clasificacione::class);
     }
 
-    protected static function booted(){
-        static::deleting(function($categoria){
-            $categoria->clasificaciones->each(function($clasificacion){
-                $clasificacion->delete();
-            });
-        });
-    }
 }
