@@ -14,21 +14,21 @@ class MercadoController extends AdminController
      */
     public function index($id)
     {
-        $mercadoGerente = Mercadogerente::with('mercado.establecimientotipo')->findOrFail($id);
-
-        $columnas = ['Número de mercado', 'Gerente de Mercado', 'Tipo de establecimiento'];
-
-        $columnasDb = ['numero', 'mercadogerente.nombre', 'establecimientotipo.nombre'];
-
-        $mercado = $mercadoGerente->mercado;
+        $mercadoGerente = Mercadogerente::findOrFail($id);
 
         if ($mercadoGerente->mercado()->count() == 0) {
-            // No permite que sea eliminado pues está ligado a un mercado
+            // No se puede ver el mercado, pues el gerente de mercado no tiene niguno asignado, por lo cual se le redirige a la página de creación de mercado
             return redirect()->route('admin.gerentes-mercado.mercados.create', $mercadoGerente->id)
                 ->with('error', 'Este gerente de mercado no tiene ningún mercado a su nombre. Agregue uno.');
         }
 
-        return view('admin.mercados.index', compact('mercado','mercadoGerente', 'columnas', 'columnasDb'));
+        $mercadoGerente->load('mercado');
+
+        $mercado = $mercadoGerente->mercado;
+
+        $mercado->loadCount('encargados');
+
+        return view('admin.mercados.index', compact('mercado','mercadoGerente'));
 
     }
 
@@ -52,13 +52,18 @@ class MercadoController extends AdminController
         $validacion = $request->validate([
             'numero' => 'required|string|min:1|max:10|unique:mercados,numero',
             'establecimientotipo_id' => 'required|integer',
+            'asociados.*' => 'nullable|integer|exists:asociados,id',
         ],['numero.unique' => 'Este número de mercado ya está registrado.']);
 
         $mercadoGerente = Mercadogerente::findOrFail($id);
 
         $mercadoGerente->mercado()->create($validacion);
 
-        $mercado = $mercadoGerente->load('mercado');
+        $mercadoGerente->load('mercado');
+
+        $mercado = $mercadoGerente->mercado;
+
+        $mercado->encargados()->sync($request->input('asociados', []));
 
         return redirect()->route('admin.gerentes-mercado.mercados.index', $mercado->id)->with('success', 'Mercado creado correctamente');
     }
@@ -84,14 +89,23 @@ class MercadoController extends AdminController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Mercado $mercado)
+    public function update(Request $request, $id)
     {
-        $validacion = $request->validate([
+
+        $mercado = Mercado::findOrFail($id);
+
+        $request->validate([
             'numero' => 'required|string|min:1|max:10|unique:mercados,numero,'.$mercado->id,
             'establecimientotipo_id' => 'required|integer',
+            'asociados.*' => 'nullable|integer|exists:asociados,id',
         ],['numero.unique' => 'Este número de mercado ya está registrado.']);
 
-        $mercado->update($validacion);
+        $mercado->update([
+            'numero' => $request->input('numero'),
+            'establecimientotipo_id' => $request->input('establecimientotipo_id'),
+        ]);
+
+        $mercado->encargados()->sync($request->input('asociados', []));
 
         return redirect()->route('admin.gerentes-mercado.mercados.index', $mercado->mercadogerente->id)->with('success', 'Mercado actualizado correctamente');
     }

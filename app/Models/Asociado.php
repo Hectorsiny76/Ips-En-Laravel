@@ -21,6 +21,6 @@ class Asociado extends Model
     }
 
     public function mercado(){
-        return $this->hasMany(Mercadoencargado::class);
+        return $this->belongsToMany(Mercadoencargado::class, 'mercadoencargados');
     }
 }

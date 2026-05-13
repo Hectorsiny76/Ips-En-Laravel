@@ -28,9 +28,9 @@ class Mercado extends Model
     }
 
     public function encargados(){
-        return $this->hasMany(Mercadoencargado::class);
+        return $this->belongsToMany(Asociado::class, 'mercadoencargados');
     }
-    
+
     public function campos(){
         return $this->hasMany(Campo::class);
     }
