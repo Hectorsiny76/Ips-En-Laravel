@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\BinomioestablecimientoController;
 use App\Http\Controllers\Admin\CategoriaController;
+use App\Http\Controllers\Admin\ClasificacioneController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FolioController;
 use App\Http\Controllers\Admin\FoliotipoController;
@@ -117,6 +118,9 @@ Route::middleware('auth')
 
     // Microservicios
     Route::resource('microservicios', MicroservicioController::class);
+
+    // Clasificaciones
+    Route::resource('clasificaciones', ClasificacioneController::class);
 });
 
 require __DIR__.'/auth.php';

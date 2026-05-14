@@ -10,7 +10,7 @@
 
     <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
         <x-form-errors/>
-        <form action="{{route('admin.categorias.store')}}" method="POST">
+        <form action="{{route('admin.categorias.update', $categoria->id)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-6">

@@ -12,9 +12,7 @@ class ClasificacioneController extends AdminController
      */
     public function index()
     {
-        $clasificaciones = Clasificacione::with(['categoria', 'subcategoria', 'servicio', 'microservicio'])->get();
-
-        return view('clasificaciones', compact('clasificaciones'));
+        return view('admin.clasificaciones.index');
     }
 
     /**
@@ -22,7 +20,7 @@ class ClasificacioneController extends AdminController
      */
     public function create()
     {
-        //
+        return view('admin.clasificaciones.create');
     }
 
     /**
@@ -30,7 +28,7 @@ class ClasificacioneController extends AdminController
      */
     public function store(Request $request)
     {
-        //
+        // Lo tiene el componente en la carpeta de livewire/clasificaciones/create-form.blade.php
     }
 
     /**
@@ -44,9 +42,13 @@ class ClasificacioneController extends AdminController
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Clasificacione $clasificacione)
+    public function edit($id)
     {
-        //
+        $clasificacion = Clasificacione::findOrFail($id);
+
+        $clasificacion->load(['categoria', 'subcategoria', 'servicio', 'microservicio']);
+
+        return view('admin.clasificaciones.edit', compact('clasificacion'));
     }
 
     /**
