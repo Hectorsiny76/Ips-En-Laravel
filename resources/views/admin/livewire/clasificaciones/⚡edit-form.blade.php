@@ -36,7 +36,7 @@ new class extends Component {
     {
         $this->validate();
 
-        Clasificacione::update([
+        $this->clasificacion->update([
             'categoria_id' => $this->categoria_id,
             'subcategoria_id' => $this->subcategoria_id,
             'servicio_id' => $this->servicio_id,
@@ -103,6 +103,6 @@ new class extends Component {
             />
 
         </div>
-        <x-form-create-buttons href="{{ route('admin.clasificaciones.index') }}"/>
+        <x-form-update-buttons href="{{ route('admin.clasificaciones.index') }}"/>
     </form>
 </div>

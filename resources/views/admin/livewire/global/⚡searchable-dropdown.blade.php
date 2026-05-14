@@ -21,6 +21,9 @@ new class extends Component
     {
         $this->selectedId = $initialId;
         $this->selectedName = $initialName;
+        $this->search = '';
+
+        $this->dispatch('dropdown-selected', field: $this->fieldToUpdate, id: $this->selectedId);
     }
 
     public function selectItem($id, $name)
