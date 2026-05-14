@@ -56,14 +56,18 @@ class ClasificacioneController extends AdminController
      */
     public function update(Request $request, Clasificacione $clasificacione)
     {
-        //
+        // Lo tiene el componente en la carpeta de livewire/clasificaciones/edit-form.blade.php
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Clasificacione $clasificacione)
+    public function destroy($id)
     {
-        //
+        $clasificacion = Clasificacione::findOrFail($id);
+
+        $clasificacion->delete();
+
+        return redirect()->route('admin.clasificaciones.index')->with('success', '¡Clasificacion eliminada correctamente!');
     }
 }
