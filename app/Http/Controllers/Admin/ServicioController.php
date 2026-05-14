@@ -82,7 +82,7 @@ class ServicioController extends Controller
         if($servicio->clasificaciones()->count() > 0){
             return redirect()
                 ->route('admin.servicios.index')
-                ->with('error', 'No se puede eliminar esta servicio porque tiene clasificaciones asignadas!');
+                ->with('error', 'No se puede eliminar este servicio porque tiene clasificaciones asignadas!');
         }
 
         $servicioEliminado = $servicio;

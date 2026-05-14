@@ -59,6 +59,7 @@
                     <x-link-aside href="{{route('admin.categorias.index')}}">Categorías</x-link-aside>
                     <x-link-aside href="{{route('admin.subcategorias.index')}}">Subcategorías</x-link-aside>
                     <x-link-aside href="{{route('admin.servicios.index')}}">Servicios</x-link-aside>
+                    <x-link-aside href="{{route('admin.microservicios.index')}}">Microservicios</x-link-aside>
                 </ul>
             </nav>
         </aside>

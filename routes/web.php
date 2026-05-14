@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FolioController;
 use App\Http\Controllers\Admin\FoliotipoController;
+use App\Http\Controllers\Admin\MicroservicioController;
 use App\Http\Controllers\Admin\PilotoprogramaController;
 use App\Http\Controllers\Admin\ServicioController;
 use App\Http\Controllers\Admin\SubcategoriaController;
@@ -113,6 +114,9 @@ Route::middleware('auth')
 
     // Servicios
     Route::resource('servicios', ServicioController::class);
+
+    // Microservicios
+    Route::resource('microservicios', MicroservicioController::class);
 });
 
 require __DIR__.'/auth.php';
