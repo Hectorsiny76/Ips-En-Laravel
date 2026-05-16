@@ -27,32 +27,15 @@
                 </div>
                 <div class="grid items-center">
                     <h1 class="text-lg italic">MS</h1>
-                    <div class="">
+                    <div class="text-md">
                         <span class="brand-name">Mesa de Servicio ICONN</span>
                         <span class="brand-sub">Soluciones para TI</span>
                     </div>
                 </div>
             </div>
-
-            <div class="drop-shadow-mg flex justify-around p-2">
-                <div
-                    class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20 hover:bg-green-600 transition-colors duration-300">
-                    <a href="http://10.60.200.8/MSI1N/complementos/contactos.html" target="2N"
-                        class="border-amber-950"><span class="icon">👥</span> Contactos</a>
-                </div>
-                <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20">
-                    <a href="http://10.60.200.8/MSI1N/complementos/index.html" target="2N" class="nav-btn"><span
-                            class="icon">🔼</span> Escalación</a>
-                </div>
-                <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20">
-                    <a href="http://10.60.200.8/MSI1N/tidel/tidel.php" target="2N" class="nav-btn"><span
-                            class="icon">📋</span> TIDEL</a>
-                </div>
-                <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20">
-                    <a href="http://10.60.200.8/MSI1N/ritms/listaRitm.php" target="2N" class="w-full"><span
-                            class="icon">📑</span> RITM</a>
-                </div>
-            </div>
+            
+            <livewire:user::livewire.navbar.navbar/>
+            
         </header>
 
         <div class="flex-1 grid-cols-12 pt-8 bg-green-100 grid justify-center gap-12">
@@ -64,38 +47,9 @@
             </main>
 
 
-            <aside class="flex col-span-3 bg-white min-h-screen b-8 rounded-xl">
+            <aside class="w-full flex-shrink-0 col-span-3 bg-white min-h-screen b-8 rounded-xl">
 
-                <div class=" grid-rows-3 gap-4 p-4">
-                    <div class="inset-shadow-sm bg-green-800 m-4 p-4 rounded-lg">
-                        <p class="text-lg font-bold mb-2 text-white text-center">
-                            Acceso rápido
-                        </p>
-
-                    </div>
-
-                    <div class="grid grid-flow-col grid-rows-3 gap-4 p-4">
-                        <div class="inset-shadow-sm inset-shadow-green-500 bg-green-200 m-4 p-4 rounded-lg">
-                            <h3>
-                                Bienvenido a la Mesa de Servicio ICONN
-                            </h3>
-                        </div>
-
-                        <div class="inset-shadow-sm inset-shadow-green-500 bg-green-200 m-4 p-4 rounded-lg">
-                            <h2 class="text-lg font-bold mb-2">Información Adicional</h2>
-                            <p class="text-sm text-gray-700">Aquí puedes agregar información adicional, enlaces útiles o
-                                cualquier otro contenido relevante para los usuarios.</p>
-
-                        </div>
-
-                        <div class="inset-shadow-sm inset-shadow-green-500 bg-green-200 m-4 p-4 rounded-lg">
-                            <h3>
-                                Incidentes principales
-                            </h3>
-                        </div>
-
-
-                    </div>
+                <livewire:user::livewire.aside.aside-manager />
 
             </aside>
         </div>
