@@ -19,43 +19,53 @@ class Establecimiento extends Model
 
     use BelongsToThrough;
 
-    public function campogerente(){
+    public function campogerente()
+    {
         return $this->belongsTo(Campogerente::class, 'campogerente_id');
     }
 
-    public function tiendaformato(){
+    public function tiendaformato()
+    {
         return $this->belongsTo(Tiendaformato::class);
     }
 
-    public function tidelprograma(){
+    public function tidelprograma()
+    {
         return $this->belongsTo(Tidelprograma::class);
     }
 
-    public function autocobrocajas(){
+    public function autocobrocajas()
+    {
         return $this->hasMany(Autocobrotienda::class);
     }
-    
-    public function drivethrucajas(){
+
+    public function drivethrucajas()
+    {
         return $this->hasMany(Drivethrutienda::class);
     }
 
-    public function avaloncontrato(){
+    public function avaloncontrato()
+    {
         return $this->hasOne(Avaloncontrato::class);
     }
 
-    public function binomiotienda(){
+    public function binomiotienda()
+    {
         return $this->hasOne(Binomioestablecimiento::class, 'tienda_id', 'id');
     }
 
-    public function binomioestacion(){
+    public function binomioestacion()
+    {
         return $this->hasOne(Binomioestablecimiento::class, 'estacion_id', 'id');
     }
 
-    public function pilotoprogramas(){
+    public function pilotoprogramas()
+    {
         return $this->hasMany(Pilotoestablecimiento::class);
     }
 
-    public function estado(){
+    public function estado()
+    {
         return $this->belongsToThrough(Estado::class, [
             Mercadogerente::class,
             Mercado::class,
@@ -64,52 +74,49 @@ class Establecimiento extends Model
         ]);
     }
 
-    public function mercadogerente(){
-        return $this->belongsToThrough(Mercadogerente::class,[
+    public function mercadogerente()
+    {
+        return $this->belongsToThrough(Mercadogerente::class, [
             Mercado::class,
             Campo::class,
             Campogerente::class,
         ]);
     }
 
-    public function establecimientotipo(){
-        return $this->belongsToThrough(Establecimientotipo::class,[
+    public function establecimientotipo()
+    {
+        return $this->belongsToThrough(Establecimientotipo::class, [
             Mercado::class,
             Campo::class,
             Campogerente::class,
         ]);
     }
 
-    public function mercado(){
-        return $this->belongsToThrough(Mercado::class,[
+    public function mercado()
+    {
+        return $this->belongsToThrough(Mercado::class, [
             Campo::class,
             Campogerente::class,
         ]);
     }
 
-    public function campo(){
-        return $this->belongsToThrough(Campo::class,[
+    public function campo()
+    {
+        return $this->belongsToThrough(Campo::class, [
             Campogerente::class,
         ]);
     }
 
-    /**
-     * Filtra sólo establecimientos de tipo "tienda".
-     */
-    public function scopeTiendas($query)
+    public function scopeSearch($query, $termino)
     {
-        return $query->whereHas('establecimientotipo', fn($q) =>
-            $q->where('nombre', 'like', '%tienda%')
-        );
-    }
+        if (empty($termino)) {
+            return $query->whereRaw('0 = 1');
+        }
 
-    /**
-     * Filtra sólo establecimientos de tipo "estación".
-     */
-    public function scopeEstaciones($query)
-    {
-        return $query->whereHas('establecimientotipo', fn($q) =>
-            $q->where('nombre', 'like', '%estacion%')
-        );
+        return $query->where(function ($q) use ($termino) {
+            $q->where('numero', 'LIKE', "%{$termino}%")
+                ->orWhere('centrodecostos', 'LIKE', "%{$termino}%")
+                ->orWhere('nombre', 'LIKE', "%{$termino}%");
+        });
     }
 }

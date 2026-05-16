@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BuscarSucursalRequest;
+use App\Models\Establecimiento;
 use App\Services\SucursalService;
 
 class EstablecimientoController extends Controller
 {
-    public function __construct(private SucursalService $service) {}
+    public function __construct(private SucursalService $service)
+    {
+    }
 
     /**
      * Display a listing of the resource.
@@ -21,11 +23,10 @@ class EstablecimientoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(BuscarSucursalRequest $request)
+    public function show($id)
     {
-        $est = $this->service->buscar($request);
-        $columnas = $est ? $this->service->columnas($est) : [];
+        $est = Establecimiento::findOrFail($id);
 
-        return view('user.main.show', compact('est', 'columnas'));
+        return view('user.main.show', compact('est'));
     }
 }

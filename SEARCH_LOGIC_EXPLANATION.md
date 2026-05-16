@@ -17,16 +17,16 @@ Este documento explica cómo funciona el flujo de búsqueda de tiendas y estacio
 **Archivo:** `app/Http/Requests/BuscarSucursalRequest.php`
 
 **Función:** Protege la aplicación validando que los datos que el usuario envía por el formulario sean correctos.
-*   **Reglas de Validación:** Define que el `nombre` sea un texto opcional, que el `numero` sea un entero, etc. 
+*   **Reglas de Validación:** Define que el `nombre` sea un texto opcional, que el `numero` sea un entero, etc. Además se puede buscar ahora tanto por nombre de sucursal como por numero de sucursal 
 *   **Seguridad:** Evita que se procesen datos maliciosos o con formatos incorrectos antes de que lleguen a la base de datos.
 
 ------------------------------------------------------------------------------
 
-## 3. El Servicio (El Cerebro)
+## 3. El Servicio o service (El Cerebro)
 **Archivo:** `app/Services/SucursalService.php`
 
 **Función:** Contiene la lógica de negocio real. Es el archivo más importante para modificar **cómo** se busca.
-*   **Método `buscar()`:** Utiliza el método `when()` de Eloquent para aplicar filtros condicionales. Si un campo viene vacío, no lo incluye en la consulta SQL.
+*   **Método `buscar()`:** Utiliza el método 'when()' de Eloquent para aplicar filtros condicionales. Si un campo viene vacío, no lo incluye en la consulta SQL.
 *   **Polimorfismo Visual:** El método `columnas()` decide dinámicamente qué campos mostrar en la tabla (ej. mostrar "Centro de Costos" solo si es una estación) sin necesidad de llenar las vistas de `if`.
 
 ------------------------------------------------------------------------------
