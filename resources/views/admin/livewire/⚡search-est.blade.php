@@ -7,6 +7,7 @@ new class extends Component
 {
     #[Validate('required')]
     public $searchText = '';
+
     public $results = [];
 
     public $selectedEst = [];

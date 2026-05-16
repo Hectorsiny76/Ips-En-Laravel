@@ -100,9 +100,9 @@ class Establecimiento extends Model
         }
 
         return $query->where(function ($q) use($termino){
-            $q->where('numero','LIKE', "%{$termino}%")
-                ->orWhere('centrodecostos','LIKE', "%{$termino}%")
-                ->orWhere('nombre','LIKE', "%{$termino}%");
+            $q->whereRaw('LOWER(numero) like ?', "%{$termino}%")
+                ->orWhereRaw('LOWER(centrodecostos) like ?', "%{$termino}%")
+                ->orWhereRaw('LOWER(nombre) like ?', "%{$termino}%");
         });
     }
 

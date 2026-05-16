@@ -21,21 +21,7 @@ new class extends Component {
         if ($this->search !== '') {
             $searchString = '%' . strtolower($this->search) . '%';
 
-            $query->where(function ($q) use ($searchString) {
-
-                $q->whereHas('categoria', function ($categoriaQuery) use ($searchString) {
-                    $categoriaQuery->whereRaw('LOWER(nombre) like ?', $searchString);
-                })
-                    ->orWhereHas('subcategoria', function ($subcategoriaQuery) use ($searchString) {
-                        $subcategoriaQuery->whereRaw('LOWER(nombre) like ?', $searchString);
-                    })
-                    ->orWhereHas('servicio', function ($servicioQuery) use ($searchString) {
-                        $servicioQuery->whereRaw('LOWER(nombre) like ?', $searchString);
-                    })
-                    ->orWhereHas('microservicio', function ($microservicioQuery) use ($searchString) {
-                        $microservicioQuery->whereRaw('LOWER(nombre) like ?', $searchString);
-                    });
-            });
+            $query = Clasificacione::search($searchString);
         }
 
         $clasificaciones = $query->latest()->paginate(10);

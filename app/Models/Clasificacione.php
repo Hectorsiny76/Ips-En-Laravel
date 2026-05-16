@@ -32,4 +32,27 @@ class Clasificacione extends Model
     public function microservicio(){
         return $this->belongsTo(Microservicio::class);
     }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        return $query->where(function ($q) use ($termino) {
+
+            $q->whereHas('categoria', function ($categoriaQuery) use ($termino) {
+                $categoriaQuery->whereRaw('LOWER(nombre) like ?', $termino);
+            })
+                ->orWhereHas('subcategoria', function ($subcategoriaQuery) use ($termino) {
+                    $subcategoriaQuery->whereRaw('LOWER(nombre) like ?', $termino);
+                })
+                ->orWhereHas('servicio', function ($servicioQuery) use ($termino) {
+                    $servicioQuery->whereRaw('LOWER(nombre) like ?', $termino);
+                })
+                ->orWhereHas('microservicio', function ($microservicioQuery) use ($termino) {
+                    $microservicioQuery->whereRaw('LOWER(nombre) like ?', $termino);
+                });
+        });
+    }
+
 }
