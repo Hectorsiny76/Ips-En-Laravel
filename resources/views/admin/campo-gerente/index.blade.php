@@ -51,6 +51,7 @@
                 <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
                     Campo
                 </th>
+                <x-index-div-table-thead-th-actions-column/>
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
@@ -67,6 +68,11 @@
                 <td>
                     {{$campo->numero}}
                 </td>
+                <x-table-td-actions
+                    ahref="{{ route('admin.campo-gerente.edit', $campo->campogerente->id) }}"
+                    formaction="{{ route('admin.campo-gerente.destroy', $campo->campogerente->id) }}"
+                    formconfirm="¿Está seguro de eliminar este gerente de campo?"
+                    />
                 <x-table-td-fd-routing href="{{ route('admin.campo-gerente.establecimientos.index', $campo->campogerente->id) }}">
                     Establecimientos
                 </x-table-td-fd-routing>

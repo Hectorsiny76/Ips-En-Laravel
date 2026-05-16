@@ -53,8 +53,6 @@ class CampogerenteController extends AdminController
 
         $campo->campogerente()->create($validacion);
 
-        $campogerente = $campo->load('campogerente');
-
         return redirect()->route('admin.campo.campo-gerente.index', $campo->id)->with('success', 'Gerente de campo creado correctamente');
     }
 
@@ -99,8 +97,18 @@ class CampogerenteController extends AdminController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Campogerente $campogerente)
+    public function destroy($id)
     {
-        //
+        $campogerente = Campogerente::findOrFail($id);
+
+        if($campogerente->establecimientos()->count() > 0){
+            return redirect()->route('admin.campo.campo-gerente.index', $campogerente->campo->id)->with('error', 'Este gerente de campo tiene establecimientos asginados!');
+        }
+
+        $gerenteEliminado = $campogerente;
+
+        $campogerente->delete();
+
+        return redirect()->route('admin.mercados.campos.index', $gerenteEliminado->campo->mercado->id)->with('success', 'Gerente de campo eliminado correctamente');
     }
 }
