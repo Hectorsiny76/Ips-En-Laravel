@@ -50,15 +50,19 @@
             </li>
         </ul>
 
-        <div class="w-full p-4 border-2 rounded-md border-double">
-
-            <livewire:admin::livewire.navbar.navbar-manager/>
-
-        </div>
-
         <div class="w-full">
-            <livewire:admin::livewire.navbar.sidebar-manager/>
+            <div class="w-full p-4 border-2 rounded-md border-double">
+
+                <livewire:admin::livewire.navbar.navbar-manager/>
+
+            </div>
+
+            <div class="w-full">
+                <livewire:admin::livewire.navbar.sidebar-manager/>
+            </div>
         </div>
+
+        <livewire:admin::livewire.tab-manager.tab-manager/>
 
     </div>
 

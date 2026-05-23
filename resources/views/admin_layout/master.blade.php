@@ -19,8 +19,13 @@
 
 <div class="flex flex-col h-dvh overflow-hidden bg-gray-100">
 
-    <header class="h-16 flex items-center justify-between shadow bg-sky-950 text-white p-4">
-        <h1 class="text-2xl font-bold">@yield('page-title', 'MSI')</h1>
+    <header class="h-16  flex items-center justify-between shadow bg-sky-950 text-white p-4">
+        <div class="flex items-center justify-center">
+            <a href="{{route('admin.admin_layout.dashboard')}}">
+                <x-application-logo class="fill-current text-gray-500"/>
+            </a>
+            <h1 class="pl-3 text-2xl font-bold">@yield('page-title', 'MSI')</h1>
+        </div>
         <div class="flex items center gap-4">
             <div class="py-2 font-medium">
                 <span >Bienvenido,</span>
