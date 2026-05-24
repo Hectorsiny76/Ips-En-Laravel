@@ -31,7 +31,7 @@ class Estado extends Model
             ]
         );
     }
-    
+
     public function campos(){
         return $this->hasManyDeep(
             Campo::class,[
@@ -95,5 +95,17 @@ class Estado extends Model
                 Establecimiento::class
             ]
         );
+    }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        $termino = strtolower($termino);
+
+        return $query->where(function ($q) use($termino){
+            $q->WhereRaw('LOWER(nombre) like ?', "%{$termino}%");
+        });
     }
 }

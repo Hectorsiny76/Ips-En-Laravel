@@ -12,13 +12,7 @@ class EstadoController extends AdminController
      */
     public function index()
     {
-        $estados = Estado::all();
-
-        $columnas = ['Nombre'];
-
-        $columnasDb = ['nombre'];
-
-        return view('admin.estados.index', compact('estados', 'columnas', 'columnasDb'));
+        return view('admin.estados.index');
     }
 
     /**
