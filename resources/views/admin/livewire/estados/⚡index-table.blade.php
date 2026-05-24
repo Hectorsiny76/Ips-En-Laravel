@@ -33,7 +33,7 @@ new class extends Component
 };
 ?>
 
-<div>
+<div class="overflow-y-auto">
 
     <x-index-table-searchable-input
         title="Buscar Estados"

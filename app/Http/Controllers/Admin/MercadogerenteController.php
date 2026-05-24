@@ -11,17 +11,12 @@ class MercadogerenteController extends AdminController
     /**
      * Display a listing of the resource.
      */
-    public function index(Estado $estado)
+    public function index($id)
     {
 
-        $columnas = ['Nombre', 'Mercado'];
+        $estado = Estado::findOrFail($id);
 
-        $columnasDb = ['nombre', 'mercado.numero'];
-
-        $mercadoGerentes = $estado->mercadoGerentes()->with('mercado')->get();
-
-        return view('admin.gerentes-mercado.index', compact('estado', 'mercadoGerentes', 'columnas', 'columnasDb'));
-
+        return view('admin.gerentes-mercado.index', compact('estado'));
     }
 
     /**

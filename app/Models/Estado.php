@@ -61,21 +61,9 @@ class Estado extends Model
             ]
         );
     }
-    public function autocobrotiendas(){
+    public function cajatipos(){
         return $this->hasManyDeep(
-            Autocobrotienda::class,[
-                Mercadogerente::class,
-                Mercado::class,
-                Campo::class,
-                Campogerente::class,
-                Establecimiento::class
-            ]
-        );
-    }
-
-    public function drivethrutiendas(){
-        return $this->hasManyDeep(
-            Drivethrutienda::class,[
+            Cajatipo::class,[
                 Mercadogerente::class,
                 Mercado::class,
                 Campo::class,

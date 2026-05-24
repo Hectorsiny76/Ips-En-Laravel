@@ -53,7 +53,7 @@ class Mercadogerente extends Model
             ]
         );
     }
-    
+
     public function autocobrotiendas(){
         return $this->hasManyDeep(
             Autocobrotienda::class,[
@@ -65,9 +65,9 @@ class Mercadogerente extends Model
         );
     }
 
-    public function drivethrutiendas(){
+    public function cajatipos(){
         return $this->hasManyDeep(
-            Drivethrutienda::class,[
+            Cajatipo::class,[
                 Mercado::class,
                 Campo::class,
                 Campogerente::class,
@@ -85,5 +85,17 @@ class Mercadogerente extends Model
                 Establecimiento::class
             ]
         );
+    }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        $termino = strtolower($termino);
+
+        return $query->where(function ($q) use($termino){
+            $q->WhereRaw('LOWER(nombre) like ?', "%{$termino}%");
+        });
     }
 }
