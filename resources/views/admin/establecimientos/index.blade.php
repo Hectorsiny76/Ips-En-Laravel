@@ -35,27 +35,6 @@
         button="Agregar un nuevo establecimiento"
     />
 
-        <x-index-div-table>
-            <x-index-div-table-thead>
-                @foreach($columnas as $columna)
-                    <x-index-div-table-thead-th-column>{{$columna}}</x-index-div-table-thead-th-column>
-                @endforeach
-                <x-index-div-table-thead-th-actions-column/>
-            </x-index-div-table-thead>
-            <x-index-div-table-tbody>
-            @foreach($establecimientos as $establecimiento)
-                <tr>
-                    @foreach($columnasDb as $columnaDb)
-                        <td>{{data_get($establecimiento, $columnaDb) ?? 'N/A'}}</td>
-                    @endforeach
-                    <x-table-td-actions
-                        ahref="{{route('admin.establecimientos.edit', $establecimiento->id)}}"
-                        formaction="{{route('admin.establecimientos.destroy', $establecimiento->id)}}"
-                        formconfirm="¿Esta seguro de que desea eliminar este establecimiento?"
-                    />
-                </tr>
-            @endforeach
-            </x-index-div-table-tbody>
-        </x-index-div-table>
+    <livewire:admin::livewire.establecimientos.index-table :campogerente="$campogerente"/>
 
 @endsection

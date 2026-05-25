@@ -15,11 +15,7 @@ class CampoController extends AdminController
     {
         $mercado = Mercado::find($id);
 
-        $mercado->load('campos.campogerente');
-
-        $campos = $mercado->campos;
-
-        return view('admin.campos.index', compact('campos', 'mercado'));
+        return view('admin.campos.index', compact( 'mercado'));
     }
 
     /**

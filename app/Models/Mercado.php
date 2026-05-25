@@ -51,19 +51,9 @@ class Mercado extends Model
             ]
         );
     }
-        public function autocobrotiendas(){
+    public function cajatipos(){
         return $this->hasManyDeep(
-            Autocobrotienda::class,[
-                Campo::class,
-                Campogerente::class,
-                Establecimiento::class
-            ]
-        );
-    }
-
-    public function drivethrutiendas(){
-        return $this->hasManyDeep(
-            Drivethrutienda::class,[
+            Cajatipo::class,[
                 Campo::class,
                 Campogerente::class,
                 Establecimiento::class

@@ -35,18 +35,10 @@ class Campo extends Model
         );
     }
 
-    public function autocobrotiendas(){
+    public function cajatipos(){
         return $this->hasManyDeep(
-            Autocobrotienda::class,[
-                Campogerente::class,
-                Establecimiento::class
-            ]
-        );
-    }
-
-    public function drivethrutiendas(){
-        return $this->hasManyDeep(
-            Drivethrutienda::class,[
+            Cajatipo::class,[
+                Campo::class,
                 Campogerente::class,
                 Establecimiento::class
             ]
@@ -60,5 +52,18 @@ class Campo extends Model
                 Establecimiento::class
             ]
         );
+    }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        return $query->where(function ($q) use($termino){
+            $q->WhereRaw('LOWER(numero) like ?', "%{$termino}%");
+        })->orWhereHas('campogerente', function ($campogerenteQuery) use($termino){
+            $termino = strtolower($termino);
+            $campogerenteQuery->whereRaw('LOWER(nombre) like ?', "%{$termino}%");
+        });
     }
 }

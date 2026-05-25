@@ -54,17 +54,6 @@ class Mercadogerente extends Model
         );
     }
 
-    public function autocobrotiendas(){
-        return $this->hasManyDeep(
-            Autocobrotienda::class,[
-                Mercado::class,
-                Campo::class,
-                Campogerente::class,
-                Establecimiento::class
-            ]
-        );
-    }
-
     public function cajatipos(){
         return $this->hasManyDeep(
             Cajatipo::class,[

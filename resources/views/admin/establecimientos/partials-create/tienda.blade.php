@@ -8,7 +8,7 @@
 
 <x-input-form-label for="tidelprograma">Programas Tidel Disponibles</x-input-form-label>
 
-<x-input-form-select name="tidelprograma_id" id="tidelprograma" initialvalue="-- TIDEL Disponibles --">
+<x-input-form-select :required="false" name="tidelprograma_id" id="tidelprograma" initialvalue="-- TIDEL Disponibles --">
     @foreach($tidelprogramas as $id => $ip)
         <option value="{{$id}}">{{$ip}}</option>
     @endforeach

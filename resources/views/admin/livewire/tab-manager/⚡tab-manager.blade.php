@@ -17,8 +17,20 @@ new class extends Component
 
 <div class="w-full pt-4">
     <div class="flex border-b pt-2">
-        <button class="pr-2 border rounded-tl-md border-gray-700 bg-gray-800 text-white hover:bg-gray-300 hover:text-gray-900" wire:click="setTab('admin::livewire.tabs.tab-search')">Buscador</button>
-        <button class="pr-2 border rounded-tr-md border-gray-700 bg-gray-800 text-white hover:bg-gray-300 hover:text-gray-900" wire:click="setTab('admin::livewire.tabs.tab-clasifications')">Clasificaciones</button>
+        <button
+            wire:click="setTab('admin::livewire.tabs.tab-search')"
+            @class(['pr-2 border rounded-tl-md',
+                    'border-gray-700 bg-gray-800 text-white' => $activeTab === 'admin::livewire.tabs.tab-search',
+                    'bg-gray-300 text-gray-900' => $activeTab !== 'admin::livewire.tabs.tab-search',
+                    ])
+        >Buscador</button>
+        <button
+            wire:click="setTab('admin::livewire.tabs.tab-clasifications')"
+            @class(['pr-2 border rounded-tl-md',
+                    'border-gray-700 bg-gray-800 text-white' => $activeTab === 'admin::livewire.tabs.tab-clasifications',
+                    'bg-gray-300 text-gray-900' => $activeTab !== 'admin::livewire.tabs.tab-clasifications',
+                    ])
+        >Clasificaciones</button>
     </div>
 
     <div>

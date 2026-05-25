@@ -26,41 +26,7 @@ class EstablecimientoController extends AdminController
     {
         $campogerente = Campogerente::findOrFail($id);
 
-        $campogerente->load(['establecimientotipo', 'establecimientos.cluster', 'establecimientos.tidelprograma', 'establecimientos.tiendaformato', 'establecimientos.avaloncontrato']);
-
-        $columnas = ['Nombre', 'Numero', 'Cajas/TPVS', 'IP'];
-
-        $columnasDb = ['nombre', 'numero', 'cajas_tpvs', 'idred'];
-
-        $estTipo = $campogerente->establecimientotipo;
-
-        $establecimientos = $campogerente->establecimientos;
-
-        if($estTipo->nombre == 'Tienda'){
-            $columnas[] = 'Ip Tidel';
-            $columnasDb[] = 'tidelprograma.ip';
-
-            $columnas[] = 'Formato de Tienda';
-            $columnasDb[] = 'tiendaformato.nombre';
-
-            $columnas[] = 'Cluster';
-            $columnasDb[] = 'cluster.nombre';
-        }
-        else if($estTipo->nombre == 'Estacion'){
-            $columnas[] = 'CDC';
-            $columnasDb[] = 'centrodecostos';
-
-            $columnas[] = 'Tel';
-            $columnasDb[] = 'tel';
-
-            $columnas[] = 'Correo';
-            $columnasDb[] = 'correo';
-
-            $columnas[] = 'Contrato Ávalon';
-            $columnasDb[] = 'avaloncontrato.numero';
-        }
-
-        return view('admin.establecimientos.index', compact('campogerente','estTipo','establecimientos', 'columnas', 'columnasDb'));
+        return view('admin.establecimientos.index', compact('campogerente'));
     }
 
     /**
@@ -108,7 +74,7 @@ class EstablecimientoController extends AdminController
         $validacionesXEstablecimiento = [
             'tienda' => [
                 'tiendaformato_id' => 'required|numeric|exists:tiendaformatos,id',
-                'tidelprograma_id' => 'required|numeric|exists:tidelprogramas,id',
+                'tidelprograma_id' => 'nullable|numeric|exists:tidelprogramas,id',
                 'cluster_id' => 'required|numeric|exists:clusters,id',
             ],
             'estacion' => [
