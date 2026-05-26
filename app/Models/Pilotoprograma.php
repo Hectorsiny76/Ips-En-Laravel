@@ -19,4 +19,18 @@ class Pilotoprograma extends Model
     public function establecimientos(){
         return $this->belongsToMany(Establecimiento::class, 'pilotoestablecimientos');
     }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        $termino = strtolower($termino);
+
+        return $query->where(function ($q) use($termino){
+            $q->whereRaw('LOWER(titulo) like ?', "%{$termino}%")
+                ->orWhereRaw('LOWER(descripcion_corta) like ?', "%{$termino}%");
+        });
+    }
+
 }
