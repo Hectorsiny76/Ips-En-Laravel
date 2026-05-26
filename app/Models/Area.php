@@ -23,4 +23,17 @@ class Area extends Model
     public function despliegues(){
         return $this->hasMany(Despliegue::class);
     }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        $termino = strtolower($termino);
+
+        return $query->where(function ($q) use($termino){
+            $q->whereRaw('LOWER(nombre) like ?', "%{$termino}%")
+                ->orWhereRaw('LOWER(descripcion) like ?', "%{$termino}%");
+        });
+    }
 }

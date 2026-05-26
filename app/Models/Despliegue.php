@@ -20,4 +20,18 @@ class Despliegue extends Model
     public function area(){
         return $this->belongsTo(Area::class);
     }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+        $termino = strtolower($termino);
+        return $query->where(function ($q) use($termino){
+            $q->WhereRaw('LOWER(titulo) like ?', "%{$termino}%")
+                ->orWhereRaw('LOWER(descripcion) like ?', "%{$termino}%");
+        })->orWhereHas('area', function ($areaQuery) use($termino){
+            $areaQuery->whereRaw('LOWER(nombre) like ?', "%{$termino}%");
+        });
+    }
+
 }

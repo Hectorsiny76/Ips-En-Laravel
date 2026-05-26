@@ -14,9 +14,7 @@ class DespliegueController extends Controller
      */
     public function index()
     {
-        $despliegues = Despliegue::with('area')->get();
-
-        return view('admin.despliegues.index', compact('despliegues'));
+        return view('admin.despliegues.index');
     }
 
     /**

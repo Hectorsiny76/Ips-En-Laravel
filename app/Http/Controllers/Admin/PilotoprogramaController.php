@@ -13,9 +13,7 @@ class PilotoprogramaController extends AdminController
      */
     public function index()
     {
-        $pilotoProgramas = Pilotoprograma::withCount('establecimientos')->get();
-
-        return view('admin.programas-piloto.index', compact('pilotoProgramas'));
+        return view('admin.programas-piloto.index');
     }
 
     /**
