@@ -72,6 +72,7 @@
                     ahref="{{ route('admin.campo-gerente.edit', $campo->campogerente->id) }}"
                     formaction="{{ route('admin.campo-gerente.destroy', $campo->campogerente->id) }}"
                     formconfirm="¿Está seguro de eliminar este gerente de campo?"
+                    warning="¡Al eliminar este gerente de campo se eliminarán todos sus establecimientos relacionados!"
                     />
                 <x-table-td-fd-routing href="{{ route('admin.campo-gerente.establecimientos.index', $campo->campogerente->id) }}">
                     Establecimientos

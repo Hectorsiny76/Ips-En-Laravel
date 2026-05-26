@@ -63,6 +63,7 @@ new class extends Component
                         ahref="{{route('admin.estados.edit', $estado->id)}}"
                         formaction="{{ route('admin.estados.destroy', $estado->id) }}"
                         formconfirm="¿Está seguro de que desea eliminar este estado?"
+                        warning="¡Al eliminar el estado eliminará todos sus registros relacionados a lo largo de la base de datos!"
                     />
                     <x-table-td-fd-routing
                         href="{{ route('admin.estados.gerentes-mercado.index', $estado->id) }}"

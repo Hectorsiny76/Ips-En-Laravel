@@ -38,6 +38,7 @@
                     ahref="{{route('admin.mercados.edit', $mercado->id)}}"
                     formaction="{{ route('admin.mercados.destroy', $mercado->id) }}"
                     formconfirm="¿Está seguro que desea eliminar este mercado?"
+                    warning="¡Al eliminar este mercado eliminará todos los registros relacionados!"
                     />
                 <x-table-td-fd-routing href="{{ route('admin.mercados.campos.index', $mercado->id) }}">Campos</x-table-td-fd-routing>
             </tr>

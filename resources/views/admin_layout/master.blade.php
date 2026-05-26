@@ -14,12 +14,18 @@
         </style>
     @endif
 
+    @livewireScriptConfig
+
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+
 </head>
 <body class="bg-gray-100">
 
 <div class="flex flex-col h-dvh overflow-hidden bg-gray-100">
 
-    <header class="h-16  flex items-center justify-between shadow bg-sky-950 text-white p-4">
+    <header class="h-16 flex items-center justify-between shadow bg-sky-950 text-white p-4">
         <div class="flex items-center justify-center">
             <a href="{{route('admin.admin_layout.dashboard')}}">
                 <x-application-logo class="fill-current text-gray-500"/>
@@ -40,10 +46,10 @@
     </header>
 
     <div class="flex-1 grid overflow-hidden grid-cols-12">
-        <aside class="col-span-2 flex-shrink-0 overflow-y-auto bg-gray-200 p-4 border-r">
+        <aside class="col-span-2 flex-shrink-0 overflow-y-auto bg-gray-200 pb-4 border-r">
             <nav>
-                <h1 class="font-bold text-xl mb-3">Menu de navegación</h1>
-                <ul class="text-2xl">
+                <h1 class="font-bold text-2xl z-10 sticky top-0 bg-gray-200 mb-3 p-2">Menu de navegación</h1>
+                <ul class="text-2xl px-4">
                     <x-link-aside href="{{route('admin.admin_layout.register')}}">Registrar</x-link-aside>
                     <x-link-aside href="{{route('admin.estados.index')}}">⭐Estados⭐</x-link-aside>
                     <x-link-aside href="{{route('admin.admin_layout.dashboard')}}">Dashboard</x-link-aside>

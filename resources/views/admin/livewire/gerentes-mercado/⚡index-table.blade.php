@@ -80,6 +80,7 @@ new class extends Component {
                         ahref="{{route('admin.gerentes-mercado.edit', $gerente->id)}}"
                         formaction="{{ route('admin.gerentes-mercado.destroy', $gerente->id) }}"
                         formconfirm="¿Está seguro de que desea eliminar este gerente de mercado?"
+                        warning="¡Al eliminar este gerente de mercado eliminará todos sus registros relacionados a lo largo de la base de datos!"
                     />
                     <x-table-td-fd-routing
                         href="{{ route('admin.gerentes-mercado.mercados.index', $gerente->id) }}"

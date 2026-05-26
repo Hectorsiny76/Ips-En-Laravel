@@ -75,6 +75,7 @@ new class extends Component {
                         ahref="{{route('admin.campos.edit', $campo->id)}}"
                         formaction="{{ route('admin.campos.destroy', $campo->id) }}"
                         formconfirm="¿Está seguro de que desea eliminar este campo?"
+                        warning="¡Al eliminar este campo se eliminarán todos los datos relacionados!"
                     />
                     <x-table-td-fd-routing
                         href="{{ route('admin.campo.campo-gerente.index', $campo->id) }}"

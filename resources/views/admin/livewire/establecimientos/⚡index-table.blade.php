@@ -102,6 +102,7 @@ new class extends Component {
                         ahref="{{route('admin.establecimientos.edit', $establecimiento->id)}}"
                         formaction="{{route('admin.establecimientos.destroy', $establecimiento->id)}}"
                         formconfirm="¿Esta seguro de que desea eliminar este establecimiento?"
+                        warning="¡Al eliminarse no se podrá recuperar!"
                     />
                 </tr>
             @endforeach
