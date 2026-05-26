@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Znck\Eloquent\Traits\BelongsToThrough;
 
 class Establecimiento extends Model
@@ -14,8 +13,6 @@ class Establecimiento extends Model
     protected $fillable = ['numero', 'nombre', 'cajas_tpvs', 'idred', 'campogerente_id', 'tidelprograma_id', 'tiendaformato_id', 'centrodecostos', 'cluster_id', 'tel', 'correo'];
 
     use HasFactory;
-
-    use SoftDeletes;
 
     use BelongsToThrough;
 

@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Znck\Eloquent\Traits\BelongsToThrough;
 
 class Campogerente extends Model
@@ -13,8 +12,6 @@ class Campogerente extends Model
     use HasRelationships;
 
     use HasFactory;
-
-    use SoftDeletes;
 
     use BelongsToThrough;
 

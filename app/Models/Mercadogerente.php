@@ -5,15 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Mercadogerente extends Model
 {
     use HasRelationships;
 
     use HasFactory;
-
-    use SoftDeletes;
 
     protected $table = 'mercadogerentes';
 

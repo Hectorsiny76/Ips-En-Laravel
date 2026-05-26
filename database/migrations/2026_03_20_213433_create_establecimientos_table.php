@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('cajas_tpvs');
             $table->string('idred');
 
-            $table->foreignId('campogerente_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('campogerente_id')->constrained()->nullOnDelete();
             $table->foreignId('tidelprograma_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('tiendaformato_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('cluster_id')->nullable()->constrained()->nullOnDelete();
@@ -29,7 +29,6 @@ return new class extends Migration
             $table->string('tel')->nullable();
             $table->string('correo')->nullable();
 
-            $table->softDeletes();
         });
     }
 

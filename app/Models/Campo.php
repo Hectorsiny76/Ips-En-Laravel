@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Campo extends Model
 {
@@ -16,8 +15,6 @@ class Campo extends Model
     protected $fillable = ['numero', 'mercado_id'];
 
     use HasFactory;
-
-    use SoftDeletes;
 
     public function mercado(){
         return $this->belongsTo(Mercado::class);

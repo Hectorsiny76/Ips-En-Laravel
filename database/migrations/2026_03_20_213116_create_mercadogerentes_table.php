@@ -16,8 +16,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('nombre');
-            $table->foreignId('estado_id')->nullable()->constrained()->nullOnDelete();
-            $table->softDeletes();
+            $table->foreignId('estado_id')->constrained()->nullOnDelete();
         });
     }
 

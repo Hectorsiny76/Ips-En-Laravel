@@ -18,8 +18,7 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('tel')->nullable();
             $table->string('correo')->nullable()->unique();
-            $table->foreignId('campo_id')->nullable()->unique()->constrained()->nullOnDelete();
-            $table->softDeletes();
+            $table->foreignId('campo_id')->unique()->constrained()->nullOnDelete();
         });
     }
 
