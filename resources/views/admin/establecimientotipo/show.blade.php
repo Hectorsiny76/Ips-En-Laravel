@@ -5,52 +5,13 @@
 @section('page-title', $estTipo->nombre)
 
 @section('content')
-    <div class="flex justify-between">
-        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Tipo de establecimiento: {{$estTipo->nombre}}</h1>
-        <a href="{{ route('admin.estados.index') }}" class="bg-indigo-300  px-4 py-2 rounded">
-            Agregar {{ $estTipo->nombre }}
-        </a>
-    </div>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200 relative">
-            <thead class="bg-gray-50">
-                <tr>
-                    @foreach($columnas as $columna)
-                        <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
-                            {{$columna}}
-                        </th>
-                    @endforeach
-                    <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm text-gray-500 uppercase">
-                        Acciones
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @foreach($establecimientos as $establecimiento)
-                    <tr>
-                        @foreach($columnasDb as $columnaDb)
-                            <td>
-                                {{data_get($establecimiento, $columnaDb) ?? 'N/A'}}
-                            </td>
-                        @endforeach
-                        <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                            <a href="{{route('admin.establecimientos.edit', $establecimiento->id)}}" class="text-indigo-600 hover:text-indigo-900 mr-4">
-                                Editar
-                            </a>
-                            <form action="{{route('admin.establecimientos.destroy', $establecimiento->id)}}" method="POST" class="inline-block" onsubmit="return confirm('¿Está seguro de que desea eliminar el establecimiento {{$establecimiento->nombre}}?');">
-                                @csrf
-                                @method('DELETE')
+    <x-div-index-title-create-button
+        title="Tipo de establecimiento: {{$estTipo->nombre}}"
+        url="{{ route('admin.estados.index') }}" {{-- TODO AGREGAR UNA RUTA DE CREACION DINÁMICA --}}
+        button="Agregar {{$estTipo->nombre}}"
+    />
 
-                                <button type="submit" class="text-red-600 hover:text-red-900">
-                                        Eliminar
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+   <livewire:admin::livewire.establecimientotipo.index-table :estTipo="$estTipo"/>
 
 @endsection

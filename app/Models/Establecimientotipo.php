@@ -25,7 +25,6 @@ class Establecimientotipo extends Model
     }
 
     public function campos(){
-
         return $this->hasManyDeep(
             Campo::class,[
                 Mercado::class
@@ -53,20 +52,9 @@ class Establecimientotipo extends Model
     }
 
 
-    public function autocobrotiendas(){
+    public function cajatipos(){
         return $this->hasManyDeep(
-            Autocobrotienda::class,[
-                Mercado::class,
-                Campo::class,
-                Campogerente::class,
-                Establecimiento::class
-            ]
-        );
-    }
-
-    public function drivethrutiendas(){
-        return $this->hasManyDeep(
-            Drivethrutienda::class,[
+            Cajatipo::class,[
                 Mercado::class,
                 Campo::class,
                 Campogerente::class,
@@ -89,4 +77,28 @@ class Establecimientotipo extends Model
     public function archivos(){
         return $this->belongsToMany(Archivo::class, 'archivo_esttipo');
     }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        return $query->where(function ($q) use ($termino) {
+
+            $termino = '%'.strtolower($termino).'%';
+
+            $q->whereHas('establecimientos', function ($estQuery) use ($termino) {
+
+                $numeroCol = $estQuery->qualifyColumn('numero');
+                $cdcCol  = $estQuery->qualifyColumn('centrodecostos');
+                $nombreCol   = $estQuery->qualifyColumn('nombre');
+
+                $estQuery->whereRaw("LOWER({$numeroCol}) like ?", [$termino])
+                    ->orWhereRaw("LOWER({$cdcCol}) like ?", [$termino])
+                    ->orWhereRaw("LOWER({$nombreCol}) like ?", $termino);
+            });
+
+        });
+    }
 }
+

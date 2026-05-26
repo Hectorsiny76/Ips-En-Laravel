@@ -13,13 +13,9 @@ class EstablecimientotipoController extends AdminController
      */
     public function index()
     {
-        $estTipos = Establecimientotipo::all();
+        $estTipos = Establecimientotipo::withCount('archivos')->get();
 
-        $columnas = ['Nombre'];
-
-        $columnasDb = ['nombre'];
-
-        return view('admin.establecimientotipo.index', compact('estTipos', 'columnas', 'columnasDb'));
+        return view('admin.establecimientotipo.index', compact('estTipos'));
     }
 
     /**

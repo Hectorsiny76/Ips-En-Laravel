@@ -17,22 +17,24 @@
         <table class="min-w-full divide-y divide-gray-200 relative">
             <thead class="bg-gray-50">
             <tr>
-                @foreach($columnas as $columna)
-                    <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
-                        {{$columna}}
-                    </th>
-                @endforeach
+                <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
+                    Nombre
+                </th>
+                <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
+                    Archivos relacionados
+                </th>
                 <x-index-div-table-thead-th-actions-column/>
             </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
             @foreach($estTipos as $estTipo)
                 <tr>
-                    @foreach($columnasDb as $columnaDb)
-                        <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                            {{data_get($estTipo, $columnaDb) ?? 'N/A'}}
-                        </td>
-                    @endforeach
+                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                        {{$estTipo->nombre}}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                        {{$estTipo->archivos_count}}
+                    </td>
                     <x-table-td-partial-edit href="{{route('admin.establecimientotipo.edit', $estTipo->id)}}" value="Agregar Archivos Relacionados"/>
                 </tr>
             @endforeach
