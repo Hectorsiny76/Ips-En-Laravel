@@ -12,11 +12,7 @@ class TidelprogramaController extends AdminController
      */
     public function index()
     {
-        $tidelprogramas  = Tidelprograma::all();
-
-        $tidelprogramas->load('establecimiento');
-
-        return view('admin.tidel-programas.index', compact('tidelprogramas'));
+        return view('admin.tidel-programas.index');
     }
 
     /**

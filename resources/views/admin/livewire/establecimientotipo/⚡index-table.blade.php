@@ -80,6 +80,8 @@ new class extends Component
         variable="search"
         />
 
+    <x-index-table-pagination :variable="$establecimientos"/>
+
     <x-index-div-table>
 
         <x-index-div-table-thead>
@@ -110,7 +112,5 @@ new class extends Component
         </x-index-div-table-tbody>
 
     </x-index-div-table>
-
-    <x-index-table-pagination :variable="$establecimientos"/>
 
 </div>

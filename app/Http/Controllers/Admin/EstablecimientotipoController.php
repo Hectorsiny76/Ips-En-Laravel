@@ -39,41 +39,9 @@ class EstablecimientotipoController extends AdminController
      */
     public function show($id)
     {
-        $columnas = ['Nombre', 'Numero', 'Cajas/TPVS', 'Id de red', 'Gerente de Campo'];
-
-        $columnasDb = ['nombre', 'numero', 'cajas_tpvs', 'idred', 'campogerente.nombre'];
-
         $estTipo = Establecimientotipo::findOrFail($id);
 
-        $estTipo->load(['establecimientos.avaloncontrato', 'establecimientos.campogerente', 'establecimientos.cluster', 'establecimientos.tidelprograma', 'establecimientos.tiendaformato']);
-
-        $establecimientos = $estTipo->establecimientos;
-
-        if($estTipo->nombre == 'Tienda'){
-            $columnas[] = 'Ip Tidel';
-            $columnasDb[] = 'tidelprograma.ip';
-
-            $columnas[] = 'Formato de Tienda';
-            $columnasDb[] = 'tiendaformato.nombre';
-
-            $columnas[] = 'Cluster';
-            $columnasDb[] = 'cluster.nombre';
-        }
-        else if($estTipo->nombre == 'Estacion'){
-            $columnas[] = 'CDC';
-            $columnasDb[] = 'centrodecostos';
-
-            $columnas[] = 'Tel';
-            $columnasDb[] = 'tel';
-
-            $columnas[] = 'Correo';
-            $columnasDb[] = 'correo';
-
-            $columnas[] = 'Contrato Ávalon';
-            $columnasDb[] = 'avaloncontrato.numero';
-        }
-
-        return view('admin.establecimientotipo.show', compact('estTipo','establecimientos', 'columnas', 'columnasDb'));
+        return view('admin.establecimientotipo.show', compact('estTipo'));
     }
 
     /**

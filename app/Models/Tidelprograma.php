@@ -19,4 +19,18 @@ class Tidelprograma extends Model
     public function establecimiento(){
         return $this->hasOne(Establecimiento::class);
     }
+
+    public function scopeSearch($query, $termino){
+        if(empty($termino)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        return $query->where(function ($q) use($termino){
+            $q->WhereRaw('LOWER(ip) like ?', "%{$termino}%");
+        })->orWhereHas('establecimiento', function ($estQuery) use($termino){
+            $termino = strtolower($termino);
+            $estQuery->whereRaw('LOWER(nombre) like ?', "%{$termino}%");
+        });
+    }
+
 }

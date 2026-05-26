@@ -16,11 +16,7 @@ class AvaloncontratoController extends AdminController
      */
     public function index()
     {
-        $avaloncontratos = Avaloncontrato::all();
-
-        $avaloncontratos->load('establecimiento', 'estatus');
-
-        return view('admin.avalon-contratos.index', compact('avaloncontratos'));
+        return view('admin.avalon-contratos.index');
     }
 
     /**
