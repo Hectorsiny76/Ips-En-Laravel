@@ -6,6 +6,6 @@
 
 @section('content')
 
-    @livewire('admin::livewire.est-type-edit-with-file-add', ['estTipo' => $estTipo])
+    @livewire('admin::livewire.establecimientotipo.est-type-edit-with-file-add', ['estTipo' => $estTipo])
 
 @endsection

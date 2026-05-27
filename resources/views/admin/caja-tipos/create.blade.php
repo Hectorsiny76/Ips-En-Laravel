@@ -22,7 +22,7 @@
                     value="{{old('nombre')}}"
                     required></x-input-form>
             </div>
-            <livewire:admin::livewire.search-est-cajatipos/>
+            <livewire:admin::livewire.caja-tipos.search-est-cajatipos/>
             <x-form-create-buttons href="{{ route('admin.caja-tipos.index') }}"/>
         </form>
     </div>

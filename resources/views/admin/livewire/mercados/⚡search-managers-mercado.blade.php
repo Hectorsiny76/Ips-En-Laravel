@@ -64,7 +64,7 @@ new class extends Component
     <x-input-form-label for="asociados">Agregar Encargados Del Mercado</x-input-form-label>
     <x-input-form
         type="text"
-        placeholder="Mario Mendez Montoya"
+        placeholder="Elmer Homero"
         value=""
         name="asociados"
         wire:model.live.debounce="search"

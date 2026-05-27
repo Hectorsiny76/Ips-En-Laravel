@@ -6,6 +6,6 @@
 
 @section('content')
 
-    <livewire:admin::livewire.est-type-create-with-file-add/>
+    <livewire:admin::livewire.establecimientotipo.est-type-create-with-file-add/>
 
 @endsection

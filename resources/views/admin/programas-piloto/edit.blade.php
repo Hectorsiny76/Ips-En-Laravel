@@ -42,7 +42,7 @@
                     value="{{old('descripcion_larga', $pilotoPrograma->descripcion_larga)}}"
                     id="descripcion_corta"/>
 
-                @livewire('admin::livewire.search-est', ['estAdded' => $pilotoPrograma->establecimientos])
+                @livewire('admin::livewire.programas-piloto.search-est', ['estAdded' => $pilotoPrograma->establecimientos])
             </div>
             <x-form-update-buttons href="{{ route('admin.programas-piloto.index') }}"/>
         </form>
