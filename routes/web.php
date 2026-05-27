@@ -121,6 +121,9 @@ Route::middleware('auth')
 
     // Clasificaciones
     Route::resource('clasificaciones', ClasificacioneController::class);
+
+    Route::livewire('/clasificaciones/create/create-from-zero', 'admin::livewire.clasificaciones.create-form-from-zero')->name('clasificaciones.create-from-zero');
+
 });
 
 require __DIR__.'/auth.php';

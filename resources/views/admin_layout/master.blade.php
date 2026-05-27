@@ -81,6 +81,9 @@
             <x-session-alert/>
 
             @yield('content')
+
+            {{$slot ?? ''}}
+
         </main>
     </div>
 
