@@ -51,6 +51,8 @@ new class extends Component {
         variable="search"
     />
 
+    <x-index-table-pagination :variable="$gerentes"/>
+
     <x-index-div-table>
         <x-index-div-table-thead>
             <x-index-div-table-thead-th-column>
@@ -95,7 +97,5 @@ new class extends Component {
             @endforeach
         </x-index-div-table-tbody>
     </x-index-div-table>
-
-    <x-index-table-pagination :variable="$gerentes"/>
 
 </div>

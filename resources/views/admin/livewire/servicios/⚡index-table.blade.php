@@ -35,19 +35,12 @@ new class extends Component {
 
 <div class="overflow-auto">
 
-    <div class="mb-4">
-        <x-input-form-label for="servicio">Buscar Servicio</x-input-form-label>
-
-        <x-input-form
-            type="text"
-            name="servicio"
-            placeholder="Soportar..."
-            value=""
-            wire:model.live.debounce="search"
-            id="servicio"
+    <x-index-table-searchable-input
+        title="Buscar Servicio"
+        variable="search"
         />
 
-    </div>
+    <x-index-table-pagination :variable="$servicios"/>
 
     <x-index-div-table>
         <x-index-div-table-thead>
@@ -83,9 +76,5 @@ new class extends Component {
             @endforeach
         </x-index-div-table-tbody>
     </x-index-div-table>
-
-    <div class="mt-4">
-        {{ $servicios->links() }}
-    </div>
 
 </div>
