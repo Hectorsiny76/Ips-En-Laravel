@@ -8,7 +8,7 @@
 
     <x-div-index-title-create-button
         title="Tipo de establecimiento: {{$estTipo->nombre}}"
-        url="{{ route('admin.estados.index') }}" {{-- TODO AGREGAR UNA RUTA DE CREACION DINÁMICA --}}
+        url="{{ route('admin.establecimientos.create-from-zero', $estTipo->id) }}"
         button="Agregar {{$estTipo->nombre}}"
     />
 

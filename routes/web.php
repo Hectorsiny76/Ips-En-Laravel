@@ -77,6 +77,9 @@ Route::middleware('auth')
     // Campogerente y Establecimientos
     Route::resource('campo-gerente.establecimientos', EstablecimientoController::class)->shallow();
 
+    // Crear un establecimiento sin tener que viajar a través de todas las rutas
+    Route::livewire('/establecimientos/create/create-from-zero/{id}', 'admin::livewire.establecimientos.create.create-form-from-zero')->name('establecimientos.create-from-zero');
+
     // Establecimientos Binomio
     Route::resource('binomioestablecimientos', BinomioestablecimientoController::class);
 

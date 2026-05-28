@@ -6,7 +6,9 @@
     placeholder="6262"
     value="{{old('centrodecostos')}}"
     min="1"
-    required/>
+    required
+    wire:model="datos.centrodecostos"
+/>
 
 <x-input-form-label for="tel">Teléfono</x-input-form-label>
 
@@ -15,7 +17,9 @@
     name="tel"
     placeholder="8181818181"
     value="{{old('tel')}}"
-    required/>
+    required
+    wire:model="datos.tel"
+/>
 
 <x-input-form-label for="correo">Correo</x-input-form-label>
 
@@ -24,5 +28,7 @@
     name="correo"
     placeholder="example@example.com"
     value="{{old('correo')}}"
-    required/>
+    required
+    wire:model="datos.correo"
+/>
 
