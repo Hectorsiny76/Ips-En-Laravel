@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Binomioestablecimiento;
 use App\Models\Establecimientotipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class BinomioestablecimientoController extends Controller
+class BinomioestablecimientoController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -113,6 +114,8 @@ class BinomioestablecimientoController extends Controller
      */
     public function destroy(Binomioestablecimiento $binomioestablecimiento)
     {
+        Gate::authorize('delete-data-create-users');
+
         $binomioestablecimiento->delete();
 
         return redirect()->route('admin.binomioestablecimientos.index')->with('success', '¡Se ha eliminado el duo de establecimientos!');

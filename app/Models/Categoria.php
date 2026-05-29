@@ -15,8 +15,6 @@ class Categoria extends Model
 
     use HasFactory;
 
-    use SoftDeletes;
-
     public function clasificaciones(){
         return $this->hasMany(Clasificacione::class);
     }

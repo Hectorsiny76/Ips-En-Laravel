@@ -27,17 +27,9 @@ class Campogerente extends Model
         return $this->hasMany(Establecimiento::class);
     }
 
-    public function autocobrotiendas(){
+    public function cajatipos(){
         return $this->hasManyDeep(
-            Autocobrotienda::class,[
-                Establecimiento::class
-            ]
-        );
-    }
-
-    public function drivethrutiendas(){
-        return $this->hasManyDeep(
-            Drivethrutienda::class,[
+            Cajatipo::class,[
                 Establecimiento::class
             ]
         );

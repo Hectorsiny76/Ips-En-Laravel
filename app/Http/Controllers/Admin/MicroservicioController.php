@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Microservicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MicroservicioController extends Controller
 {
@@ -77,13 +78,9 @@ class MicroservicioController extends Controller
      */
     public function destroy($id)
     {
-        $microservicio = Microservicio::findOrFail($id);
+        Gate::authorize('delete-data-create-users');
 
-        if($microservicio->clasificaciones()->count() > 0){
-            return redirect()
-                ->route('admin.servicios.index')
-                ->with('error', 'No se puede eliminar este microservicio porque tiene clasificaciones asignadas!');
-        }
+        $microservicio = Microservicio::findOrFail($id);
 
         $microservicioEliminado = $microservicio;
 

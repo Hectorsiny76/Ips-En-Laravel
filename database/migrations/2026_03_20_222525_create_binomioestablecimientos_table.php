@@ -15,8 +15,8 @@ return new class extends Migration
         Schema::create('binomioestablecimientos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('tienda_id')->constrained('establecimientos');
-            $table->foreignId('estacion_id')->constrained('establecimientos');
+            $table->foreignId('tienda_id')->constrained('establecimientos')->cascadeOnDelete();
+            $table->foreignId('estacion_id')->constrained('establecimientos')->cascadeOnDelete();
             $table->softDeletes();
         });
         //aplicar barrera en caso de que sea el servidor MYSQL

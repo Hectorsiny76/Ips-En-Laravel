@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Tidelprograma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TidelprogramaController extends AdminController
 {
@@ -78,11 +79,9 @@ class TidelprogramaController extends AdminController
      */
     public function destroy($id)
     {
-        $tidelprograma = Tidelprograma::findOrFail($id);
+        Gate::authorize('delete-data-create-users');
 
-        if($tidelprograma->establecimiento()->count() > 0){
-            return redirect()->route('admin.tidel-programas.index')->with('error', 'No se puede eliminar este programa, tiene un establecimiento asociado. Elimine la relación antes de eliminar el programa');
-        }
+        $tidelprograma = Tidelprograma::findOrFail($id);
 
         $tidelprograma->delete();
 

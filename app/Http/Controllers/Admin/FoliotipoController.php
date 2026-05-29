@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Foliotipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FoliotipoController extends Controller
 {
@@ -69,8 +70,12 @@ class FoliotipoController extends Controller
      */
     public function destroy(Foliotipo $foliotipo)
     {
+        Gate::authorize('delete-data-create-users');
+
         $folioEliminado = $foliotipo;
+
         $foliotipo->delete();
+
         return redirect()->route('admin.foliotipos.index')->with('success', 'Folio tipo '.$folioEliminado->tipo.' eliminado');
     }
 }

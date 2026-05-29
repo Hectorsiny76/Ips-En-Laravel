@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Subcategoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class SubcategoriaController extends Controller
 {
@@ -78,13 +79,9 @@ class SubcategoriaController extends Controller
      */
     public function destroy($id)
     {
-        $subcategoria = Subcategoria::findOrFail($id);
+        Gate::authorize('delete-data-create-users');
 
-        if($subcategoria->clasificaciones()->count() > 0){
-            return redirect()
-                ->route('admin.subcategorias.index')
-                ->with('error', '¡No se puede eliminar esta subcategoría porque tiene clasificaciones asignadas!');
-        }
+        $subcategoria = Subcategoria::findOrFail($id);
 
         $subcategoriaEliminada = $subcategoria;
 

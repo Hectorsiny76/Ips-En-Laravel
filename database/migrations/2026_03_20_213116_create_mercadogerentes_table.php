@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('nombre');
-            $table->foreignId('estado_id')->constrained()->nullOnDelete();
+            $table->foreignId('estado_id')->constrained()->cascadeOnDelete();
         });
     }
 

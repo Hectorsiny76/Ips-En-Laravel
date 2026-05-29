@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Folio;
 use App\Models\Foliotipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class FolioController extends Controller
 {
@@ -92,6 +93,8 @@ class FolioController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $folio = Folio::findOrFail($id);
 
         $folioEliminiado = $folio;

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('cajas_tpvs');
             $table->string('idred');
 
-            $table->foreignId('campogerente_id')->constrained()->nullOnDelete();
+            $table->foreignId('campogerente_id')->constrained()->cascadeOnDelete();
             $table->foreignId('tidelprograma_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('tiendaformato_id')->nullable()->constrained()->nullOnDelete();
             $table->foreignId('cluster_id')->nullable()->constrained()->nullOnDelete();

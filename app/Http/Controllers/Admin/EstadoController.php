@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Estado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class EstadoController extends AdminController
 {
@@ -70,16 +71,16 @@ class EstadoController extends AdminController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Estado $estado)
+    public function destroy($id)
     {
-        if ($estado->mercadogerentes()->count() > 0) {
-            // Bounce them back with an error message instead of deleting
-            return redirect()->route('admin.estados.index')
-                ->with('error', 'No puedes eliminar este estado debido a que tiene gerentes de mercado asignados. Favor de reasignarlos a otro estado.');
-        }
+        Gate::authorize('delete-data-create-users');
+
+        $estado = Estado::findOrFail($id);
+
+        $estadoEliminado = $estado;
 
         $estado->delete();
 
-        return redirect()->route('admin.estados.index')->with('success', 'Estado eliminado satisfactoriamente!');
+        return redirect()->route('admin.estados.index')->with('success', 'Estado '.$estadoEliminado->nombre.' eliminado satisfactoriamente!');
     }
 }

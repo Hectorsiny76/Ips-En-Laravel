@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Servicio;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ServicioController extends Controller
 {
@@ -77,13 +78,9 @@ class ServicioController extends Controller
      */
     public function destroy($id)
     {
-        $servicio = Servicio::findOrFail($id);
+        Gate::authorize('delete-data-create-users');
 
-        if($servicio->clasificaciones()->count() > 0){
-            return redirect()
-                ->route('admin.servicios.index')
-                ->with('error', 'No se puede eliminar este servicio porque tiene clasificaciones asignadas!');
-        }
+        $servicio = Servicio::findOrFail($id);
 
         $servicioEliminado = $servicio;
 

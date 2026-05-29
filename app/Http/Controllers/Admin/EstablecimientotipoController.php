@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Archivotipo;
 use App\Models\Establecimientotipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class EstablecimientotipoController extends AdminController
 {
@@ -65,8 +66,24 @@ class EstablecimientotipoController extends AdminController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Establecimientotipo $establecimiento)
+    public function destroy($id)
     {
-        //
+        Gate::authorize('delete-data-create-users');
+
+        $estTipo = Establecimientotipo::findOrFail($id);
+
+        if ($estTipo->mercados()->count() > 0) {
+            // Error no se puede eliminar
+            return redirect()->route('admin.estados.index')
+                ->with('error', 'No puedes eliminar este estado debido a que tiene gerentes de mercado asignados. Favor de reasignarlos a otro estado.');
+        }
+
+        $estTipoEliminado = $estTipo;
+
+        $estTipo->delete();
+
+        return redirect()
+            ->route('admin.establecimientotipo.index')
+            ->with('success', '¡Se ha eliminado el tipo de Establecimiento'.$estTipoEliminado->nombre.'!');
     }
 }

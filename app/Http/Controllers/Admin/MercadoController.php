@@ -6,6 +6,7 @@ use App\Models\Mercado;
 use Illuminate\Http\Request;
 use App\Models\Mercadogerente;
 use App\Models\Establecimientotipo;
+use Illuminate\Support\Facades\Gate;
 
 class MercadoController extends AdminController
 {
@@ -113,8 +114,16 @@ class MercadoController extends AdminController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Mercado $mercado)
+    public function destroy($id)
     {
-        //
+        Gate::authorize('delete-data-create-users');
+
+        $mercado = Mercado::findOrFail($id);
+
+        $mercadoEliminado = $mercado;
+
+        $mercado->delete();
+
+        return redirect()->route('admin.gerentes-mercado.mercados.index', $mercadoEliminado->mercadogerente->id)->with('success', 'Mercado '.$mercadoEliminado->numero.' eliminado correctamente');
     }
 }

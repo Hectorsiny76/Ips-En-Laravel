@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Area;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class AreaController extends Controller
+class AreaController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -79,6 +80,8 @@ class AreaController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $area = Area::findOrFail($id);
 
         $areaEliminada = $area;

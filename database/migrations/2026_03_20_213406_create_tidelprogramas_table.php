@@ -17,7 +17,6 @@ return new class extends Migration
 
             $table->string('ip');
             $table->date('fechamigracion')->nullable();
-            $table->softDeletes();
         });
     }
 

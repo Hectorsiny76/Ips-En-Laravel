@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Despliegue;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class DespliegueController extends Controller
 {
@@ -90,6 +91,8 @@ class DespliegueController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $despliegue = Despliegue::findOrfail($id);
 
         $despliegueEliminado = $despliegue;

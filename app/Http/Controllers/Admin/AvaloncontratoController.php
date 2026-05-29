@@ -8,6 +8,7 @@ use App\Models\Establecimiento;
 use App\Models\Establecimientotipo;
 use App\Models\Estatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AvaloncontratoController extends AdminController
 {
@@ -104,11 +105,9 @@ class AvaloncontratoController extends AdminController
      */
     public function destroy($id)
     {
-        $avaloncontrato = Avaloncontrato::findOrFail($id);
+        Gate::authorize('delete-data-create-users');
 
-        if($avaloncontrato->establecimiento()->exists()){
-            return redirect()->route('admin.avalon-contratos.index')->with('error', 'No se puede eliminar este contrato debido a que tiene una estación a su nombre.');
-        }
+        $avaloncontrato = Avaloncontrato::findOrFail($id);
 
         $avaloncontrato->delete();
 

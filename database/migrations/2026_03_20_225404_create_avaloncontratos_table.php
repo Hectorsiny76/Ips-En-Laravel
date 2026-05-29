@@ -17,8 +17,6 @@ return new class extends Migration
             $table->string('numero')->unique();
             $table->foreignId('estatus_id')->constrained()->cascadeOnDelete();
             $table->foreignId('establecimiento_id')->nullable()->constrained()->nullOnDelete();
-
-            $table->softDeletes();
         });
     }
 

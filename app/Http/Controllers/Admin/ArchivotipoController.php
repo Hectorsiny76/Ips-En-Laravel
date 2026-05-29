@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Archivotipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class ArchivotipoController extends Controller
+class ArchivotipoController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -85,6 +86,8 @@ class ArchivotipoController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $archivoTipo = Archivotipo::findOrFail($id);
 
         $archivoTipoEliminado = $archivoTipo;

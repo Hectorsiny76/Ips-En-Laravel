@@ -67,6 +67,21 @@ new class extends Component
 
     public function guardar(GuardadoDeArchivosService $guardadoService)
     {
+
+        if(empty($this->arrayArchivos) && empty($this->archivosAEliminar)){
+            $this->validate([
+                'nombre' => 'required|string|max:255',
+                ]);
+
+            $this->estTipo->update([
+                'nombre' => $this->nombre,
+            ]);
+
+            return redirect()
+                ->route('admin.establecimientotipo.index')
+                ->with('success', '¡Se ha actualizado el tipo de establecimiento!');
+        }
+
         $this->validate([
             'nombre' => 'required|string|max:255',
             'arrayArchivos.*.titulo' => 'required|string|max:255',
@@ -110,9 +125,15 @@ new class extends Component
             }
         }
 
-        $this->validate($reglas);
-
         if(count($this->arrayArchivos) > 0){
+            $this->validate($reglas);
+        }
+
+        $this->estTipo->update([
+            'nombre' => $this->nombre,
+        ]);
+
+        if(count($this->arrayArchivos) > 0 || count($this->archivosAEliminar) > 0){
             $guardadoService->actualizarArchivosParaEsttipo($this->estTipo, $this->arrayArchivos, $this->archivosAEliminar);
         }
 
@@ -145,7 +166,7 @@ new class extends Component
                     class="w-full rounded-md shadow-sm focus:ring-sky-700 focus:border-sky-700
                     @error('nombre') border-red-500 text-red-900 @else border-gray-300  @enderror"
                     wire:model="nombre"
-                    readonly>
+                    >
 
             </div>
 

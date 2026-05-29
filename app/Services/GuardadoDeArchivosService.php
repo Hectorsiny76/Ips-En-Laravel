@@ -79,6 +79,7 @@ class GuardadoDeArchivosService
             }
 
             else {
+
                 $archivoExistente = Archivo::findOrFail($datos['archivo_id']);
 
                 $archivoExistente->titulo = $datos['titulo'];

@@ -9,6 +9,17 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- Role -->
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('Role')" />
+            <x-input-form-select name="role" id="role" :register="true" class="block mt-1 w-full" initialvalue="-- Tipo de Admin --">
+                @foreach(App\Enums\UserRole::cases() as $role)
+                    <option value="{{$role->value}}">{{$role->name}}</option>
+                @endforeach
+            </x-input-form-select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />

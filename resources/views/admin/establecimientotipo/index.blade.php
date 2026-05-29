@@ -36,6 +36,12 @@
                         {{$estTipo->archivos_count}}
                     </td>
                     <x-table-td-partial-edit href="{{route('admin.establecimientotipo.edit', $estTipo->id)}}" value="Agregar Archivos Relacionados"/>
+                    <x-table-td-actions
+                        ahref="{{route('admin.establecimientotipo.edit', $estTipo->id)}}"
+                        formaction="{{route('admin.establecimientotipo.destroy', $estTipo->id)}}"
+                        formconfirm="¿Esta seguro de que desea eliminar este tipo de establecimiento?"
+                        warning="¡Esta acción podría tener consecuencias fatales con los registros relacionados!"
+                        />
                 </tr>
             @endforeach
             </tbody>

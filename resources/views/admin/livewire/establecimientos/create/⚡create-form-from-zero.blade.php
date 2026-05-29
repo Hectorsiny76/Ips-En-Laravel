@@ -64,6 +64,14 @@ class extends Component {
 
     public function updatedSelectedEstado($estadoId)
     {
+
+        if(blank($estadoId)){
+
+            $this->reset(['selectedEstado','selectedMercadoGerente','selectedMercado', 'selectedCampo', 'selectedCampoGerente', 'mercadoGerentes', 'mercados', 'campos', 'campoGerentes']);
+
+            return;
+        }
+
         $this->mercadoGerentes = Mercadogerente::where('estado_id', $estadoId)->get();
 
         $this->reset(['selectedMercadoGerente','selectedMercado', 'selectedCampo', 'selectedCampoGerente', 'mercados', 'campos', 'campoGerentes']);
@@ -71,6 +79,13 @@ class extends Component {
 
     public function updatedSelectedMercadoGerente($mercadoGerenteId)
     {
+
+        if(blank($mercadoGerenteId)){
+            $this->reset(['selectedMercadoGerente','selectedMercado', 'selectedCampo', 'selectedCampoGerente', 'mercados', 'campos', 'campoGerentes']);
+
+            return;
+        }
+
         $this->mercados = Mercado::where('mercadogerente_id', $mercadoGerenteId)
             ->where('establecimientotipo_id', $this->estTipo->id)
             ->get();
@@ -80,6 +95,13 @@ class extends Component {
 
     public function updatedSelectedMercado($mercadoId)
     {
+
+        if(blank($mercadoId)){
+            $this->reset(['selectedMercado', 'selectedCampo', 'selectedCampoGerente', 'campos', 'campoGerentes']);
+
+            return;
+        }
+
         $this->campos = Campo::where('mercado_id', $mercadoId)->get();
 
         $this->reset(['selectedCampo','selectedCampoGerente', 'campoGerentes']);
@@ -87,6 +109,13 @@ class extends Component {
 
     public function updatedSelectedCampo($campoId)
     {
+
+        if(blank($campoId)){
+            $this->reset(['selectedCampo', 'selectedCampoGerente','campoGerentes']);
+
+            return;
+        }
+
         $this->campoGerentes = Campogerente::where('campo_id', $campoId)->get();
 
         $this->reset(['selectedCampoGerente']);

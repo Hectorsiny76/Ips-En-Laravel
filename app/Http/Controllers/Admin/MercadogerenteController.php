@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Mercadogerente;
 use Illuminate\Http\Request;
 use App\Models\Estado;
+use Illuminate\Support\Facades\Gate;
 
 class MercadogerenteController extends AdminController
 {
@@ -81,15 +82,11 @@ class MercadogerenteController extends AdminController
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $mercadoGerente = Mercadogerente::findOrfail($id);
 
         $estadoId = $mercadoGerente->estado_id;
-
-        if ($mercadoGerente->mercado()->count() > 0) {
-            // No permite que sea eliminado pues está ligado a un mercado
-            return redirect()->route('admin.estados.gerentes-mercado.index', $estadoId)
-                ->with('error', 'No puedes eliminar este gerente de mercado debido a que tiene un mercado asignado. Favor de reasignar el mercado a otro gerente.');
-        }
 
         $mercadoGerente->delete();
 

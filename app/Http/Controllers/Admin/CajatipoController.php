@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Cajatipo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CajatipoController extends AdminController
 {
@@ -95,6 +96,8 @@ class CajatipoController extends AdminController
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $cajatipo = Cajatipo::findOrFail($id);
 
         $cajatipo->delete();

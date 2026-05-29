@@ -14,8 +14,6 @@ class Tidelprograma extends Model
 
     use HasFactory;
 
-    use SoftDeletes;
-
     public function establecimiento(){
         return $this->hasOne(Establecimiento::class);
     }

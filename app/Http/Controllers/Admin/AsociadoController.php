@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Asociado;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class AsociadoController extends Controller
+class AsociadoController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -92,6 +93,8 @@ class AsociadoController extends Controller
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $asociado = Asociado::findOrFail($id);
 
         $asociadoEliminado = $asociado;

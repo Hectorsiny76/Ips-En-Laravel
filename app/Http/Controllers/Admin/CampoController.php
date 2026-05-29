@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Campo;
 use Illuminate\Http\Request;
 use App\Models\Mercado;
+use Illuminate\Support\Facades\Gate;
 
 class CampoController extends AdminController
 {
@@ -80,8 +81,14 @@ class CampoController extends AdminController
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $campo = Campo::findOrFail($id);
 
+        $campoAEliminar = $campo;
 
+        $campo->delete();
+
+        return redirect()->route('admin.mercados.campos.index', $campoAEliminar->mercado->id)->with('success', 'Campo eliminado correctamente');
     }
 }

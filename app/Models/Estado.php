@@ -9,12 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Estado extends Model
 {
-
     use HasRelationships;
 
     use HasFactory;
-
-    use SoftDeletes;
 
     protected $table = 'estados';
 

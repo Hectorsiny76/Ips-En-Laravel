@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\Cajatipo;
 use App\Models\Campogerente;
 use App\Models\Categoria;
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
            'name'=>'Hector',
            'email'=>'hecmasanchez1976@gmail.com',
             'password'=> Hash::make('Imthenumber176@'),
+            'role'=>UserRole::Master,
         ]);
 
         $this->call([

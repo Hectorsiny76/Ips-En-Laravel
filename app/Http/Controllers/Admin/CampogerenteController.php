@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Campo;
 use App\Models\Campogerente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class CampogerenteController extends AdminController
 {
@@ -99,11 +100,9 @@ class CampogerenteController extends AdminController
      */
     public function destroy($id)
     {
-        $campogerente = Campogerente::findOrFail($id);
+        Gate::authorize('delete-data-create-users');
 
-        if($campogerente->establecimientos()->count() > 0){
-            return redirect()->route('admin.campo.campo-gerente.index', $campogerente->campo->id)->with('error', 'Este gerente de campo tiene establecimientos asginados!');
-        }
+        $campogerente = Campogerente::findOrFail($id);
 
         $gerenteEliminado = $campogerente;
 

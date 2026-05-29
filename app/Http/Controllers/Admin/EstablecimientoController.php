@@ -15,6 +15,7 @@ use App\Models\Campogerente;
 use App\Models\Tidelprograma;
 use App\Models\Tiendaformato;
 use App\Models\Establecimiento;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 
 class EstablecimientoController extends AdminController
@@ -170,6 +171,14 @@ class EstablecimientoController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        Gate::authorize('delete-data-create-users');
+
+        $establecimiento = Establecimiento::findOrFail($id);
+
+        $establecimientoEliminado = $establecimiento;
+
+        $establecimiento->delete();
+
+        return redirect()->route('admin.campo-gerente.establecimientos.index', $establecimientoEliminado->campogerente->id)->with('success', 'El establecimiento '.$establecimientoEliminado->nombre.' se ha eliminado correctamente.');
     }
 }

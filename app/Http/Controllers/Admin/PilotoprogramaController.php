@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Pilotoprograma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PilotoprogramaController extends AdminController
 {
@@ -99,6 +100,8 @@ class PilotoprogramaController extends AdminController
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $pilotoPrograma = Pilotoprograma::find($id);
 
         $pilotoPrograma->delete();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Clasificacione;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class ClasificacioneController extends AdminController
 {
@@ -64,6 +65,8 @@ class ClasificacioneController extends AdminController
      */
     public function destroy($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $clasificacion = Clasificacione::findOrFail($id);
 
         $clasificacion->delete();

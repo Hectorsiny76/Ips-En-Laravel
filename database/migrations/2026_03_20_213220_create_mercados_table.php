@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('numero')->unique();
-            $table->foreignId('mercadogerente_id')->unique()->constrained()->nullOnDelete();
+            $table->foreignId('mercadogerente_id')->unique()->constrained()->cascadeOnDelete();
             $table->foreignId('establecimientotipo_id')->constrained()->nullOnDelete();
 
         });

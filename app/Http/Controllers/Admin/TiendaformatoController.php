@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Tiendaformato;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TiendaformatoController extends Controller
 {
@@ -79,11 +80,9 @@ class TiendaformatoController extends Controller
      */
     public function destroy($id)
     {
-        $tiendaformato = Tiendaformato::findOrFail($id);
+        Gate::authorize('delete-data-create-users');
 
-        if($tiendaformato->establecimientos()->count() > 0){
-            return redirect()->route('admin.tienda-formatos.index')->with('error', 'No se puede eliminar este formato de tienda ya que tiene establecimientos asociados');
-        }
+        $tiendaformato = Tiendaformato::findOrFail($id);
 
         $tiendaformato->delete();
 

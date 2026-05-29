@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Categoria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use function Termwind\renderUsing;
 
 class CategoriaController extends AdminController
@@ -77,13 +78,9 @@ class CategoriaController extends AdminController
      */
     public function destroy($id)
     {
-        $categoria = Categoria::findOrFail($id);
+        Gate::authorize('delete-data-create-users');
 
-        if($categoria->clasificaciones()->count() > 0){
-            return redirect()
-                ->route('admin.categorias.index')
-                ->with('error', 'No se puede eliminar esta categoría porque tiene clasificaciones asignadas!');
-        }
+        $categoria = Categoria::findOrFail($id);
 
         $categoriaEliminada = $categoria;
 

@@ -50,7 +50,9 @@
             <nav>
                 <h1 class="font-bold text-2xl z-10 sticky top-0 bg-gray-200 mb-3 p-2">Menu de navegación</h1>
                 <ul class="text-2xl px-4">
-                    <x-link-aside href="{{route('admin.admin_layout.register')}}">Registrar</x-link-aside>
+                    @can('delete-data-create-users')
+                        <x-link-aside href="{{route('admin.admin_layout.register')}}">Registrar</x-link-aside>
+                    @endcan
                     <x-link-aside href="{{route('admin.estados.index')}}">⭐Estados⭐</x-link-aside>
                     <x-link-aside href="{{route('admin.admin_layout.dashboard')}}">Dashboard</x-link-aside>
                     @foreach($navEstablecimientos as $est)

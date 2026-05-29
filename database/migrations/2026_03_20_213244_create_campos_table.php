@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('numero');
-            $table->foreignId('mercado_id')->constrained()->nullOnDelete();
+            $table->foreignId('mercado_id')->constrained()->cascadeOnDelete();
         });
     }
 

@@ -11,8 +11,6 @@ class Avaloncontrato extends Model
     /** @use HasFactory<\Database\Factories\AvaloncontratoFactory> */
     use HasFactory;
 
-    use SoftDeletes;
-
     protected $table = 'avaloncontratos';
 
     protected $fillable = ['numero', 'estatus_id', 'establecimiento_id'];
