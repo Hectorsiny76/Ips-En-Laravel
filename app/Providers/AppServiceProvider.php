@@ -29,8 +29,29 @@ class AppServiceProvider extends ServiceProvider
             View::share('navEstablecimientos', Establecimientotipo::all());
         }
 
+        Gate::define('delete-admins', function (User $currentUser, User $targetUser) {
+
+            // No se puede eliminar a sí mismo desde desde el controlador UserController
+            if($currentUser->id === $targetUser->id){
+                return false;
+            }
+
+            // Masters pueden eliminar a quien quiera
+            if($currentUser->isMasterAdmin()){
+                return true;
+            }
+
+            // Admins solo pueden eliminar SubAdmins
+            if($currentUser->isAdmin() && $targetUser->role === UserRole::SubAdmin){
+                return true;
+            }
+
+            // En caso de que no se cumpla ninguno, no se puede realizar la operación de eliminación
+            return false;
+        });
+
         Gate::define('delete-data-create-users', function (User $user) {
-           return $user->isMasterAdmin();
+           return $user->isAdmin();
         });
 
         Gate::define('manage-general-data', function (User $user) {

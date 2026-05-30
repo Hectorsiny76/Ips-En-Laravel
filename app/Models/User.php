@@ -54,8 +54,20 @@ class User extends Authenticatable
         return $this->role === UserRole::Master;
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->role === UserRole::Admin || $this->isMasterAdmin();
+    }
+
     public function isSubAdmin(): bool
     {
-        return $this->role === UserRole::SubAdmin || $this->isMasterAdmin();
+        return $this->role === UserRole::SubAdmin || $this->isAdmin();
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        $search = strtolower($search);
+
+        return $query->whereRaw('LOWER (name) like ?', '%' . $search . '%');
     }
 }

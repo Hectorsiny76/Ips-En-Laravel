@@ -48,6 +48,10 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
+        if($user->isMasterAdmin()){
+            abort(403, 'Un Admin Master no se puede eliminar');
+        }
+
         Auth::logout();
 
         $user->delete();

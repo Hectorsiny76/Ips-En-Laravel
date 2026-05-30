@@ -10,7 +10,6 @@ use Illuminate\Validation\Rule;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
@@ -21,9 +20,19 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
-    public function create(): View
+    public function create(Request $request): View
     {
-        return view('auth.register');
+
+        $currentUser = $request->user();
+        $allowedRoles = [];
+
+        if($currentUser->isMasterAdmin()){
+            $allowedRoles = [UserRole::Admin, UserRole::SubAdmin];
+        } else if($currentUser->isAdmin()){
+            $allowedRoles = [UserRole::SubAdmin];
+        }
+
+        return view('auth.register', compact('allowedRoles'));
     }
 
     /**
@@ -41,6 +50,17 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', Rule::enum(UserRole::class)],
         ]);
+
+        // ¿Qué tipo de admin está tratando de guardar?
+        $currentUser = $request->user();
+        $requestedRole = UserRole::from($request->role);
+
+        // Confirmación de permisos
+        if($requestedRole === UserRole::Master){
+            abort(403, 'No se puede crear un Administrador Master desde el Dashboard');
+        } else if($requestedRole === UserRole::Admin && !$currentUser->isMasterAdmin()){
+            abort(403, 'No se puede crear un Admin siendo de nivel Admin');
+        }
 
         $user = User::create([
             'name' => $request->name,

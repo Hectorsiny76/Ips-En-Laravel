@@ -7,7 +7,7 @@ use App\Models\CajatipoEstablecimiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class CajatipoestablecimientoController extends Controller
+class CajatipoestablecimientoController extends AdminController
 {
     /**
      * Display a listing of the resource.

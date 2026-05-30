@@ -52,6 +52,7 @@
                 <ul class="text-2xl px-4">
                     @can('delete-data-create-users')
                         <x-link-aside href="{{route('admin.admin_layout.register')}}">Registrar</x-link-aside>
+                        <x-link-aside href="{{route('admin.users.index')}}">Admins</x-link-aside>
                     @endcan
                     <x-link-aside href="{{route('admin.estados.index')}}">⭐Estados⭐</x-link-aside>
                     <x-link-aside href="{{route('admin.admin_layout.dashboard')}}">Dashboard</x-link-aside>
