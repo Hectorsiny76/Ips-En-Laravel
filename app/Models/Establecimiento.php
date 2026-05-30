@@ -28,9 +28,8 @@ class Establecimiento extends Model
         return $this->belongsTo(Tidelprograma::class);
     }
 
-    public function cajatipos(){
-        return $this->belongsToMany(CajaTipo::class, 'cajatipo_establecimiento')
-            ->withPivot('numcaja');
+    public function cajatipoestablecimiento(){
+        return $this->hasMany(Cajatipoestablecimiento::class);
     }
 
     public function avaloncontrato(){

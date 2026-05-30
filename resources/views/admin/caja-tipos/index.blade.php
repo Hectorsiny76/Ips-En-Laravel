@@ -21,9 +21,6 @@
             <x-index-div-table-thead-th-column>
                 Nombre
             </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Establecimientos relacionados
-            </x-index-div-table-thead-th-column>
             <x-index-div-table-thead-th-actions-column/>
         </x-index-div-table-thead>
         <x-index-div-table-tbody>
@@ -34,9 +31,6 @@
                     </td>
                     <td>
                         {{$cajatipo->nombre}}
-                    </td>
-                    <td>
-                        {{$cajatipo->establecimientos_count}}
                     </td>
                     <x-table-td-actions
                         ahref="{{route('admin.caja-tipos.edit', $cajatipo->id)}}"

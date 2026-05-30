@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
 
-            $table->foreignId('establecimiento_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('establecimiento_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('cajatipo_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('numcaja');
-            $table->softDeletes();
+
         });
     }
 

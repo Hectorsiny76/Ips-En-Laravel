@@ -14,7 +14,7 @@ class CajatipoController extends AdminController
      */
     public function index()
     {
-        $cajatipos = Cajatipo::withCount('establecimientos')->get();
+        $cajatipos = Cajatipo::latest()->get();
 
         return view('admin.caja-tipos.index', compact('cajatipos'));
     }
@@ -34,16 +34,11 @@ class CajatipoController extends AdminController
     {
         $request->validate([
             'nombre' => 'required|string|unique:cajatipos',
-            'establecimientos' => 'nullable|array',
-            'establecimientos.*' => 'required|exists:establecimientos,id',
-            'establecimientos.*.numcaja' => 'required|string|min:1',
         ]);
 
-        $cajatipo = Cajatipo::create([
+        Cajatipo::create([
             'nombre' => $request->nombre,
         ]);
-
-        $cajatipo->establecimientos()->sync($request->input('establecimientos'), []);
 
         return redirect()->route('admin.caja-tipos.index')->with('success', 'Nuevo tipo de caja creado satisfactoriamente');
     }
@@ -63,8 +58,6 @@ class CajatipoController extends AdminController
     {
         $cajatipo = Cajatipo::findOrFail($id);
 
-        $cajatipo->load('establecimientos');
-
         return view('admin.caja-tipos.edit', compact('cajatipo'));
     }
 
@@ -77,16 +70,11 @@ class CajatipoController extends AdminController
 
         $request->validate([
             'nombre' => 'required|string|unique:cajatipos,nombre,'.$cajatipo->id,
-            'establecimientos' => 'nullable|array',
-            'establecimientos.*' => 'required|exists:establecimientos,id',
-            'establecimientos.*.numcaja' => 'required|string|min:1',
         ]);
 
         $cajatipo->update([
             'nombre' => $request->nombre,
         ]);
-
-        $cajatipo->establecimientos()->sync($request->input('establecimientos', []));
 
         return redirect()->route('admin.caja-tipos.index')->with('success', 'Tipo de caja actualizado satisfactoriamente');
     }

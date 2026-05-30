@@ -65,7 +65,7 @@ new class extends Component
     @if($selectedId)
         <div class="flex items-center justify-between p-3 border border-sky-500 rounded bg-sky-50">
             <span class="font-bold text-sky-700">{{$selectedName}}</span>
-            <button wire:click.prevent="clearSelection" class="text-sm text-gray-800">
+            <button type="button" wire:click.prevent="clearSelection" class="text-sm text-gray-800">
                 Cambiar
             </button>
         </div>

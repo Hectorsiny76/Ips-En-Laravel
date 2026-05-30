@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\BinomioestablecimientoController;
+use App\Http\Controllers\Admin\CajatipoestablecimientoController;
 use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ClasificacioneController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -88,6 +89,9 @@ Route::middleware('auth')
 
     // Caja Tipos (Ej: Autocobro)
     Route::resource('caja-tipos', CajatipoController::class);
+
+    // Establecimientos y sus tipos de caja (Ej: Agua Sucia - Autocobro - Caja 3)
+    Route::resource('cajatipo-establecimiento', CajatipoestablecimientoController::class);
 
     // Establecimientotipos
     Route::resource('establecimientotipo', EstablecimientotipoController::class);

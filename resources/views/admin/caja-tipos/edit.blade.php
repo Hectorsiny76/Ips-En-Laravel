@@ -23,7 +23,6 @@
                     value="{{old('nombre', $cajatipo->nombre)}}"
                     required></x-input-form>
             </div>
-            @livewire('admin::livewire.caja-tipos.search-est-cajatipos', ['estAdded' => $cajatipo->establecimientos])
             <x-form-update-buttons href="{{ route('admin.caja-tipos.index') }}"/>
         </form>
     </div>
