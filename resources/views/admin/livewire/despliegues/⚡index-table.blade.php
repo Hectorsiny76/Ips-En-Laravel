@@ -32,7 +32,7 @@ new class extends Component
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar un despliegue"
@@ -41,50 +41,52 @@ new class extends Component
 
     <x-index-table-pagination :variable="$despliegues"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                Titulo
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Descripcion
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Area
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Inicio
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Fin
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($despliegues as $despliegue)
-                <tr>
-                    <td>
-                        {{$despliegue->titulo}}
-                    </td>
-                    <td>
-                        {{$despliegue->descripcion}}
-                    </td>
-                    <td>
-                        {{$despliegue->area->nombre}}
-                    </td>
-                    <td>
-                        {{$despliegue->inicio}}
-                    </td>
-                    <td>
-                        {{$despliegue->fin}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.despliegues.edit', $despliegue->id)}}"
-                        formaction="{{ route('admin.despliegues.destroy', $despliegue->id) }}"
-                        formconfirm="¿Esta seguro de eliminar este despliegue?"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
-</div>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    Titulo
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Descripcion
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Area
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Inicio
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Fin
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($despliegues as $despliegue)
+                    <tr>
+                        <td>
+                            {{$despliegue->titulo}}
+                        </td>
+                        <td>
+                            {{$despliegue->descripcion}}
+                        </td>
+                        <td>
+                            {{$despliegue->area->nombre}}
+                        </td>
+                        <td>
+                            {{$despliegue->inicio}}
+                        </td>
+                        <td>
+                            {{$despliegue->fin}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.despliegues.edit', $despliegue->id)}}"
+                            formaction="{{ route('admin.despliegues.destroy', $despliegue->id) }}"
+                            formconfirm="¿Esta seguro de eliminar este despliegue?"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
+</x-livewire-parent-div>

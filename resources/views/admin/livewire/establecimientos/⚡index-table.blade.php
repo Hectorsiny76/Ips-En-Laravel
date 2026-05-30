@@ -78,7 +78,7 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar Establecimientos"
@@ -87,28 +87,30 @@ new class extends Component {
 
     <x-index-table-pagination :variable="$establecimientos"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            @foreach($columnas as $columna)
-                <x-index-div-table-thead-th-column>{{$columna}}</x-index-div-table-thead-th-column>
-            @endforeach
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($establecimientos as $establecimiento)
-                <tr>
-                    @foreach($columnasDb as $columnaDb)
-                        <td>{{data_get($establecimiento, $columnaDb) ?? 'N/A'}}</td>
-                    @endforeach
-                    <x-table-td-actions
-                        ahref="{{route('admin.establecimientos.edit', $establecimiento->id)}}"
-                        formaction="{{route('admin.establecimientos.destroy', $establecimiento->id)}}"
-                        formconfirm="¿Esta seguro de que desea eliminar este establecimiento?"
-                        warning="¡Al eliminarse no se podrá recuperar!"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                @foreach($columnas as $columna)
+                    <x-index-div-table-thead-th-column>{{$columna}}</x-index-div-table-thead-th-column>
+                @endforeach
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($establecimientos as $establecimiento)
+                    <tr>
+                        @foreach($columnasDb as $columnaDb)
+                            <td>{{data_get($establecimiento, $columnaDb) ?? 'N/A'}}</td>
+                        @endforeach
+                        <x-table-td-actions
+                            ahref="{{route('admin.establecimientos.edit', $establecimiento->id)}}"
+                            formaction="{{route('admin.establecimientos.destroy', $establecimiento->id)}}"
+                            formconfirm="¿Esta seguro de que desea eliminar este establecimiento?"
+                            warning="¡Al eliminarse no se podrá recuperar!"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

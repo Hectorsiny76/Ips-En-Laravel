@@ -44,7 +44,7 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar Gerentes de Mercado"
@@ -53,49 +53,51 @@ new class extends Component {
 
     <x-index-table-pagination :variable="$gerentes"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                No
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Nombre
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Mercado
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($gerentes as $gerente)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$gerente->nombre}}
-                    </td>
-                    <td>
-                        {{$gerente->mercado?->numero ?? 'Sin mercado'}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.gerentes-mercado.edit', $gerente->id)}}"
-                        formaction="{{ route('admin.gerentes-mercado.destroy', $gerente->id) }}"
-                        formconfirm="¿Está seguro de que desea eliminar este gerente de mercado?"
-                        warning="¡Al eliminar este gerente de mercado eliminará todos sus registros relacionados a lo largo de la base de datos!"
-                    />
-                    <x-table-td-fd-routing
-                        href="{{ route('admin.gerentes-mercado.mercados.index', $gerente->id) }}"
-                    >
-                        @if($gerente->mercado()->exists())
-                            Mercado
-                        @else
-                            Asignar Mercado
-                        @endif
-                    </x-table-td-fd-routing>
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    No
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Nombre
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Mercado
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($gerentes as $gerente)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$gerente->nombre}}
+                        </td>
+                        <td>
+                            {{$gerente->mercado?->numero ?? 'Sin mercado'}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.gerentes-mercado.edit', $gerente->id)}}"
+                            formaction="{{ route('admin.gerentes-mercado.destroy', $gerente->id) }}"
+                            formconfirm="¿Está seguro de que desea eliminar este gerente de mercado?"
+                            warning="¡Al eliminar este gerente de mercado eliminará todos sus registros relacionados a lo largo de la base de datos!"
+                        />
+                        <x-table-td-fd-routing
+                            href="{{ route('admin.gerentes-mercado.mercados.index', $gerente->id) }}"
+                        >
+                            @if($gerente->mercado()->exists())
+                                Mercado
+                            @else
+                                Asignar Mercado
+                            @endif
+                        </x-table-td-fd-routing>
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

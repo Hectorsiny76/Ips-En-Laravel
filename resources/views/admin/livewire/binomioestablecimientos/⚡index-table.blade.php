@@ -32,7 +32,7 @@ new class extends Component
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar una tienda o estación"
@@ -43,51 +43,53 @@ new class extends Component
         :variable="$estBinomios"
         />
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                Fila
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Tienda
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                No. Tienda
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Estación
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Centro De Costos
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($estBinomios as $estBinomio)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$estBinomio->tienda->nombre}}
-                    </td>
-                    <td>
-                        {{$estBinomio->tienda->numero}}
-                    </td>
-                    <td>
-                        {{$estBinomio->estacion->nombre}}
-                    </td>
-                    <td>
-                        {{$estBinomio->estacion->centrodecostos ?? 'N/A'}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.binomioestablecimientos.edit', $estBinomio->id)}}"
-                        formaction="{{ route('admin.binomioestablecimientos.destroy', $estBinomio->id) }}"
-                        formconfirm="¿Esta seguro de eliminar esta duo de establecimientos de la lista?"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    Fila
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Tienda
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    No. Tienda
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Estación
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Centro De Costos
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($estBinomios as $estBinomio)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$estBinomio->tienda->nombre}}
+                        </td>
+                        <td>
+                            {{$estBinomio->tienda->numero}}
+                        </td>
+                        <td>
+                            {{$estBinomio->estacion->nombre}}
+                        </td>
+                        <td>
+                            {{$estBinomio->estacion->centrodecostos ?? 'N/A'}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.binomioestablecimientos.edit', $estBinomio->id)}}"
+                            formaction="{{ route('admin.binomioestablecimientos.destroy', $estBinomio->id) }}"
+                            formconfirm="¿Esta seguro de eliminar esta duo de establecimientos de la lista?"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

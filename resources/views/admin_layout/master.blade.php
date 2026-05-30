@@ -66,7 +66,7 @@
                     <x-link-aside href="{{route('admin.binomioestablecimientos.index')}}">Establecimientos Binomio</x-link-aside>
                     <x-link-aside href="{{route('admin.programas-piloto.index')}}">Programas Piloto</x-link-aside>
                     <x-link-aside href="{{route('admin.caja-tipos.index')}}">Tipos de Caja</x-link-aside>
-                    <x-link-aside href="{{route('admin.cajatipo-establecimiento.index')}}">Est - Caja Tipo</x-link-aside>
+                    <x-link-aside href="{{route('admin.cajatipo-establecimiento.index')}}">Est - Tipo de Caja</x-link-aside>
                     <x-link-aside href="{{route('admin.foliotipos.index')}}">Tipos de Folios</x-link-aside>
                     <x-link-aside href="{{route('admin.areas.index')}}">Áreas</x-link-aside>
                     <x-link-aside href="{{route('admin.despliegues.index')}}">Despliegues</x-link-aside>

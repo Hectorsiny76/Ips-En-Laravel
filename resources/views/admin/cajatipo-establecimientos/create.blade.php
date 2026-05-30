@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <x-div-edit-create-title>Crear un nueva relación Establecimiento - Tipo de Cajaa</x-div-edit-create-title>
+    <x-div-edit-create-title>Crear un nueva relación Establecimiento - Tipo de Caja</x-div-edit-create-title>
 
     <livewire:admin::livewire.cajatipo-establecimiento.create-form/>
 

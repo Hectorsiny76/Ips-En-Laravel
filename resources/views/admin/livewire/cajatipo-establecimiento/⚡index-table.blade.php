@@ -31,7 +31,7 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar un establecimiento, tipo de caja o numero de caja"
@@ -42,45 +42,47 @@ new class extends Component {
         :variable="$estsCajaTipos"
     />
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                Fila
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Establecimiento
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Tipo de Caja
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Numero de Caja
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($estsCajaTipos as $estCajatipo)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$estCajatipo->establecimiento->nombre}}
-                    </td>
-                    <td>
-                        {{$estCajatipo->cajatipo->nombre}}
-                    </td>
-                    <td>
-                        {{$estCajatipo->numcaja}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.cajatipo-establecimiento.edit', $estCajatipo->id)}}"
-                        formaction="{{ route('admin.cajatipo-establecimiento.destroy', $estCajatipo->id) }}"
-                        formconfirm="¿Esta seguro de eliminar esta relación de la base de datos?"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    Fila
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Establecimiento
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Tipo de Caja
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Numero de Caja
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($estsCajaTipos as $estCajatipo)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$estCajatipo->establecimiento->nombre}}
+                        </td>
+                        <td>
+                            {{$estCajatipo->cajatipo->nombre}}
+                        </td>
+                        <td>
+                            {{$estCajatipo->numcaja}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.cajatipo-establecimiento.edit', $estCajatipo->id)}}"
+                            formaction="{{ route('admin.cajatipo-establecimiento.destroy', $estCajatipo->id) }}"
+                            formconfirm="¿Esta seguro de eliminar esta relación de la base de datos?"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

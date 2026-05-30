@@ -38,7 +38,7 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         variable="search"
@@ -49,53 +49,57 @@ new class extends Component {
         :variable="$users"
     />
 
-    <x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
 
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                No
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Nombre
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Admin
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    No
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Nombre
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Admin
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
 
-        <x-index-div-table-tbody>
-            @foreach($users as $user)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$user->name ?? 'No hay establecimiento asignado'}}
-                    </td>
-                    <td>
-                        {{$user->role->name}}
-                    </td>
-                    <td>
-                        @can('delete-admins', $user)
-                            <form x-data="{ showModal: false }" action="{{route('admin.users.destroy', $user->id)}}" method="POST">
-                                @csrf
-                                @method('DELETE')
+            <x-index-div-table-tbody>
+                @foreach($users as $user)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$user->name ?? 'No hay establecimiento asignado'}}
+                        </td>
+                        <td>
+                            {{$user->role->name}}
+                        </td>
+                        <td>
+                            @can('delete-admins', $user)
+                                <form x-data="{ showModal: false }" action="{{route('admin.users.destroy', $user->id)}}"
+                                      method="POST">
+                                    @csrf
+                                    @method('DELETE')
 
-                                <x-delete-modal formconfirm="¿Está seguro de querer eliminar este admin?" warning="¡Esta acción no se podrá deshacer!"/>
+                                    <x-delete-modal formconfirm="¿Está seguro de querer eliminar este admin?"
+                                                    warning="¡Esta acción no se podrá deshacer!"/>
 
-                            </form>
+                                </form>
 
-                        @else
+                            @else
 
-                            <span class="text-gray-400">Acceso Restringido</span>
+                                <span class="text-gray-400">Acceso Restringido</span>
 
-                        @endcan
-                    </td>
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
+                            @endcan
+                        </td>
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
 
-    </x-index-div-table>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

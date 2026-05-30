@@ -33,7 +33,7 @@ new class extends Component
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar Estados"
@@ -42,39 +42,41 @@ new class extends Component
 
     <x-index-table-pagination :variable="$estados"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                No
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Nombre
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($estados as $estado)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$estado->nombre}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.estados.edit', $estado->id)}}"
-                        formaction="{{ route('admin.estados.destroy', $estado->id) }}"
-                        formconfirm="¿Está seguro de que desea eliminar este estado?"
-                        warning="¡Al eliminar el estado eliminará todos sus registros relacionados a lo largo de la base de datos!"
-                    />
-                    <x-table-td-fd-routing
-                        href="{{ route('admin.estados.gerentes-mercado.index', $estado->id) }}"
-                    >
-                        Gerentes de Mercado
-                    </x-table-td-fd-routing>
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    No
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Nombre
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($estados as $estado)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$estado->nombre}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.estados.edit', $estado->id)}}"
+                            formaction="{{ route('admin.estados.destroy', $estado->id) }}"
+                            formconfirm="¿Está seguro de que desea eliminar este estado?"
+                            warning="¡Al eliminar el estado eliminará todos sus registros relacionados a lo largo de la base de datos!"
+                        />
+                        <x-table-td-fd-routing
+                            href="{{ route('admin.estados.gerentes-mercado.index', $estado->id) }}"
+                        >
+                            Gerentes de Mercado
+                        </x-table-td-fd-routing>
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

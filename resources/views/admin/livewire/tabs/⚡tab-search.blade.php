@@ -36,75 +36,77 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input title="Buscar Establecimientos" variable="search"/>
 
     <x-index-table-pagination :variable="$establecimientos"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                Tipo
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Numero
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Nombre
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Centro de Costos
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Gerente de Campo
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Tidel
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Formato
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Contrato
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($establecimientos as $est)
-                <tr>
-                    <td>
-                        {{$est->establecimientotipo->nombre}}
-                    </td>
-                    <td>
-                        {{$est->numero}}
-                    </td>
-                    <td>
-                        {{$est->nombre}}
-                    </td>
-                    <td>
-                        {{$est->centrodecostos ?? 'N/A'}}
-                    </td>
-                    <td>
-                        {{$est->campogerente->nombre}}
-                    </td>
-                    <td>
-                        {{$est->tidelprograma->ip ?? 'N/A'}}
-                    </td>
-                    <td>
-                        {{$est->tiendaformato->nombre ?? 'N/A'}}
-                    </td>
-                    <td>
-                        {{$est->avaloncontrato->numero ?? 'N/A'}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.establecimientos.edit', $est->id)}}"
-                        formaction="{{ route('admin.establecimientos.destroy', $est->id) }}"
-                        formconfirm="¿Esta seguro de eliminar esta clasificación?"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    Tipo
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Numero
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Nombre
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Centro de Costos
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Gerente de Campo
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Tidel
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Formato
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Contrato
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($establecimientos as $est)
+                    <tr>
+                        <td>
+                            {{$est->establecimientotipo->nombre}}
+                        </td>
+                        <td>
+                            {{$est->numero}}
+                        </td>
+                        <td>
+                            {{$est->nombre}}
+                        </td>
+                        <td>
+                            {{$est->centrodecostos ?? 'N/A'}}
+                        </td>
+                        <td>
+                            {{$est->campogerente->nombre}}
+                        </td>
+                        <td>
+                            {{$est->tidelprograma->ip ?? 'N/A'}}
+                        </td>
+                        <td>
+                            {{$est->tiendaformato->nombre ?? 'N/A'}}
+                        </td>
+                        <td>
+                            {{$est->avaloncontrato->numero ?? 'N/A'}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.establecimientos.edit', $est->id)}}"
+                            formaction="{{ route('admin.establecimientos.destroy', $est->id) }}"
+                            formconfirm="¿Esta seguro de eliminar esta clasificación?"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

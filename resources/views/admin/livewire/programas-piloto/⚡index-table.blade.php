@@ -32,7 +32,7 @@ new class extends Component
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar un programa piloto"
@@ -41,44 +41,46 @@ new class extends Component
 
     <x-index-table-pagination :variable="$pilotoProgramas"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                No
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Titulo
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Descripción Corta
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Establecimientos relacionados
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($pilotoProgramas as $pilotoPrograma)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$pilotoPrograma->titulo}}
-                    </td>
-                    <td>
-                        {{$pilotoPrograma->descripcion_corta}}
-                    </td>
-                    <td>
-                        {{$pilotoPrograma->establecimientos_count}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.programas-piloto.edit', $pilotoPrograma->id)}}"
-                        formaction="{{ route('admin.programas-piloto.destroy', $pilotoPrograma->id) }}"
-                        formconfirm="¿Esta seguro de eliminar esta duo de establecimientos de la lista?"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
-</div>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    No
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Titulo
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Descripción Corta
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Establecimientos relacionados
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($pilotoProgramas as $pilotoPrograma)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$pilotoPrograma->titulo}}
+                        </td>
+                        <td>
+                            {{$pilotoPrograma->descripcion_corta}}
+                        </td>
+                        <td>
+                            {{$pilotoPrograma->establecimientos_count}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.programas-piloto.edit', $pilotoPrograma->id)}}"
+                            formaction="{{ route('admin.programas-piloto.destroy', $pilotoPrograma->id) }}"
+                            formconfirm="¿Esta seguro de eliminar esta duo de establecimientos de la lista?"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
+</x-livewire-parent-div>

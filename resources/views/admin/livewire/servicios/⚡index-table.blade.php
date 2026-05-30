@@ -33,7 +33,7 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar Servicio"
@@ -42,39 +42,41 @@ new class extends Component {
 
     <x-index-table-pagination :variable="$servicios"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                No
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Nombre
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Clasificaciones relacionadas
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($servicios as $servicio)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$servicio->nombre}}
-                    </td>
-                    <td>
-                        {{$servicio->clasificaciones_count}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.servicios.edit', $servicio->id)}}"
-                        formaction="{{ route('admin.servicios.destroy', $servicio->id) }}"
-                        formconfirm="¿Esta seguro de eliminar este servicio?"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    No
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Nombre
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Clasificaciones relacionadas
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($servicios as $servicio)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$servicio->nombre}}
+                        </td>
+                        <td>
+                            {{$servicio->clasificaciones_count}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.servicios.edit', $servicio->id)}}"
+                            formaction="{{ route('admin.servicios.destroy', $servicio->id) }}"
+                            formconfirm="¿Esta seguro de eliminar este servicio?"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

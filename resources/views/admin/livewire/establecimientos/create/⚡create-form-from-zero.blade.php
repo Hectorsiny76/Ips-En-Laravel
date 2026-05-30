@@ -179,85 +179,87 @@ class extends Component {
 
 @section('page-title', 'Crear '.$estTipo->nombre.' desde Cero')
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-div-edit-create-title :cancel="true" href="{{route('admin.establecimientotipo.show', $this->estTipo->id)}}">
         Crear un@ {{$estTipo->nombre}} desde Cero
     </x-div-edit-create-title>
 
-    <x-dynamic-select-create-form-shallow model="selectedEstado" label="Estado" :options="$estados"/>
+    <x-livewire-content-div>
+        <x-dynamic-select-create-form-shallow model="selectedEstado" label="Estado" :options="$estados"/>
 
-    @if(count($mercadoGerentes) > 0)
-        <x-dynamic-select-create-form-shallow model="selectedMercadoGerente" label="Gerente de Mercado" :options="$mercadoGerentes"/>
-    @endif
+        @if(count($mercadoGerentes) > 0)
+            <x-dynamic-select-create-form-shallow model="selectedMercadoGerente" label="Gerente de Mercado" :options="$mercadoGerentes"/>
+        @endif
 
-    @if(count($mercados) > 0)
-        <x-dynamic-select-create-form-shallow model="selectedMercado" :numero="true" label="Mercado" :options="$mercados"/>
-    @endif
+        @if(count($mercados) > 0)
+            <x-dynamic-select-create-form-shallow model="selectedMercado" :numero="true" label="Mercado" :options="$mercados"/>
+        @endif
 
-    @if(count($campos) > 0)
-        <x-dynamic-select-create-form-shallow model="selectedCampo" :numero="true" label="Campo" :options="$campos"/>
-    @endif
+        @if(count($campos) > 0)
+            <x-dynamic-select-create-form-shallow model="selectedCampo" :numero="true" label="Campo" :options="$campos"/>
+        @endif
 
-    @if(count($campoGerentes) > 0)
-        <x-dynamic-select-create-form-shallow model="selectedCampoGerente" label="Gerente de campo" :options="$campoGerentes"/>
-    @endif
+        @if(count($campoGerentes) > 0)
+            <x-dynamic-select-create-form-shallow model="selectedCampoGerente" label="Gerente de campo" :options="$campoGerentes"/>
+        @endif
 
-    @if($selectedCampoGerente)
+        @if($selectedCampoGerente)
 
-        <x-form-errors/>
+            <x-form-errors/>
 
-        <div class="border-t border-gray-400 my-6">
-            <x-input-form-label for="nombre">Nombre</x-input-form-label>
+            <div class="border-t border-gray-400 my-6 pb-6">
+                <x-input-form-label for="nombre">Nombre</x-input-form-label>
 
-            <x-input-form
-                type="text"
-                name="nombre"
-                placeholder="Agua Caliente"
-                wire:model="datos.nombre"
-                required/>
+                <x-input-form
+                    type="text"
+                    name="nombre"
+                    placeholder="Agua Caliente"
+                    wire:model="datos.nombre"
+                    required/>
 
-            <x-input-form-label for="numero">Numero</x-input-form-label>
+                <x-input-form-label for="numero">Numero</x-input-form-label>
 
-            <x-input-form
-                type="number"
-                name="numero"
-                placeholder="192"
-                wire:model="datos.numero"
-                min="1"
-                required/>
+                <x-input-form
+                    type="number"
+                    name="numero"
+                    placeholder="192"
+                    wire:model="datos.numero"
+                    min="1"
+                    required/>
 
-            <x-input-form-label for="cajas_tpvs">
-                @if(Str::slug($estTipo->nombre) == 'tienda')
-                    Cajas
-                @elseif(Str::slug($estTipo->nombre) == 'estacion')
-                    TPV's
-                @endif
-            </x-input-form-label>
+                <x-input-form-label for="cajas_tpvs">
+                    @if(Str::slug($estTipo->nombre) == 'tienda')
+                        Cajas
+                    @elseif(Str::slug($estTipo->nombre) == 'estacion')
+                        TPV's
+                    @endif
+                </x-input-form-label>
 
-            <x-input-form
-                type="number"
-                name="cajas_tpvs"
-                placeholder="4"
-                wire:model="datos.cajas_tpvs"
-                min="1"
-                required/>
+                <x-input-form
+                    type="number"
+                    name="cajas_tpvs"
+                    placeholder="4"
+                    wire:model="datos.cajas_tpvs"
+                    min="1"
+                    required/>
 
-            <x-input-form-label for="idred">Id de Red</x-input-form-label>
+                <x-input-form-label for="idred">Id de Red</x-input-form-label>
 
-            <x-input-form
-                type="text"
-                name="idred"
-                placeholder="8.8.8"
-                wire:model="datos.idred"
-                required/>
+                <x-input-form
+                    type="text"
+                    name="idred"
+                    placeholder="8.8.8"
+                    wire:model="datos.idred"
+                    required/>
 
-            @includeIf('admin.establecimientos.partials-create.'.Str::slug($estTipo->nombre))
+                @includeIf('admin.establecimientos.partials-create.'.Str::slug($estTipo->nombre))
 
-            <x-form-create-buttons click="save" href="{{route('admin.establecimientotipo.show', $this->estTipo->id)}}"/>
+                <x-form-create-buttons click="save" href="{{route('admin.establecimientotipo.show', $this->estTipo->id)}}"/>
 
-        </div>
+            </div>
 
-    @endif
+        @endif
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

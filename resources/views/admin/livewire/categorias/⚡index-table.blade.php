@@ -33,45 +33,47 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input title="Buscar Categoría" variable="search"/>
 
     <x-index-table-pagination :variable="$categorias"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                No
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Nombre
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Clasificaciones relacionadas
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($categorias as $categoria)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$categoria->nombre}}
-                    </td>
-                    <td>
-                        {{$categoria->clasificaciones_count}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.categorias.edit', $categoria->id)}}"
-                        formaction="{{ route('admin.categorias.destroy', $categoria->id) }}"
-                        formconfirm="¿Esta seguro de eliminar esta categoría?"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    No
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Nombre
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Clasificaciones relacionadas
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($categorias as $categoria)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$categoria->nombre}}
+                        </td>
+                        <td>
+                            {{$categoria->clasificaciones_count}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.categorias.edit', $categoria->id)}}"
+                            formaction="{{ route('admin.categorias.destroy', $categoria->id) }}"
+                            formconfirm="¿Esta seguro de eliminar esta categoría?"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

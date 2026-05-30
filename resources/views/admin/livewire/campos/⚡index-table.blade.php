@@ -42,7 +42,7 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar campos"
@@ -53,48 +53,50 @@ new class extends Component {
         :variable="$campos"
     />
 
-    <x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
 
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                Numero
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Gerente
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    Numero
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Gerente
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
 
-        <x-index-div-table-tbody>
+            <x-index-div-table-tbody>
 
-            @foreach($campos as $campo)
-                <tr>
-                    <td>
-                        {{$campo->numero}}
-                    </td>
-                    <td>
-                        {{$campo->campogerente?->nombre ?? 'No hay gerente asignado'}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.campos.edit', $campo->id)}}"
-                        formaction="{{ route('admin.campos.destroy', $campo->id) }}"
-                        formconfirm="¿Está seguro de que desea eliminar este campo?"
-                        warning="¡Al eliminar este campo se eliminarán todos los datos relacionados!"
-                    />
-                    <x-table-td-fd-routing
-                        href="{{ route('admin.campo.campo-gerente.index', $campo->id) }}"
-                    >
-                        @if($campo->campogerente()->exists())
-                            Gerente de Campo
-                        @else
-                            Asignar gerente de campo
-                        @endif
-                    </x-table-td-fd-routing>
-                </tr>
-            @endforeach
+                @foreach($campos as $campo)
+                    <tr>
+                        <td>
+                            {{$campo->numero}}
+                        </td>
+                        <td>
+                            {{$campo->campogerente?->nombre ?? 'No hay gerente asignado'}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.campos.edit', $campo->id)}}"
+                            formaction="{{ route('admin.campos.destroy', $campo->id) }}"
+                            formconfirm="¿Está seguro de que desea eliminar este campo?"
+                            warning="¡Al eliminar este campo se eliminarán todos los datos relacionados!"
+                        />
+                        <x-table-td-fd-routing
+                            href="{{ route('admin.campo.campo-gerente.index', $campo->id) }}"
+                        >
+                            @if($campo->campogerente()->exists())
+                                Gerente de Campo
+                            @else
+                                Asignar gerente de campo
+                            @endif
+                        </x-table-td-fd-routing>
+                    </tr>
+                @endforeach
 
-        </x-index-div-table-tbody>
+            </x-index-div-table-tbody>
 
-    </x-index-div-table>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

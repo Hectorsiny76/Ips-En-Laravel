@@ -33,7 +33,7 @@ new class extends Component {
 };
 ?>
 
-<div class="overflow-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         title="Buscar Microservicio"
@@ -42,39 +42,41 @@ new class extends Component {
 
     <x-index-table-pagination :variable="$microservicios"/>
 
-    <x-index-div-table>
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                No
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Nombre
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Clasificaciones relacionadas
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
-        <x-index-div-table-tbody>
-            @foreach($microservicios as $microservicio)
-                <tr>
-                    <td>
-                        {{$loop->iteration}}
-                    </td>
-                    <td>
-                        {{$microservicio->nombre}}
-                    </td>
-                    <td>
-                        {{$microservicio->clasificaciones_count}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.microservicios.edit', $microservicio->id)}}"
-                        formaction="{{ route('admin.microservicios.destroy', $microservicio->id) }}"
-                        formconfirm="¿Esta seguro de eliminar este microservicio?"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
-    </x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    No
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Nombre
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Clasificaciones relacionadas
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
+            <x-index-div-table-tbody>
+                @foreach($microservicios as $microservicio)
+                    <tr>
+                        <td>
+                            {{$loop->iteration}}
+                        </td>
+                        <td>
+                            {{$microservicio->nombre}}
+                        </td>
+                        <td>
+                            {{$microservicio->clasificaciones_count}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.microservicios.edit', $microservicio->id)}}"
+                            formaction="{{ route('admin.microservicios.destroy', $microservicio->id) }}"
+                            formconfirm="¿Esta seguro de eliminar este microservicio?"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

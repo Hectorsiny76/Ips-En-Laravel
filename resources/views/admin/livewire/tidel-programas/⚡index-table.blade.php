@@ -32,7 +32,7 @@ new class extends Component
 };
 ?>
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-index-table-searchable-input
         variable="search"
@@ -43,43 +43,45 @@ new class extends Component
         :variable="$tidelprogramas"
         />
 
-    <x-index-div-table>
+    <x-livewire-content-div>
+        <x-index-div-table>
 
-        <x-index-div-table-thead>
-            <x-index-div-table-thead-th-column>
-                Tienda
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Ip
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-column>
-                Fecha Migración
-            </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
-        </x-index-div-table-thead>
+            <x-index-div-table-thead>
+                <x-index-div-table-thead-th-column>
+                    Tienda
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Ip
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
+                    Fecha Migración
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-actions-column/>
+            </x-index-div-table-thead>
 
-        <x-index-div-table-tbody>
-            @foreach($tidelprogramas as $tidelprograma)
-                <tr>
-                    <td>
-                        {{$tidelprograma->establecimiento?->nombre ?? 'No hay establecimiento asignado'}}
-                    </td>
-                    <td>
-                        {{$tidelprograma->ip}}
-                    </td>
-                    <td>
-                        {{$tidelprograma->fechamigracion ?? 'Sin fecha'}}
-                    </td>
-                    <x-table-td-actions
-                        ahref="{{route('admin.tidel-programas.edit', $tidelprograma->id)}}"
-                        formaction="{{ route('admin.tidel-programas.destroy', $tidelprograma->id) }}"
-                        formconfirm="¿Esta seguro de desear eliminar esta migración?"
-                        warning="¡Esta acción no se puede deshacer!"
-                    />
-                </tr>
-            @endforeach
-        </x-index-div-table-tbody>
+            <x-index-div-table-tbody>
+                @foreach($tidelprogramas as $tidelprograma)
+                    <tr>
+                        <td>
+                            {{$tidelprograma->establecimiento?->nombre ?? 'No hay establecimiento asignado'}}
+                        </td>
+                        <td>
+                            {{$tidelprograma->ip}}
+                        </td>
+                        <td>
+                            {{$tidelprograma->fechamigracion ?? 'Sin fecha'}}
+                        </td>
+                        <x-table-td-actions
+                            ahref="{{route('admin.tidel-programas.edit', $tidelprograma->id)}}"
+                            formaction="{{ route('admin.tidel-programas.destroy', $tidelprograma->id) }}"
+                            formconfirm="¿Esta seguro de desear eliminar esta migración?"
+                            warning="¡Esta acción no se puede deshacer!"
+                        />
+                    </tr>
+                @endforeach
+            </x-index-div-table-tbody>
 
-    </x-index-div-table>
+        </x-index-div-table>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>

@@ -1,5 +1,5 @@
 @props(['variable'])
 
-<div {{$attributes->merge(['class'=>"my-4"])}}>
+<div {{$attributes->merge(['class'=>""])}}>
     {{ $variable->links() }}
 </div>
