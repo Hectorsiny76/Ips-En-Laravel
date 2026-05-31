@@ -72,7 +72,13 @@ class extends Component {
             return;
         }
 
-        $this->mercadoGerentes = Mercadogerente::where('estado_id', $estadoId)->get();
+        $estTipo = $this->estTipo;
+
+        $this->mercadoGerentes = Mercadogerente::where('estado_id', $estadoId)
+            ->whereHas('mercado', function ($q) use ($estTipo){
+                $q->where('establecimientotipo_id', $estTipo->id);
+            })
+            ->get();
 
         $this->reset(['selectedMercadoGerente','selectedMercado', 'selectedCampo', 'selectedCampoGerente', 'mercados', 'campos', 'campoGerentes']);
     }
@@ -190,18 +196,26 @@ class extends Component {
 
         @if(count($mercadoGerentes) > 0)
             <x-dynamic-select-create-form-shallow model="selectedMercadoGerente" label="Gerente de Mercado" :options="$mercadoGerentes"/>
+        @elseif(!empty($selectedEstado))
+            <x-span-no-results-found/>
         @endif
 
         @if(count($mercados) > 0)
-            <x-dynamic-select-create-form-shallow model="selectedMercado" :numero="true" label="Mercado" :options="$mercados"/>
+            <x-dynamic-select-create-form-shallow model="selectedMercado" :mercado="true" :numero="true" label="Mercado" :options="$mercados"/>
+        @elseif(!empty($selectedMercadoGerente))
+            <x-span-no-results-found/>
         @endif
 
         @if(count($campos) > 0)
             <x-dynamic-select-create-form-shallow model="selectedCampo" :numero="true" label="Campo" :options="$campos"/>
+        @elseif(!empty($selectedMercado))
+            <x-span-no-results-found/>
         @endif
 
         @if(count($campoGerentes) > 0)
             <x-dynamic-select-create-form-shallow model="selectedCampoGerente" label="Gerente de campo" :options="$campoGerentes"/>
+        @elseif(!empty($selectedCampo))
+            <x-span-no-results-found/>
         @endif
 
         @if($selectedCampoGerente)

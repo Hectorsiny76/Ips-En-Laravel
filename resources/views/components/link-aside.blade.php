@@ -3,7 +3,7 @@
 @php
 
 $classes = $active
-    ? 'my-1 transition-all duration-200 hover:scale-105 rounded-md bg-gray-600 dark:hover:bg-gray-700'
+    ? 'my-1 transition-all duration-200 hover:scale-105 rounded-md bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-700'
     : 'my-1 transition-all duration-200 hover:scale-105 rounded-md hover:bg-gray-300 dark:hover:bg-gray-700';
 
 @endphp
