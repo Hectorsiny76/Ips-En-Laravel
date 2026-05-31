@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html
-    lang="en"
+    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
     x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }"
     x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))"
     x-bind:class="{ 'dark' : darkMode }"
@@ -61,36 +61,41 @@
     </header>
 
     <div class="flex-1 grid overflow-hidden grid-cols-12">
-        <aside class="col-span-2 flex-shrink-0 overflow-y-auto bg-gray-200 dark:bg-gray-800 dark:text-gray-300 pb-4 border-r dark:border-none">
+        <aside
+            class="col-span-2 flex-shrink-0 overflow-y-auto bg-gray-200 dark:bg-gray-800 dark:text-gray-300 pb-4 border-r dark:border-none"
+            x-data="{ scroll: localStorage.getItem('sidebar-scroll') || 0 }"
+            x-init="$el.scrollTop = scroll"
+            @scroll.debounce.50ms="localStorage.setItem('sidebar-scroll', $el.scrollTop)"
+        >
             <nav>
                 <h1 class="font-bold text-2xl z-10 sticky top-0 bg-gray-200 dark:bg-gray-800 dark:text-white mb-3 p-2">Menu de navegación</h1>
                 <ul class="text-2xl px-4">
                     @can('delete-data-create-users')
-                        <x-link-aside href="{{route('admin.admin_layout.register')}}">Registrar</x-link-aside>
-                        <x-link-aside href="{{route('admin.users.index')}}">Admins</x-link-aside>
+                        <x-link-aside href="{{route('admin.admin_layout.register')}}" :active="request()->routeIs('admin.admin_layout.register')">Registrar</x-link-aside>
+                        <x-link-aside href="{{route('admin.users.index')}}" :active="request()->routeIs('admin.users.*')">Admins</x-link-aside>
                     @endcan
-                    <x-link-aside href="{{route('admin.estados.index')}}">⭐Estados⭐</x-link-aside>
-                    <x-link-aside href="{{route('admin.admin_layout.dashboard')}}">Dashboard</x-link-aside>
+                    <x-link-aside href="{{route('admin.estados.index')}}" :active="request()->routeIs('admin.estados.*')">⭐Estados⭐</x-link-aside>
+                    <x-link-aside href="{{route('admin.admin_layout.dashboard')}}" :active="request()->routeIs('admin.admin_layout.dashboard')">Dashboard</x-link-aside>
                     @foreach($navEstablecimientos as $est)
-                        <x-link-aside href='/admin/establecimientotipo/{{ $est->id }}'>{{$est->nombre}}</x-link-aside>
+                        <x-link-aside href='/admin/establecimientotipo/{{ $est->id }}' :active="request()->is('admin/establecimientotipo/'.$est->id.'*')">{{$est->nombre}}</x-link-aside>
                     @endforeach
-                    <x-link-aside href="{{route('admin.establecimientotipo.index')}}">Tipos de establecimientos</x-link-aside>
-                    <x-link-aside href="{{route('admin.tidel-programas.index')}}">Migraciones Tidel</x-link-aside>
-                    <x-link-aside href="{{route('admin.tienda-formatos.index')}}">Formatos de Tienda</x-link-aside>
-                    <x-link-aside href="{{route('admin.avalon-contratos.index')}}">Contratos Ávalon</x-link-aside>
-                    <x-link-aside href="{{route('admin.binomioestablecimientos.index')}}">Establecimientos Binomio</x-link-aside>
-                    <x-link-aside href="{{route('admin.programas-piloto.index')}}">Programas Piloto</x-link-aside>
-                    <x-link-aside href="{{route('admin.caja-tipos.index')}}">Tipos de Caja</x-link-aside>
-                    <x-link-aside href="{{route('admin.cajatipo-establecimiento.index')}}">Est - Tipo de Caja</x-link-aside>
-                    <x-link-aside href="{{route('admin.foliotipos.index')}}">Tipos de Folios</x-link-aside>
-                    <x-link-aside href="{{route('admin.areas.index')}}">Áreas</x-link-aside>
-                    <x-link-aside href="{{route('admin.despliegues.index')}}">Despliegues</x-link-aside>
-                    <x-link-aside href="{{route('admin.archivo-tipo.index')}}">Tipos de Archivo</x-link-aside>
-                    <x-link-aside href="{{route('admin.categorias.index')}}">Categorías</x-link-aside>
-                    <x-link-aside href="{{route('admin.subcategorias.index')}}">Subcategorías</x-link-aside>
-                    <x-link-aside href="{{route('admin.servicios.index')}}">Servicios</x-link-aside>
-                    <x-link-aside href="{{route('admin.microservicios.index')}}">Microservicios</x-link-aside>
-                    <x-link-aside href="{{route('admin.clasificaciones.index')}}">Clasificaciones</x-link-aside>
+                    <x-link-aside href="{{route('admin.establecimientotipo.index')}}" :active="request()->routeIs('admin.establecimientotipo.*')">Tipos de establecimientos</x-link-aside>
+                    <x-link-aside href="{{route('admin.tidel-programas.index')}}" :active="request()->routeIs('admin.tidel-programas.*')">Migraciones Tidel</x-link-aside>
+                    <x-link-aside href="{{route('admin.tienda-formatos.index')}}" :active="request()->routeIs('admin.tienda-formatos.*')">Formatos de Tienda</x-link-aside>
+                    <x-link-aside href="{{route('admin.avalon-contratos.index')}}" :active="request()->routeIs('admin.avalon-contratos.*')">Contratos Ávalon</x-link-aside>
+                    <x-link-aside href="{{route('admin.binomioestablecimientos.index')}}" :active="request()->routeIs('admin.binomioestablecimientos.*')">Establecimientos Binomio</x-link-aside>
+                    <x-link-aside href="{{route('admin.programas-piloto.index')}}" :active="request()->routeIs('admin.programas-piloto.*')">Programas Piloto</x-link-aside>
+                    <x-link-aside href="{{route('admin.caja-tipos.index')}}" :active="request()->routeIs('admin.caja-tipos.*')">Tipos de Caja</x-link-aside>
+                    <x-link-aside href="{{route('admin.cajatipo-establecimiento.index')}}" :active="request()->routeIs('admin.cajatipo-establecimiento.index')">Est - Tipo de Caja</x-link-aside>
+                    <x-link-aside href="{{route('admin.foliotipos.index')}}" :active="request()->routeIs('admin.foliotipos.*')">Tipos de Folios</x-link-aside>
+                    <x-link-aside href="{{route('admin.areas.index')}}" :active="request()->routeIs('admin.areas.*')">Áreas</x-link-aside>
+                    <x-link-aside href="{{route('admin.despliegues.index')}}" :active="request()->routeIs('admin.despliegues.*')">Despliegues</x-link-aside>
+                    <x-link-aside href="{{route('admin.archivo-tipo.index')}}" :active="request()->routeIs('admin.archivo-tipo.*')">Tipos de Archivo</x-link-aside>
+                    <x-link-aside href="{{route('admin.categorias.index')}}" :active="request()->routeIs('admin.categorias.*')">Categorías</x-link-aside>
+                    <x-link-aside href="{{route('admin.subcategorias.index')}}" :active="request()->routeIs('admin.subcategorias.*')">Subcategorías</x-link-aside>
+                    <x-link-aside href="{{route('admin.servicios.index')}}" :active="request()->routeIs('admin.servicios.*')">Servicios</x-link-aside>
+                    <x-link-aside href="{{route('admin.microservicios.index')}}" :active="request()->routeIs('admin.microservicios.*')">Microservicios</x-link-aside>
+                    <x-link-aside href="{{route('admin.clasificaciones.index')}}" :active="request()->routeIs('admin.clasificaciones.*')">Clasificaciones</x-link-aside>
                 </ul>
             </nav>
         </aside>
