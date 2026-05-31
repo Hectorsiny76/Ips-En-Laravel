@@ -8,8 +8,8 @@
 
     <div x-data="{showOption : false}" class="flex justify-between py-2">
 
-        <h1 class="text-xl font-semibold py-2 flex-shrink-0">Estos son las clasificaciones actuales</h1>
-        <button type="button" @click="showOption = true" class="bg-indigo-300  px-4 py-2 rounded text-indigo-600 hover:text-indigo-900 mr-4">Agregar una nueva clasificación</button>
+        <h1 class="dark:text-white text-xl font-semibold py-2 flex-shrink-0">Estos son las clasificaciones actuales</h1>
+        <button type="button" @click="showOption = true" class="bg-indigo-300 dark:bg-indigo-900/50 dark:hover:bg-indigo-700/50 dark:focus:border dark:focus:border-gray-400 border border-transparent dark:text-gray-300 px-4 py-2 rounded  hover:text-indigo-900 mr-4">Agregar una nueva clasificación</button>
 
         <div
             x-show="showOption"

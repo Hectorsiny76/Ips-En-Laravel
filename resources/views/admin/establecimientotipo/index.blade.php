@@ -6,27 +6,23 @@
 
 @section('content')
 
-    <div class="flex justify-between">
-        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Estos son los tipos de establecimientos actuales</h1>
-        <a href="{{ route('admin.establecimientotipo.create')}}" class="bg-indigo-300  px-4 py-2 rounded">
-            Agregar nuevo tipo de establecimiento
-        </a>
-    </div>
+    <x-div-index-title-create-button
+        title="Estos son los tipos de establecimientos actuales"
+        url="{{ route('admin.establecimientotipo.create')}}"
+        button="Agregar nuevo tipo de establecimiento"
+        />
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg">
-        <table class="min-w-full divide-y divide-gray-200 relative">
-            <thead class="bg-gray-50">
-            <tr>
-                <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
-                    Nombre
-                </th>
-                <th class="sticky top-0 z-10 px-1 py-3 text-left bg-gray-50 shadow-sm">
-                    Archivos relacionados
-                </th>
-                <x-index-div-table-thead-th-actions-column/>
-            </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+    <x-index-div-table>
+        <x-index-div-table-thead>
+            <x-index-div-table-thead-th-column>
+                Nombre
+            </x-index-div-table-thead-th-column>
+            <x-index-div-table-thead-th-column>
+                Archivos relacionados
+            </x-index-div-table-thead-th-column>
+            <x-index-div-table-thead-th-actions-column :routing="true"/>
+        </x-index-div-table-thead>
+        <x-index-div-table-tbody>
             @foreach($estTipos as $estTipo)
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
@@ -41,11 +37,10 @@
                         formaction="{{route('admin.establecimientotipo.destroy', $estTipo->id)}}"
                         formconfirm="¿Esta seguro de que desea eliminar este tipo de establecimiento?"
                         warning="¡Esta acción podría tener consecuencias fatales con los registros relacionados!"
-                        />
+                    />
                 </tr>
             @endforeach
-            </tbody>
-        </table>
-    </div>
+        </x-index-div-table-tbody>
+    </x-index-div-table>
 
 @endsection

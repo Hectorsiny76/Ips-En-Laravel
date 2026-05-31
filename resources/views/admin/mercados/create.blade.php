@@ -6,75 +6,49 @@
 
 @section('content')
 
-    <div class="flex justify-between">
-        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Agrega un mercado nuevo</h1>
-    </div>
+    <x-div-edit-create-title>Agrega un mercado nuevo</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
-        @if ($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                <ul class="list-disc pl-5">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <x-div-form-create-edit>
+        <x-form-errors/>
         <form action="{{route('admin.gerentes-mercado.mercados.store', $mercadoGerente->id)}}" method="POST">
             @csrf
             <div class="mb-6">
-                <label for="nombre" class="block text-lg font-medium text-gray-700 my-2">Número</label>
+                <x-input-form-label for="nombre">Número</x-input-form-label>
 
-                <input
+                <x-input-form
                     type="number"
                     name="numero"
                     placeholder="601"
                     value="{{old('numero')}}"
                     min="1"
                     step="1"
-                    class="w-full rounded-md shadow-sm focus:ring-sky-700 focus:border-sky-700
-                    @error('numero') border-red-500 text-red-900 @else border-gray-300  @enderror"
-                    required>
+                    required
+                />
 
-                @error('name')
-                <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p>
-                @enderror
+                <x-input-form-label for="Gerente de mercado">Gerente de Mercado</x-input-form-label>
 
-                <label for="Gerente de mercado" class="block text-lg font-medium text-gray-700 my-2">Gerente de Mercado</label>
-
-                <input
+                <x-input-form
                     type="text"
+                    name="Gerente de mercado"
                     value="{{$mercadoGerente->nombre}}"
-                    class="w-full rounded-md shadow-sm focus:ring-sky-700 focus:border-sky-700
-                    @error('numero') border-red-500 text-red-900 @else border-gray-300  @enderror"
-                    readonly>
+                    readonly
+                />
 
-                <label for="establecimientotipo_id" class="block text-lg font-medium text-gray-700 my-2">Tipo de establecimiento</label>
+                <x-input-form-label for="establecimientotipo_id">Tipo de establecimiento</x-input-form-label>
 
-                <select name="establecimientotipo_id" required>
+                <x-input-form-select name="establecimientotipo_id" id="establecimientotipo_id" initialvalue="-- Escoje un tipo de establecimiento --" :required="true">
                     @foreach($estTipos as $estTipo)
                         <option value="{{$estTipo->id}}">{{$estTipo->nombre}}</option>
                     @endforeach
-                </select>
+                </x-input-form-select>
 
-                @error('establecimientotipo_id')
-                <p class="text-red-500 text-xs mt-2 font-medium">{{ $message }}</p>
-                @enderror
             </div>
 
             <livewire:admin::livewire.mercados.search-managers-mercado/>
 
-            <div class="flex justify-center space-x-3 mt-8 pt-4 border-t border-gray-500">
-                <a href="{{route('admin.estados.gerentes-mercado.index', $mercadoGerente->estado->id)}}" class="px-6 py-2 text-lg font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Cancelar
-                </a>
-                <button
-                    type="submit"
-                    class="px-6 py-2 text-lg font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Crear
-                </button>
-            </div>
+            <x-form-create-buttons href="{{route('admin.estados.gerentes-mercado.index', $mercadoGerente->estado->id)}}"/>
+
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

@@ -56,7 +56,7 @@ new class extends Component
                 <x-index-div-table-thead-th-column>
                     No. Asociados
                 </x-index-div-table-thead-th-column>
-                <x-index-div-table-thead-th-actions-column/>
+                <x-index-div-table-thead-th-actions-column :routing="true"/>
             </x-index-div-table-thead>
             <x-index-div-table-tbody>
                 @foreach($areas as $area)

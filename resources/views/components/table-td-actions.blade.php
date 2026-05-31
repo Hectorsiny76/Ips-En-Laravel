@@ -2,7 +2,7 @@
 
 <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
 
-    <a href="{{$ahref}}" class="text-indigo-600 hover:text-indigo-900 mr-4">
+    <a href="{{$ahref}}" class="text-indigo-600 dark:hover:text-indigo-400 dark:text-indigo-500 hover:text-indigo-900 mr-4">
         Editar
     </a>
 

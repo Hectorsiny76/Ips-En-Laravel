@@ -74,7 +74,7 @@ new class extends Component
 
         <div class="text-md pt-2">
             @foreach($results as $asociado)
-                <p wire:click="addManager({{$asociado->id}}, '{{$asociado->nombre}}', '{{$asociado->area->nombre}}')" class="cursor-pointer font-bold">{{$asociado->nombre}} - {{$asociado->area->nombre}}</p>
+                <p wire:click="addManager({{$asociado->id}}, '{{$asociado->nombre}}', '{{$asociado->area->nombre}}')" class="cursor-pointer dark:text-gray-400 font-bold">{{$asociado->nombre}} - {{$asociado->area->nombre}}</p>
             @endforeach
         </div>
 
@@ -95,7 +95,7 @@ new class extends Component
                         <td>{{$asociado['nombre']}}</td>
                         <td>{{$asociado['area']}}</td>
                         <td>
-                            <button wire:click.prevent="removeManager({{$id}})" class="text-red-600 font-bold text-xl w-full">
+                            <button wire:click.prevent="removeManager({{$id}})" class="text-red-600 hover:text-red-500 dark:hover:text-red-700 dark:text-red-900  font-bold text-xl w-full">
                                 X
                             </button>
                             <input type="hidden" name="asociados[]" value="{{$id}}">

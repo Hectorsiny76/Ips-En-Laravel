@@ -18,7 +18,7 @@
             <x-index-div-table-thead-th-column>Gerente de Mercado</x-index-div-table-thead-th-column>
             <x-index-div-table-thead-th-column>Tipo de Establecimiento</x-index-div-table-thead-th-column>
             <x-index-div-table-thead-th-column>Asociados Relacionados</x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
+            <x-index-div-table-thead-th-actions-column :routing="true"/>
         </x-index-div-table-thead>
         <x-index-div-table-tbody>
             <tr>

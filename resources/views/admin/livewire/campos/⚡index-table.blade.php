@@ -63,7 +63,7 @@ new class extends Component {
                 <x-index-div-table-thead-th-column>
                     Gerente
                 </x-index-div-table-thead-th-column>
-                <x-index-div-table-thead-th-actions-column/>
+                <x-index-div-table-thead-th-actions-column :routing="true"/>
             </x-index-div-table-thead>
 
             <x-index-div-table-tbody>

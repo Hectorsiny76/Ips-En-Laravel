@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+    lang="en"
+    x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }"
+    x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))"
+    x-bind:class="{ 'dark' : darkMode }"
+>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,9 +26,9 @@
     </style>
 
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 dark:bg-gray-900">
 
-<div class="flex flex-col h-dvh overflow-hidden bg-gray-100">
+<div class="flex flex-col h-dvh overflow-hidden bg-gray-100 dark:bg-gray-900">
 
     <header class="h-16 flex items-center justify-between shadow bg-sky-950 text-white p-4">
         <div class="flex items-center justify-center">
@@ -40,15 +45,25 @@
             </div>
             <form method="post" action="{{route('logout')}}">
                 @csrf
-                <button type="submit" class="bg-red-50 text-red-900 px-4 py-2 rounded transition-all duration-200 hover:bg-red-900 hover:text-red-50">Cerrar sesión</button>
+                    <button type="submit" class="flex items-center gap-2 px-3 py-2 rounded-md text-red-400 hover:text-red-300 border border-transparent hover:bg-red-500/10 transition-colors font-medium">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                    </svg>
+                    <span>Salir</span>
+                </button>
             </form>
+            <button type="button" class="flex items-center gap-2 px-3 py-2 rounded-md text-white hover:bg-white/20 bg-white/10 border border-transparent transition-colors" @click="darkMode = !darkMode">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+                </svg>
+            </button>
         </div>
     </header>
 
     <div class="flex-1 grid overflow-hidden grid-cols-12">
-        <aside class="col-span-2 flex-shrink-0 overflow-y-auto bg-gray-200 pb-4 border-r">
+        <aside class="col-span-2 flex-shrink-0 overflow-y-auto bg-gray-200 dark:bg-gray-800 dark:text-gray-300 pb-4 border-r dark:border-none">
             <nav>
-                <h1 class="font-bold text-2xl z-10 sticky top-0 bg-gray-200 mb-3 p-2">Menu de navegación</h1>
+                <h1 class="font-bold text-2xl z-10 sticky top-0 bg-gray-200 dark:bg-gray-800 dark:text-white mb-3 p-2">Menu de navegación</h1>
                 <ul class="text-2xl px-4">
                     @can('delete-data-create-users')
                         <x-link-aside href="{{route('admin.admin_layout.register')}}">Registrar</x-link-aside>
@@ -80,7 +95,7 @@
             </nav>
         </aside>
 
-        <main class="col-span-10 flex-1 flex flex-col p-6 bg-white shadow-md m-4 rounded overflow-hidden relative">
+        <main class="col-span-10 flex-1 flex flex-col p-6 bg-white dark:bg-gray-800/50 shadow-md m-4 rounded overflow-hidden relative">
 
             <x-session-alert/>
 

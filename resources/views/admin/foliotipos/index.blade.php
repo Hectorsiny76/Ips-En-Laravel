@@ -24,7 +24,7 @@
             <x-index-div-table-thead-th-column>
                 Folios existentes
             </x-index-div-table-thead-th-column>
-            <x-index-div-table-thead-th-actions-column/>
+            <x-index-div-table-thead-th-actions-column :routing="true"/>
         </x-index-div-table-thead>
         <x-index-div-table-tbody>
             @foreach($foliotipos as $foliotipo)

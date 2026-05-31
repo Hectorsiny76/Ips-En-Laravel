@@ -6,67 +6,50 @@
 
 @section('content')
 
-    <div class="flex justify-between">
-        <h1 class="text-xl font-semibold mb-4 flex-shrink-0">Editar mercado {{$mercado->numero}}</h1>
-    </div>
+    <x-div-edit-create-title>Editar mercado {{$mercado->numero}}</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
-        @if ($errors->any())
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
-                <ul class="list-disc pl-5">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <x-div-form-create-edit>
+        <x-form-errors/>
         <form action="{{route('admin.mercados.update', $mercado->id)}}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-6">
-                <label for="nombre" class="block text-lg font-medium text-gray-700 my-2">Número</label>
+                <x-input-form-label for="nombre">Número</x-input-form-label>
 
-                <input
+                <x-input-form
                     type="number"
                     name="numero"
                     placeholder="601"
                     value="{{old('numero', $mercado->numero)}}"
                     min="1"
                     step="1"
-                    class="w-full rounded-md shadow-sm focus:ring-sky-700 focus:border-sky-700"
-                    required>
+                    required
+                />
 
-                <label for="Gerente de mercado" class="block text-lg font-medium text-gray-700 my-2">Gerente de Mercado</label>
+                <x-input-form-label for="Gerente de mercado">Gerente de Mercado</x-input-form-label>
 
-                <input
+                <x-input-form
                     type="text"
+                    name="Gerente de Mercado"
                     value="{{$mercado->mercadogerente->nombre}}"
-                    class="w-full rounded-md shadow-sm focus:ring-sky-700 focus:border-sky-700"
-                    readonly>
+                    readonly
+                />
 
-                <label for="establecimientotipo_id" class="block text-lg font-medium text-gray-700 my-2">Tipo de establecimiento</label>
+                <x-input-form-label for="establecimientotipo_id">Tipo de establecimiento</x-input-form-label>
 
-                <select name="establecimientotipo_id" required>
+                <x-input-form-select name="establecimientotipo_id" id="establecimientotipo_id" initialvalue="-- Escoje un tipo de establecimiento --" :required="true">
                     @foreach($estTipos as $estTipo)
                         <option value="{{$estTipo->id}}" @selected(old('establecimientotipo_id', $mercado->establecimientotipo->id ?? '') == $estTipo->id)>{{$estTipo->nombre}}</option>
                     @endforeach
-                </select>
+                </x-input-form-select>
 
             </div>
 
             @livewire('admin::livewire.mercados.search-managers-mercado', ['mercado' => $mercado])
 
-            <div class="flex justify-center space-x-3 mt-8 pt-4 border-t border-gray-500">
-                <a href="{{route('admin.gerentes-mercado.mercados.index', $mercado->mercadogerente->id)}}" class="px-6 py-2 text-lg font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Cancelar
-                </a>
-                <button
-                    type="submit"
-                    class="px-6 py-2 text-lg font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Actualizar
-                </button>
-            </div>
+            <x-form-update-buttons href="{{route('admin.gerentes-mercado.mercados.index', $mercado->mercadogerente->id)}}"/>
+
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

@@ -105,7 +105,7 @@ new class extends Component
                         <x-table-td-actions
                             ahref="{{route('admin.establecimientos.edit', $establecimiento->id)}}"
                             formaction="{{route('admin.establecimientos.destroy', $establecimiento->id)}}"
-                            formconfirm="¿Está seguro de que desea eliminar esta {{$establecimiento->nombre}}?"
+                            formconfirm="¿Está seguro de que desea eliminar {{$establecimiento->nombre}}?"
                             warning="¡Esta acción no se podrá deshacer!"
                         />
                     </tr>
