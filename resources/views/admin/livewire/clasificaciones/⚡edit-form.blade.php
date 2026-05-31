@@ -53,10 +53,9 @@ new class extends Component {
 };
 ?>
 
-<div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+<x-livewire-parent-div>
     <form wire:submit="save">
-        @csrf
-        <div class="mb-6">
+        <x-livewire-content-div>
             <x-form-errors/>
             <x-input-form-label for="">Categoria</x-input-form-label>
 
@@ -102,7 +101,7 @@ new class extends Component {
                 initialName="{{$this->clasificacion->microservicio->nombre}}"
             />
 
-        </div>
+        </x-livewire-content-div>
         <x-form-update-buttons href="{{ route('admin.clasificaciones.index') }}"/>
     </form>
-</div>
+</x-livewire-parent-div>

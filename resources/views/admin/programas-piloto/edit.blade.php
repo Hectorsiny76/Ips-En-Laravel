@@ -8,7 +8,7 @@
 
     <x-div-edit-create-title>Actualizar Programa Piloto {{$pilotoPrograma->titulo}}</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <x-div-form-create-edit>
         <x-form-errors/>
         <form action="{{route('admin.programas-piloto.update', $pilotoPrograma->id)}}" method="POST">
             @csrf
@@ -22,7 +22,9 @@
                     name="titulo"
                     placeholder="ADV v0.2 Pre-Alpha"
                     value="{{old('titulo', $pilotoPrograma->titulo)}}"
-                    id="titulo"/>
+                    id="titulo"
+                    required
+                />
 
                 <x-input-form-label for="descripcion_corta">Descripción corta</x-input-form-label>
 
@@ -31,7 +33,9 @@
                     name="descripcion_corta"
                     placeholder="Version Preeliminar de ADV enfocada en el Cierre de Dfa"
                     value="{{old('descripcion_corta', $pilotoPrograma->descripcion_corta)}}"
-                    id="descripcion_corta"/>
+                    id="descripcion_corta"
+                    required
+                />
 
                 <x-input-form-label for="descripcion_larga">Descripción larga</x-input-form-label>
 
@@ -40,12 +44,14 @@
                     name="descripcion_larga"
                     placeholder="Version enfocada principalmente en el cierre de dfa, mantenimiento a empleados, sevenly y generación de reportes de mercancía."
                     value="{{old('descripcion_larga', $pilotoPrograma->descripcion_larga)}}"
-                    id="descripcion_corta"/>
+                    id="descripcion_corta"
+                    required
+                />
 
                 @livewire('admin::livewire.programas-piloto.search-est', ['estAdded' => $pilotoPrograma->establecimientos])
             </div>
             <x-form-update-buttons href="{{ route('admin.programas-piloto.index') }}"/>
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

@@ -18,19 +18,19 @@
         >
             <div
                 @click.away="showOption = false"
-                class="bg-white p-6 rounded"
+                class="bg-white dark:bg-gray-800 p-6 rounded"
             >
-                <h2 class="text-center text-lg font-bold">
+                <h2 class="dark:text-gray-300 text-center text-lg font-bold">
                     ¿Cómo desea crear una clasificación nueva?
                 </h2>
 
                 <div class="m-4 flex items-center justify-around">
 
-                    <a href="{{route('admin.clasificaciones.create')}}" class="bg-indigo-200  px-4 py-2 rounded text-indigo-600 hover:text-indigo-900 mr-4">
+                    <a href="{{route('admin.clasificaciones.create')}}" class="dark:bg-indigo-900/50 dark:text-indigo-400 dark:hover:text-indigo-300 bg-indigo-200 px-4 py-2 rounded text-indigo-600 hover:text-indigo-900 mr-4">
                         Categorias ya existentes
                     </a>
 
-                    <a href="{{route('admin.clasificaciones.create-from-zero')}}" class="bg-indigo-200  px-4 py-2 rounded text-indigo-600 hover:text-indigo-900 mr-4">
+                    <a href="{{route('admin.clasificaciones.create-from-zero')}}" class="dark:bg-indigo-900/50 dark:text-indigo-400 dark:hover:text-indigo-300 bg-indigo-200  px-4 py-2 rounded text-indigo-600 hover:text-indigo-900 mr-4">
                         Desde Cero
                     </a>
                 </div>
@@ -39,7 +39,7 @@
                     <button
                         type="button"
                         @click="showOption = false"
-                        class="bg-gray-400 hover:bg-gray-300 px-4 py-2"
+                        class="bg-gray-400 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-gray-300 hover:bg-gray-300 px-4 py-2"
                     >
                         Cancelar
                     </button>

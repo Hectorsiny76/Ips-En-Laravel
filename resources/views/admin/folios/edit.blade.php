@@ -8,7 +8,7 @@
 
     <x-div-edit-create-title>Actualizar el Folio {{$folio->titulo}}</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <x-div-form-create-edit>
         <x-form-errors/>
         <form action="{{route('admin.folios.update', $folio->id)}}" method="POST">
             @csrf
@@ -45,6 +45,6 @@
             </div>
             <x-form-update-buttons href="{{ route('admin.foliotipos.folios.index', $folio->foliotipo->id) }}"/>
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

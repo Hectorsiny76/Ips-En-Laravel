@@ -8,7 +8,7 @@
 
     <x-div-edit-create-title>Actualizar Tipo de Caja {{$cajatipo->nombre}}</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <x-div-form-create-edit>
         <x-form-errors/>
         <form action="{{route('admin.caja-tipos.update', $cajatipo->id)}}" method="POST">
             @csrf
@@ -25,6 +25,6 @@
             </div>
             <x-form-update-buttons href="{{ route('admin.caja-tipos.index') }}"/>
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

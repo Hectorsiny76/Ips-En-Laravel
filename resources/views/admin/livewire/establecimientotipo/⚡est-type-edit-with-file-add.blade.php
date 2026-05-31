@@ -146,67 +146,61 @@ new class extends Component
 };
 ?>
 
-<div class="w-full overflow-auto">
+<x-livewire-parent-div>
 
     <x-form-errors/>
 
     <x-div-edit-create-title>Actualizar archivos del establecimiento {{$estTipo->nombre}}</x-div-edit-create-title>
 
-    <div class="flex-1 bg-white shadow rounded-lg p-3">
+    <x-livewire-content-div>
         <form wire:submit="guardar" class="space-y-6" method="POST">
             @csrf
             <div class="mb-6">
 
                 <x-input-form-label for="nombre">Nombre</x-input-form-label>
 
-                <input
+                <x-input-form
                     type="text"
                     name="nombre"
                     value="{{old('nombre', $estTipo->nombre)}}"
-                    class="w-full rounded-md shadow-sm focus:ring-sky-700 focus:border-sky-700
-                    @error('nombre') border-red-500 text-red-900 @else border-gray-300  @enderror"
                     wire:model="nombre"
-                    >
+                />
 
             </div>
 
             <div class="border p-4">
                 <div class="flex justify-between items-center mb-4">
-                    <h3>Archivos Relacionados</h3>
+                    <h3 class="dark:text-gray-300">Archivos Relacionados</h3>
 
-                    <button type="button" wire:click="agregarFilaArchivo" class="bg-blue-500 text-white px-3 py-1">
+                    <button type="button" wire:click="agregarFilaArchivo" class="dark:text-gray-300 dark:bg-blue-900 dark:hover:text-gray-200 bg-blue-500 text-white px-3 py-1">
                         + Agregar Otra Fila
                     </button>
 
                 </div>
 
                 @foreach($arrayArchivos as $index => $archivoDatos)
-                    <div wire:key="fila-archivo-{{$index}}" class="w-full border p-3 mb-3 grid grid-cols-[1fr_1fr_1fr_10%] gap-4 bg-white">
+                    <div wire:key="fila-archivo-{{$index}}" class="w-full dark:bg-gray-800 border p-3 mb-3 grid grid-cols-[1fr_1fr_1fr_10%] gap-4 bg-white">
 
                         <div class="p-2">
                             <x-input-form-label for="titulo">Titulo</x-input-form-label>
 
-                            <input
+                            <x-input-form
                                 placeholder="Escalacion a..."
                                 type="text"
                                 wire:model="arrayArchivos.{{$index}}.titulo"
-                                class="w-full"
                             />
                         </div>
 
                         <div class="p-2">
                             <x-input-form-label for="archivotipo_id">Tipo de Archivo</x-input-form-label>
 
-                            <select wire:model.live="arrayArchivos.{{$index}}.archivotipo_id" wire:key="select-{{$index}}" class="w-full">
-                                <option value="">Selecciona un Tipo de Archivo</option>
-
+                            <x-input-form-select wire:model.live="arrayArchivos.{{$index}}.archivotipo_id" wire:key="select-{{$index}}" initialvalue="-- Selecciona un tipo de archivo --">
                                 @foreach($archivoTipos as $tipo)
                                     <option value="{{$tipo['id']}}" wire:key="opt-{{$index}}-{{$tipo['id']}}">
                                         {{$tipo['nombre']}}
                                     </option>
                                 @endforeach
-
-                            </select>
+                            </x-input-form-select>
                         </div>
 
                         <div wire:key="inputs-condicionales-{{$index}}" class="p-2">
@@ -218,11 +212,10 @@ new class extends Component
                             @if($tipoSeleccionado)
                                 @if($tipoSeleccionado['es_link'])
                                     <x-input-form-label for="ruta">URL</x-input-form-label>
-                                    <input
+                                    <x-input-form
                                         type="url"
                                         placeholder="google.com"
                                         wire:model="arrayArchivos.{{$index}}.linkUrl"
-                                        class="w-full"
                                     />
                                 @else
                                     @if($archivoDatos['ruta_existente'])
@@ -266,7 +259,7 @@ new class extends Component
                             <button
                                 type="button"
                                 wire:click="eliminarFilaArchivo({{$index}})"
-                                class="border text-xl border-red-600 text-red-500 p-2"
+                                class="border text-xl dark:border-red-400 dark:text-red-800 dark:hover:bg-red-700 dark:hover:text-red-200 border-red-600 text-red-500 p-2"
                             >
                                 Eliminar
                             </button>
@@ -278,7 +271,7 @@ new class extends Component
             </div>
             <x-form-update-buttons href="{{ route('admin.establecimientotipo.index') }}"/>
         </form>
-    </div>
+    </x-livewire-content-div>
 
 
-</div>
+</x-livewire-parent-div>

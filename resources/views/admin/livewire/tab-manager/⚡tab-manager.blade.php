@@ -15,20 +15,20 @@ new class extends Component
 };
 ?>
 
-<div class="w-full pt-4">
+<x-livewire-parent-div>
     <div class="flex border-b pt-2">
         <button
             wire:click="setTab('admin::livewire.tabs.tab-search')"
             @class(['pr-2 border rounded-tl-md',
-                    'border-gray-700 bg-gray-800 text-white' => $activeTab === 'admin::livewire.tabs.tab-search',
-                    'bg-gray-300 text-gray-900' => $activeTab !== 'admin::livewire.tabs.tab-search',
+                    'border-gray-700 bg-gray-800 text-white dark:bg-gray-300 dark:text-gray-900' => $activeTab === 'admin::livewire.tabs.tab-search',
+                    'bg-gray-300 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white' => $activeTab !== 'admin::livewire.tabs.tab-search',
                     ])
         >Buscador</button>
         <button
             wire:click="setTab('admin::livewire.tabs.tab-clasifications')"
-            @class(['pr-2 border rounded-tl-md',
-                    'border-gray-700 bg-gray-800 text-white' => $activeTab === 'admin::livewire.tabs.tab-clasifications',
-                    'bg-gray-300 text-gray-900' => $activeTab !== 'admin::livewire.tabs.tab-clasifications',
+            @class(['pr-2 border rounded-tr-md',
+                    'border-gray-700 bg-gray-800 text-white dark:bg-gray-300 dark:text-gray-900' => $activeTab === 'admin::livewire.tabs.tab-clasifications',
+                    'bg-gray-300 text-gray-900 dark:border-gray-700 dark:bg-gray-800 dark:text-white' => $activeTab !== 'admin::livewire.tabs.tab-clasifications',
                     ])
         >Clasificaciones</button>
     </div>
@@ -37,4 +37,4 @@ new class extends Component
         <livewire:dynamic-component :is="$activeTab" :key="$activeTab"/>
     </div>
 
-</div>
+</x-livewire-parent-div>

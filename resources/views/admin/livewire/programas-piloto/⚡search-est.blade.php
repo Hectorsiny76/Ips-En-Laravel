@@ -52,16 +52,16 @@ new class extends Component
     <div class="mt-2">
             <x-input-form-label for="buscar-tiendas">Tiendas Relacionadas</x-input-form-label>
             <div class="flex justify-between w-full">
-                <input
+                <x-input-form
                     id="buscar-tiendas"
                     type="text"
                     placeholder="Busca una tienda"
                     wire:model.live.debounce="searchText"
                     class="w-full rounded-md border"
                     wire:key="buscar-tiendas{{$searchText}}"
-                >
+                />
                 <button
-                    class="border rounded-md bg-indigo-600 px-2 text-white ml-2 disabled:bg-indigo-400"
+                    class="border rounded-md dark:disabled:bg-indigo-400/50 dark:bg-indigo-800/50 dark:hover:bg-indigo-700 bg-indigo-600 px-2 text-white ml-2 disabled:bg-indigo-400"
                     wire:click.prevent="clear()"
                     {{empty($searchText) ? 'disabled' : '' }}
                 >
@@ -70,13 +70,21 @@ new class extends Component
             </div>
         @if(!empty($searchText))
             <ul class="w-full my-2 border rounded shadow-lg">
-                @foreach($results as $est)
+                @forelse($results as $est)
                     <li
                         wire:click="addEst({{$est->id}}, '{{$est->nombre}}')"
-                        class="my-2 mx-2 hover:text-gray-500 cursor-pointer">
+                        class="my-2 mx-2 hover:text-gray-500 dark:text-gray-200 dark:hover:text-gray-500 cursor-pointer">
                         {{$est->numero.' '.$est->nombre.' '.$est->centrodecostos ?? ''}}
                     </li>
-                @endforeach
+
+                @empty
+
+                    <li
+                        class="my-2 mx-2 dark:text-gray-200">
+                        Sin resultados
+                    </li>
+
+                @endforelse
             </ul>
         @endif
         <div class="flex flex-wrap mt-4 gap-2">

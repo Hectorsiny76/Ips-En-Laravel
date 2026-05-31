@@ -8,7 +8,7 @@
 
     <x-div-edit-create-title>Crear un nuevo Contrato Ávalon</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <x-div-form-create-edit>
         <x-form-errors/>
         <form action="{{route('admin.avalon-contratos.store')}}" method="POST">
             @csrf
@@ -21,7 +21,9 @@
                     placeholder="78787847"
                     value="{{old('numero')}}"
                     required
-                    id="numero"/>
+                    id="numero"
+                    min="1"
+                />
 
                 <x-input-form-label for="estatus">Estatus</x-input-form-label>
 
@@ -41,6 +43,6 @@
             </div>
             <x-form-create-buttons href="{{ route('admin.avalon-contratos.index') }}"/>
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

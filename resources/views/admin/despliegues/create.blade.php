@@ -8,7 +8,7 @@
 
     <x-div-edit-create-title>Crear un nuevo Despliegue</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <x-div-form-create-edit>
         <x-form-errors/>
         <form action="{{route('admin.despliegues.store')}}" method="POST">
             @csrf
@@ -63,6 +63,6 @@
             </div>
             <x-form-create-buttons href="{{ route('admin.despliegues.index') }}"/>
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

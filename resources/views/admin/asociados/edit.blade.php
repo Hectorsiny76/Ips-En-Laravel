@@ -8,7 +8,7 @@
 
     <x-div-edit-create-title>Actualizar al Asociado {{$asociado->nombre}}</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <x-div-form-create-edit>
         <x-form-errors/>
         <form action="{{route('admin.asociados.update', $asociado->id)}}" method="POST">
             @csrf
@@ -47,6 +47,6 @@
             </div>
             <x-form-update-buttons href="{{ route('admin.areas.asociados.index', $asociado->area->id) }}"/>
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

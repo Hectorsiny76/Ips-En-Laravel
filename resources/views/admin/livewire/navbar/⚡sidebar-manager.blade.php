@@ -20,7 +20,7 @@ new class extends Component
 };
 ?>
 
-<div class="w-full bg-gray-100 p-4">
+<div class="w-full dark:bg-gray-800 dark:text-gray-300 bg-gray-100 p-4">
     @if($activeComponent)
         <livewire:dynamic-component :is="$activeComponent" :key="$activeComponent" />
     @else

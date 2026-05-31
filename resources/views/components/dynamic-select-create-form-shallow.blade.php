@@ -3,9 +3,9 @@
 @if(count($options) > 0 )
 
     <div class="mt-4">
-        <label for="select">{{$label}}</label>
+        <x-input-form-label for="select">{{$label}}</x-input-form-label>
 
-        <select wire:model.live="{{$model}}" wire:key="select-{{$model}}" class="border rounded w-full py-2 px-3 text-gray-700" id="select-{{$model}}">
+        <select wire:model.live="{{$model}}" wire:key="select-{{$model}}" class="dark:bg-gray-800 dark:text-gray-300 border rounded w-full py-2 px-3 text-gray-700" id="select-{{$model}}">
             <option value="">-- Selecciona un {{$label}} --</option>
 
             @foreach($options as $option)

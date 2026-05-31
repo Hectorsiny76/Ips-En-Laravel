@@ -63,15 +63,15 @@ new class extends Component
 
 <div class="mb-4">
     @if($selectedId)
-        <div class="flex items-center justify-between p-3 border border-sky-500 rounded bg-sky-50">
-            <span class="font-bold text-sky-700">{{$selectedName}}</span>
-            <button type="button" wire:click.prevent="clearSelection" class="text-sm text-gray-800">
+        <div class="flex items-center justify-between p-3 border border-sky-500 rounded bg-sky-50 dark:border-sky-600 dark:bg-sky-900">
+            <span class="font-bold text-sky-700 dark:text-sky-500">{{$selectedName}}</span>
+            <button type="button" wire:click.prevent="clearSelection" class="dark:text-gray-400 dark:hover:text-gray-200 text-sm text-gray-800">
                 Cambiar
             </button>
         </div>
     @else
         <div x-data="{ open: false }" class="relative">
-            <input
+            <x-input-form
                 id="search-{{$fieldToUpdate}}"
                 type="text"
                 wire:model.live.debounce.300ms="search"
@@ -79,13 +79,12 @@ new class extends Component
                 x-on:click.away="open = false"
                 placeholder="{{$placeholder}}"
                 autocomplete="off"
-                class="w-full p-2 border rounded"
-            >
+            />
             @if(count($results) > 0)
                 <div
                     x-cloak
                     x-show="open"
-                    class="absolute z-10 w-full mt-1 bg-white border rounded shadow-lg"
+                    class="absolute z-10 w-full mt-1 dark:bg-gray-800 bg-white border rounded shadow-lg"
                     style="display: none;"
                 >
                     <ul class="max-h-60 overflow-y-auto">
@@ -94,7 +93,7 @@ new class extends Component
                                 wire:key="item-{{$fieldToUpdate}}-{{$result->id}}"
                                 wire:click="selectItem({{$result->id}}, '{{ $result->{$searchColumn} }}')"
                                 x-on:click="open = false"
-                                class="p-2 cursor-pointer hover:bg-blue-500 hover:text-white"
+                                class="p-2 border-transparent rounded cursor-pointer dark:text-gray-300 dark:hover:bg-blue-900/50 hover:bg-blue-500 hover:text-white"
                             >
                                 {{ $result->{$searchColumn} }}
                             </li>

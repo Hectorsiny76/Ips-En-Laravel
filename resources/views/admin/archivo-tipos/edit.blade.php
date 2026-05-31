@@ -8,7 +8,7 @@
 
     <x-div-edit-create-title>Actualizar el Tipo de Archivo {{$archivoTipo->nombre}}</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <x-div-form-create-edit>
         <x-form-errors/>
         <form action="{{route('admin.archivo-tipo.update', $archivoTipo->id)}}" method="POST">
             @csrf
@@ -55,6 +55,6 @@
             </div>
             <x-form-update-buttons href="{{ route('admin.archivo-tipo.index') }}"/>
         </form>
-    </div>
+    </x-div-form-create-edit>
 
 @endsection

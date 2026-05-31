@@ -54,14 +54,14 @@ new #[Layout('admin_layout.master')] class extends Component
 
 @section('page-title', 'Crear Clasificación desde Cero')
 
-<div class="overflow-y-auto">
+<x-livewire-parent-div>
 
     <x-div-edit-create-title>Crear una Clasificación desde Cero</x-div-edit-create-title>
 
-    <div class="flex-1 overflow-auto bg-white shadow rounded-lg p-3">
+    <x-livewire-content-div>
         <x-form-errors/>
         <form wire:submit="save" method="POST">
-            <div class="mb-6">
+            <x-div-form-create-edit>
                 <x-input-form-label for="categoria">Categoria</x-input-form-label>
 
                 <x-input-form
@@ -106,9 +106,9 @@ new #[Layout('admin_layout.master')] class extends Component
                     wire:model="microservicio"
                     required/>
 
-            </div>
+            </x-div-form-create-edit>
             <x-form-create-buttons href="{{ route('admin.clasificaciones.index') }}"/>
         </form>
-    </div>
+    </x-livewire-content-div>
 
-</div>
+</x-livewire-parent-div>
