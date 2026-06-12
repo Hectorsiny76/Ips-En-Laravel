@@ -14,15 +14,15 @@ new class extends Component
 };
 ?>
 
-<div class="w-full p-2">
+<div class="w-full p-4">
     <div class="flex w-full items-center justify-center">
         <h1>Documentos</h1>
     </div>
     
-    <div class="flex-1 w-full items-center">
-        <ul>
+    <div class="flex-1 w-full items-center border-2 border-gray-800 rounded p-2 mt-4">
+        <ul class="list-disc list-inside">
         @foreach($Documentos as $documento)
-            <li>{{ $documento->titulo }}</li>
+            <li class="text-gray-800 border-b border-gray-800 py-2">{{ $documento->titulo }}</li>
         @endforeach
     </ul>
     </div>

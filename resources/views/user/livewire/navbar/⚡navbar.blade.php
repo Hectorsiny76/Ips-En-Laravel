@@ -28,5 +28,12 @@ new class extends Component
     <div class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20">
         <button wire:click="$dispatch('Cargar-componente', {componente:'user::livewire.aside.components.requerimientos'})"
             class="border-amber-950"><span class="icon">📑</span> RITM</button>
-    </div>     
+    </div>
+    
+        <div href= "https://7eleven.sharepoint.com/sites/Equipo6/SitePages/TrainingHome.aspx?csf=1&web=1&e=PiSIqx&CID=3e431f48-ea36-4501-84ff-b390f592db05"
+        class="border border-green-700 rounded-lg p-2 m-2 shadow-xl/20">
+        <button wire:click="$dispatch('Cargar-componente', {componente:'user::livewire.aside.components.capacitacion'})"
+            class="border-amber-950"><span class="icon">📋</span> Sala de capacitacion</button>
+    </div>
+    
 </div>
