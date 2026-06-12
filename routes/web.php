@@ -30,10 +30,19 @@ use App\Http\Controllers\Admin\EstablecimientoController;
 use App\Http\Controllers\Admin\DespliegueController;
 use App\Http\Controllers\Admin\AsociadoController;
 use App\Http\Controllers\Admin\ArchivotipoController;
+use App\Http\Controllers\user\EstablecimientoController;
+
+Route::resource('/', EstablecimientoController::class);
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/establecimiento/{establecimiento}', [App\Http\Controllers\user\EstablecimientoController::class, 'show'])->name('user.main.show');
+
+Route::get('/', [EstablecimientoController::class, 'index'])->name('main.index');
+
+
+
 
 //Route::post('/', [RegisteredUserController::class, 'index'])->name('register');
 
