@@ -1,15 +1,12 @@
 <!DOCTYPE html>
-<html
-    lang="{{ str_replace('_', '-', app()->getLocale()) }}"
-    x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }"
-    x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))"
-    x-bind:class="{ 'dark' : darkMode }"
->
+<x-html-darkmode/>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Default page')</title>
+
+    <x-theme-script/>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -19,12 +16,10 @@
         </style>
     @endif
 
-    @livewireScriptConfig
-
     <style>
         [x-cloak] { display: none !important; }
     </style>
-
+    @livewireStyles
 </head>
 <body class="bg-gray-100 dark:bg-gray-900">
 
@@ -121,6 +116,6 @@
     </div>
 
 </div>
-
+@livewireScripts
 </body>
 </html>

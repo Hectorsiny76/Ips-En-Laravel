@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+
+<x-html-darkmode/>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield('title', 'Mesa De Servicio Iconn')</title>
+
+    <x-theme-script/>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/css/stylep.css', 'resources/js/app.js'])
@@ -19,8 +22,8 @@
 
 <body>
 
-    <div class="flex flex-col h-dvh">
-        <header class="flex items-center justify-between p-5 bg-green-800 text-white border-b">
+    <div class="flex  flex-col h-dvh">
+        <header class="flex items-center justify-between p-5  bg-green-800 text-white border-b">
             <div class="flex">
                 <div class="shadow-xl/55 mr-2 h-14 w-14">
                     <a href="{{ route('main.index')}}"><img src="{{ asset('images/descarga.png') }}" alt="Logo"></a>
@@ -33,17 +36,15 @@
                     </div>
                 </div>
             </div>
-            
+
             <livewire:user::livewire.navbar.navbar/>
-            
+
         </header>
 
         <div class="flex-1 grid-cols-12 pt-8 bg-green-100 grid justify-center gap-12">
 
             <main class="flex col-span-7 col-start-2 flex-col bg-white min-h-screen rounded-xl p-6">
                 @yield('contenido')
-
-
             </main>
 
 
