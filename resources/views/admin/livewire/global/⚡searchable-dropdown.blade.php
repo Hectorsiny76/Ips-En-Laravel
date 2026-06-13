@@ -84,7 +84,7 @@ new class extends Component
                 <div
                     x-cloak
                     x-show="open"
-                    class="absolute z-10 w-full mt-1 dark:bg-gray-800 bg-white border rounded shadow-lg"
+                    class="absolute z-10 w-full  dark:bg-gray-800 bg-white border rounded shadow-lg"
                     style="display: none;"
                 >
                     <ul class="max-h-60 overflow-y-auto">

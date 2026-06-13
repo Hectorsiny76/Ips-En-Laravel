@@ -95,6 +95,8 @@ class Establecimiento extends Model
             return $query->whereRaw('0 = 1');
         }
 
+        $termino = strtolower($termino);
+
         return $query->where(function ($q) use($termino){
             $q->whereRaw('LOWER(numero) like ?', "%{$termino}%")
                 ->orWhereRaw('LOWER(centrodecostos) like ?', "%{$termino}%")

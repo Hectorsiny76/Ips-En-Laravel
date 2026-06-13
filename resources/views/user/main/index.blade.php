@@ -1,11 +1,9 @@
 @extends('user_layout.main')
 
 
-@section('title', 'Requerimientos')
+@section('title', 'Inicio')
 @section('contenido')
 
-    <div class="bg-white gap-6 p-4 flex-col h-auto">
-        <livewire:user::livewire.buscar-est/>
-    </div>
+        <livewire:user::livewire.tabs-index.tab-manager/>
 
 @endsection

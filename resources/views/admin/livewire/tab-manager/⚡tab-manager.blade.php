@@ -9,7 +9,6 @@ new class extends Component
     public function setTab($component)
     {
         $this->activeTab = $component;
-
     }
 
 };

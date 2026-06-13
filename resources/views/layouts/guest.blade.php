@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<x-html-darkmode/>
+<x-html-darkmode>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,4 +34,4 @@
         </div>
         @livewireScripts
     </body>
-</html>
+</x-html-darkmode>

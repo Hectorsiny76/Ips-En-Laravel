@@ -5,8 +5,7 @@ use Livewire\Component;
 
 new class extends Component
 {
-    public $componenteActivo = 'user::livewire.aside.components.documentos'; 
-
+    public $componenteActivo = 'user::livewire.aside.components.documentos';
 
     #[On('Cargar-componente')]
     public function cargarNuevoComponente($componente)

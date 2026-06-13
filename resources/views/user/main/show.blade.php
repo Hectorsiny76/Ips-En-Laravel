@@ -4,7 +4,7 @@
 @section('contenido')
 
     <div class="bg-white gap-6 p-4 flex-col h-auto">
-        <livewire:user::livewire.buscar-est/>
+        <livewire:user/>
 
         @if($est)
             <div class="col-span-12 mt-4">
