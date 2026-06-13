@@ -8,9 +8,6 @@ use App\Services\SucursalService;
 
 class EstablecimientoController extends Controller
 {
-    public function __construct(private SucursalService $service)
-    {
-    }
 
     /**
      * Display a listing of the resource.
