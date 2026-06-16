@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('numero')->nullable();
             $table->foreignId('foliotipo_id')->constrained()->cascadeOnDelete();
             $table->string('titulo');
-            $table->string('descripcion')->nullable();
+            $table->text('descripcion')->nullable();
 
             $table->softDeletes();
         });

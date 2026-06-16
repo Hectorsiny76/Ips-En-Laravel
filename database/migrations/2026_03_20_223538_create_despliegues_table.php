@@ -16,7 +16,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->string('titulo');
-            $table->string('descripcion');
+            $table->text('descripcion');
             $table->foreignId('area_id')->nullable()->constrained()->nullOnDelete();
             $table->date('inicio');
             $table->date('fin');

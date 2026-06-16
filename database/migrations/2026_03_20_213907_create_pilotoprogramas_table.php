@@ -17,7 +17,7 @@ return new class extends Migration
 
             $table->string('titulo');
             $table->string('descripcion_corta');
-            $table->string('descripcion_larga');
+            $table->text('descripcion_larga');
             $table->softDeletes();
         });
     }

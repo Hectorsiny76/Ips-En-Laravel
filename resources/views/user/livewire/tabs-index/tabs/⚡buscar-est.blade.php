@@ -48,7 +48,7 @@ new class extends Component {
             </button>
         </div>
 
-        <div x-cloak x-show="open" class="border-gray-300 rounded border absolute z-50 max-h-60 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">
+        <div x-cloak x-show="open" class="border-gray-300 bg-white rounded border absolute z-50 max-h-60 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">
             @forelse ($ests as $est)
                 <div wire:key="est-{{$est->id}}"
                      class="w-full mt-1"
@@ -61,7 +61,7 @@ new class extends Component {
                     </p>
                 </div>
             @empty
-                <p class="w-full text-gray-800">No se encontraron resultados</p>
+                <p class="w-full text-gray-800 p-2">No se encontraron resultados</p>
             @endforelse
 
         </div>
