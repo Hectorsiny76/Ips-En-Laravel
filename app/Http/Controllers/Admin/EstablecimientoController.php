@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Avaloncontrato;
 use App\Models\Cluster;
 use App\Models\Estatus;
+use App\Services\SucursalService;
 use Illuminate\Http\Request;
 use App\Models\Estado;
 use App\Models\Mercadogerente;
@@ -63,29 +64,7 @@ class EstablecimientoController extends AdminController
 
         $estTipo = $campogerente->establecimientotipo;
 
-        $estTipoNombre = Str::slug($estTipo->nombre);
-
-        $validacionesBase = [
-            'nombre' => 'required|string|max:255',
-            'numero' => 'required|string|min:1|max:10',
-            'cajas_tpvs' => 'required|numeric|min:1',
-            'idred' => 'required|ip',
-        ];
-
-        $validacionesXEstablecimiento = [
-            'tienda' => [
-                'tiendaformato_id' => 'required|numeric|exists:tiendaformatos,id',
-                'tidelprograma_id' => 'nullable|numeric|exists:tidelprogramas,id',
-                'cluster_id' => 'required|numeric|exists:clusters,id',
-            ],
-            'estacion' => [
-                'centrodecostos' => 'required|numeric|min:1|unique:establecimientos,centrodecostos',
-                'tel' => 'required|min:10|max:15',
-                'correo' => 'required|string|email',
-            ]
-        ];
-
-        $validacionFinal = array_merge($validacionesBase, $validacionesXEstablecimiento[$estTipoNombre] ?? []);
+        $validacionFinal = SucursalService::validacion($estTipo);
 
         $validacion = $request->validate($validacionFinal);
 
@@ -135,29 +114,7 @@ class EstablecimientoController extends AdminController
 
         $estTipo = $establecimiento->establecimientotipo;
 
-        $estTipoNombre = Str::slug($estTipo->nombre);
-
-        $validacionesBase = [
-            'nombre' => 'required|string|max:255',
-            'numero' => 'required|string|min:1|max:10',
-            'cajas_tpvs' => 'required|numeric|min:1',
-            'idred' => 'required|ip',
-        ];
-
-        $validacionesXEstablecimiento = [
-            'tienda' => [
-                'tiendaformato_id' => 'required|numeric|exists:tiendaformatos,id',
-                'tidelprograma_id' => 'required|numeric|exists:tidelprogramas,id',
-                'cluster_id' => 'required|numeric|exists:clusters,id',
-            ],
-            'estacion' => [
-                'centrodecostos' => 'required|numeric|min:1|unique:establecimientos,centrodecostos,'.$establecimiento->id,
-                'tel' => 'required|min:10|max:15',
-                'correo' => 'required|string|email',
-            ]
-        ];
-
-        $validacionFinal = array_merge($validacionesBase, $validacionesXEstablecimiento[$estTipoNombre] ?? []);
+        $validacionFinal = SucursalService::validacion($estTipo, $establecimiento->id);
 
         $validacion = $request->validate($validacionFinal);
 

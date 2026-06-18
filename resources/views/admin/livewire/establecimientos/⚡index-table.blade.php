@@ -3,6 +3,7 @@
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Campogerente;
+use App\Services\SucursalService;
 
 new class extends Component {
     public $search = '';
@@ -35,35 +36,7 @@ new class extends Component {
 
         $estTipo = $this->campogerente->establecimientotipo;
 
-        $columnas = ['Nombre', 'Numero', 'Cajas/TPVS', 'IP'];
-
-        $columnasDb = ['nombre', 'numero', 'cajas_tpvs', 'idred'];
-
-        if(Str::slug($estTipo->nombre) == 'tienda'){
-            $columnas[] = 'Ip Tidel';
-            $columnasDb[] = 'tidelprograma.ip';
-
-            $columnas[] = 'Formato de Tienda';
-            $columnasDb[] = 'tiendaformato.nombre';
-
-            $columnas[] = 'Cluster';
-            $columnasDb[] = 'cluster.nombre';
-        }
-        else if(Str::slug($estTipo->nombre) == 'estacion'){
-            $columnas[] = 'CDC';
-            $columnasDb[] = 'centrodecostos';
-
-            $columnas[] = 'Tel';
-            $columnasDb[] = 'tel';
-
-            $columnas[] = 'Correo';
-            $columnasDb[] = 'correo';
-
-            $columnas[] = 'Contrato Ávalon';
-            $columnasDb[] = 'avaloncontrato.numero';
-        }
-
-        // Aquí se pueden agregar más if o en su caso un match o si lo ven necesario agregar en una clase de servicio los valores de cada columna de cada tipo de establecimiento
+        $columnas = SucursalService::columnasAdmin($estTipo);
 
         $establecimientos = $query->latest()->paginate(10);
 
@@ -72,7 +45,6 @@ new class extends Component {
         return view('admin.livewire.establecimientos.⚡index-table', [
             'establecimientos' => $establecimientos,
             'columnas' => $columnas,
-            'columnasDb' => $columnasDb,
         ]);
     }
 };
@@ -90,7 +62,7 @@ new class extends Component {
     <x-livewire-content-div>
         <x-index-div-table>
             <x-index-div-table-thead>
-                @foreach($columnas as $columna)
+                @foreach($columnas['th'] as $columna)
                     <x-index-div-table-thead-th-column>{{$columna}}</x-index-div-table-thead-th-column>
                 @endforeach
                 <x-index-div-table-thead-th-actions-column/>
@@ -98,7 +70,7 @@ new class extends Component {
             <x-index-div-table-tbody>
                 @foreach($establecimientos as $establecimiento)
                     <tr>
-                        @foreach($columnasDb as $columnaDb)
+                        @foreach($columnas['tb'] as $columnaDb)
                             <td>{{data_get($establecimiento, $columnaDb) ?? 'N/A'}}</td>
                         @endforeach
                         <x-table-td-actions

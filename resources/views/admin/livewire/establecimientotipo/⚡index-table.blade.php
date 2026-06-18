@@ -4,6 +4,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Establecimiento;
 use App\Models\Establecimientotipo;
+use App\Services\SucursalService;
 
 new class extends Component
 {
@@ -36,37 +37,10 @@ new class extends Component
 
         $establecimientos = $query->latest()->paginate(10);
 
-        $columnas = ['Nombre', 'Numero', 'Cajas/TPVS', 'Id de red', 'Gerente de Campo'];
-
-        $columnasDb = ['nombre', 'numero', 'cajas_tpvs', 'idred', 'campogerente.nombre'];
-
-        if(Str::slug($this->estTipo->nombre) == 'tienda'){
-            $columnas[] = 'Ip Tidel';
-            $columnasDb[] = 'tidelprograma.ip';
-
-            $columnas[] = 'Formato de Tienda';
-            $columnasDb[] = 'tiendaformato.nombre';
-
-            $columnas[] = 'Cluster';
-            $columnasDb[] = 'cluster.nombre';
-        }
-        else if(Str::slug($this->estTipo->nombre) == 'estacion'){
-            $columnas[] = 'CDC';
-            $columnasDb[] = 'centrodecostos';
-
-            $columnas[] = 'Tel';
-            $columnasDb[] = 'tel';
-
-            $columnas[] = 'Correo';
-            $columnasDb[] = 'correo';
-
-            $columnas[] = 'Contrato Ávalon';
-            $columnasDb[] = 'avaloncontrato.numero';
-        }
+        $columnas = SucursalService::columnasAdmin($this->estTipo);
 
         return view('admin.livewire.establecimientotipo.⚡index-table', [
             'establecimientos' => $establecimientos,
-            'columnasDb' => $columnasDb,
             'columnas' => $columnas
         ]);
     }
@@ -86,7 +60,7 @@ new class extends Component
         <x-index-div-table>
 
             <x-index-div-table-thead>
-                @foreach($columnas as $columna)
+                @foreach($columnas['th'] as $columna)
                     <x-index-div-table-thead-th-column>
                         {{$columna}}
                     </x-index-div-table-thead-th-column>
@@ -97,7 +71,7 @@ new class extends Component
             <x-index-div-table-tbody>
                 @foreach($establecimientos as $establecimiento)
                     <tr>
-                        @foreach($columnasDb as $columnaDb)
+                        @foreach($columnas['tb'] as $columnaDb)
                             <td>
                                 {{data_get($establecimiento, $columnaDb) ?? 'N/A'}}
                             </td>
