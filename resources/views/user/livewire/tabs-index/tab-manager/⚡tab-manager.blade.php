@@ -19,27 +19,27 @@ new class extends Component
     <div class="flex">
         <button
             wire:click="setTab('user::livewire.tabs-index.tabs.buscar-est')"
-            @class(['pl-1 pr-2 border rounded-tl-md transition-colors',
+            @class(['pl-1 pr-2 border border-green-800 rounded-tl-md transition-colors',
                     'border-green-700 bg-green-800 text-white dark:bg-gray-300 dark:text-gray-900' => $activeTab === 'user::livewire.tabs-index.tabs.buscar-est',
-                    'bg-gray-200 text-gray-500 hover:bg-green-700 hover:text-white dark:border-gray-700 dark:bg-gray-800 dark:text-white' => $activeTab !== 'user::livewire.tabs-index.tabs.buscar-est',
+                    'bg-green-100 text-gray-500 hover:bg-green-700 hover:text-white dark:border-gray-700 dark:bg-gray-800 dark:text-white' => $activeTab !== 'user::livewire.tabs-index.tabs.buscar-est',
                     ])
-        >Buscador</button>
+        >Establecimientos</button>
         <button
             wire:click="setTab('user::livewire.tabs-index.tabs.buscar-clasificaciones')"
-            @class(['px-2 border transition-colors',
+            @class(['px-2 border border-green-800 transition-colors',
                     'border-green-700 bg-green-800 text-white dark:bg-gray-300 dark:text-gray-900' => $activeTab === 'user::livewire.tabs-index.tabs.buscar-clasificaciones',
-                    'bg-gray-200 text-gray-500 hover:bg-green-700 hover:text-white dark:border-gray-700 dark:bg-gray-800 dark:text-white' => $activeTab !== 'user::livewire.tabs-index.tabs.buscar-clasificaciones',
+                    'bg-green-100 text-gray-500 hover:bg-green-700 hover:text-white dark:border-gray-700 dark:bg-gray-800 dark:text-white' => $activeTab !== 'user::livewire.tabs-index.tabs.buscar-clasificaciones',
                     ])
         >Clasificaciones</button>
         <button
             wire:click="setTab('user::livewire.tabs-index.tabs.despliegues')"
-            @class(['pl-1 pr-2 border rounded-tr-md transition-colors',
+            @class(['pl-1 pr-2 border border-green-800 rounded-tr-md transition-colors',
                     'border-green-700 bg-green-800 text-white dark:bg-gray-300 dark:text-gray-900' => $activeTab === 'user::livewire.tabs-index.tabs.despliegues',
-                    'bg-gray-200 text-gray-500 hover:bg-green-700 hover:text-white dark:border-gray-700 dark:bg-gray-800 dark:text-white' => $activeTab !== 'user::livewire.tabs-index.tabs.despliegues',
+                    'bg-green-100 text-gray-500 hover:bg-green-700 hover:text-white dark:border-gray-700 dark:bg-gray-800 dark:text-white' => $activeTab !== 'user::livewire.tabs-index.tabs.despliegues',
                     ])
         >Despliegues</button>
     </div>
-    <div class="border border-green-800 rounded-bl-md rounded-br-md p-2">
+    <div class="border border-green-800 rounded-bl-md rounded-br-md rounded-tr-md p-2">
         <livewire:dynamic-component :is="$activeTab" :key="$activeTab"/>
     </div>
 </div>

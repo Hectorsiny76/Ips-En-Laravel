@@ -23,7 +23,7 @@
 <body>
 
     <div class="flex flex-col h-dvh relative">
-        <header class="flex items-center justify-between p-2 bg-green-900 text-white border-b">
+        <header class="flex items-center justify-between p-2 bg-green-800 text-white border-b">
 
             <div class="flex items-center pl-2">
                 <div class="mr-2 h-10 w-10 lg:h-20 lg:w-20">

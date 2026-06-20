@@ -2,57 +2,93 @@
 
 use Livewire\Component;
 use App\Models\Despliegue;
+use Livewire\WithPagination;
+use Livewire\Attributes\Session;
 
-new class extends Component
-{
-    public $despliegues = [];
+new class extends Component {
+    #[Session]
+    public $search = '';
 
-    public function mount()
+    use WithPagination;
+
+    public function updatedSearch()
     {
-        $this->despliegues = Despliegue::with('area')
-            ->orderBy('inicio', 'desc')
-            ->get();
+        $this->resetPage();
+    }
+
+    public function render()
+    {
+
+        $query = Despliegue::with('area');
+
+        if ($this->search !== '') {
+            $searchString = '%' . strtolower($this->search) . '%';
+
+            $query = Despliegue::search($searchString);
+        }
+
+        $despliegues = $query->latest()->paginate(10);
+
+        return view('user.livewire.tabs-index.tabs.⚡despliegues', [
+            'despliegues' => $despliegues
+        ]);
     }
 
 };
 ?>
 
-<div>
+<x-livewire-parent-div>
 
-    <table class="border-collapse border w-full">
-        <thead>
-        <tr class="text-xs lg:text-lg">
-            <th>
-                Titulo
-            </th>
-            <th>
-                Desc
-            </th>
-            <th>
-                Area
-            </th>
-            <th>
-                Inicio
-            </th>
-            <th>
-                Fin
-            </th>
-        </tr>
-        </thead>
-        <tbody class="text-xs lg:text-lg">
-            @forelse($despliegues as $despliegue)
-                <tr>
-                    <td>{{$despliegue->titulo}}</td>
-                    <td>{{$despliegue->descripcion}}</td>
-                    <td>{{$despliegue->area->nombre}}</td>
-                    <td>{{$despliegue->inicio}}</td>
-                    <td>{{$despliegue->fin}}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="5">No hay nada</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+    <x-index-table-searchable-input title="Buscar Despliegues" variable="search"/>
+
+    <x-index-table-pagination :variable="$despliegues"/>
+
+    <x-livewire-content-div class="pt-3">
+        <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
+            <x-index-div-table-thead-user>
+                <x-index-div-table-thead-th-column-user>
+                    Título
+                </x-index-div-table-thead-th-column-user>
+                <x-index-div-table-thead-th-column-user>
+                    Descripción
+                </x-index-div-table-thead-th-column-user>
+                <x-index-div-table-thead-th-column-user>
+                    Área
+                </x-index-div-table-thead-th-column-user>
+                <x-index-div-table-thead-th-column-user>
+                    Inicio
+                </x-index-div-table-thead-th-column-user>
+                <x-index-div-table-thead-th-column-user>
+                    Fin
+                </x-index-div-table-thead-th-column-user>
+            </x-index-div-table-thead-user>
+            <x-index-div-table-tbody>
+                @forelse($despliegues as $despliegue)
+                    <tr>
+                        <x-index-div-table-tbody-tr-td>
+                            {{$despliegue->titulo}}
+                        </x-index-div-table-tbody-tr-td>
+                        <x-index-div-table-tbody-tr-td>
+                            {{$despliegue->descripcion}}
+                        </x-index-div-table-tbody-tr-td>
+                        <x-index-div-table-tbody-tr-td>
+                            {{$despliegue->area->nombre}}
+                        </x-index-div-table-tbody-tr-td>
+                        <x-index-div-table-tbody-tr-td>
+                            {{$despliegue->inicio}}
+                        </x-index-div-table-tbody-tr-td>
+                        <x-index-div-table-tbody-tr-td>
+                            {{$despliegue->fin}}
+                        </x-index-div-table-tbody-tr-td>
+                    </tr>
+                @empty
+                    <tr>
+                        <x-index-div-table-tbody-tr-td class="font-bold" colspan="5">No hay nada
+                        </x-index-div-table-tbody-tr-td>
+                    </tr>
+                @endforelse
+            </x-index-div-table-tbody>
+        </x-index-div-table>
+    </x-livewire-content-div>
+
+</x-livewire-parent-div>

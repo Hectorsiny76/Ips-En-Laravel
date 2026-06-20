@@ -1,6 +1,6 @@
 @props(['title', 'variable'])
 
-<div {{$attributes->merge(['class'=>"mb-4"])}}>
+<div {{$attributes->merge(['class'=>"mb-4 text-xs lg:text-lg"])}}>
     <x-input-form-label for="searchableInput" class="dark:text-gray-300">{{$title}}</x-input-form-label>
 
     <x-input-form

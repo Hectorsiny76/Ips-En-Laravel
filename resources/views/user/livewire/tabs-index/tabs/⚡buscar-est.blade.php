@@ -35,17 +35,20 @@ new class extends Component {
 
 <div class="h-full pt-2">
     <div x-data="{ open: false }" class="relative">
-        <div class="flex w-full justify-between items-center h-full pb-2">
-            <input type="text"
-                   class="mb-0 w-full p-2 border rounded-md text-xs lg:text-lg"
-                   placeholder="Escribe el nombre, numero o centro de costos de una tienda"
-                   wire:model.live.debounce="busqueda"
-                   x-on:focus="open = true"
-                   x-on:click.away="open = false"
-            >
-            <button type="submit" wire:click="limpiar"
-                    class="bg-green-800 text-white rounded mx-1 p-2 lg:p-1  h-full">Limpiar
-            </button>
+        <div class="h-full">
+            <x-input-form-label class="my-0" for="buscar">Buscar Establecimientos</x-input-form-label>
+            <div class="flex w-full justify-between items-center pt-2">
+                <input type="text"
+                      class="mb-0 w-full p-2 border rounded-md text-xs lg:text-lg focus:ring-green-700 focus:border-green-700"
+                      placeholder="Escribe el nombre, numero o centro de costos de una tienda"
+                      wire:model.live.debounce="busqueda"
+                      x-on:focus="open = true"
+                      x-on:click.away="open = false"
+                >
+                <button type="submit" wire:click="limpiar"
+                        class="bg-green-800 text-white rounded mx-1 p-2 lg:p-1  h-full">Limpiar
+                </button>
+            </div>
         </div>
 
         <div x-cloak x-show="open" class="border-gray-300 bg-white rounded border absolute z-50 max-h-60 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">

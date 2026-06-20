@@ -42,49 +42,43 @@ new class extends Component {
 
     <x-index-table-pagination :variable="$clasificaciones"/>
 
-    <x-livewire-content-div>
-        <x-index-div-table>
-            <x-index-div-table-thead>
-                <x-index-div-table-thead-th-column>
+    <x-livewire-content-div class="pt-3">
+        <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
+            <x-index-div-table-thead-user>
+                <x-index-div-table-thead-th-column-user>
                     No
-                </x-index-div-table-thead-th-column>
-                <x-index-div-table-thead-th-column>
+                </x-index-div-table-thead-th-column-user>
+                <x-index-div-table-thead-th-column-user>
                     Categoría
-                </x-index-div-table-thead-th-column>
-                <x-index-div-table-thead-th-column>
+                </x-index-div-table-thead-th-column-user>
+                <x-index-div-table-thead-th-column-user>
                     Subcategoría
-                </x-index-div-table-thead-th-column>
-                <x-index-div-table-thead-th-column>
+                </x-index-div-table-thead-th-column-user>
+                <x-index-div-table-thead-th-column-user>
                     Servicio
-                </x-index-div-table-thead-th-column>
-                <x-index-div-table-thead-th-column>
+                </x-index-div-table-thead-th-column-user>
+                <x-index-div-table-thead-th-column-user>
                     Microservicio
-                </x-index-div-table-thead-th-column>
-                <x-index-div-table-thead-th-actions-column/>
-            </x-index-div-table-thead>
+                </x-index-div-table-thead-th-column-user>
+            </x-index-div-table-thead-user>
             <x-index-div-table-tbody>
                 @foreach($clasificaciones as $clasificacione)
                     <tr>
-                        <td>
+                        <x-index-div-table-tbody-tr-td>
                             {{$loop->iteration}}
-                        </td>
-                        <td>
+                        </x-index-div-table-tbody-tr-td>
+                        <x-index-div-table-tbody-tr-td>
                             {{$clasificacione->categoria->nombre}}
-                        </td>
-                        <td>
+                        </x-index-div-table-tbody-tr-td>
+                        <x-index-div-table-tbody-tr-td>
                             {{$clasificacione->subcategoria->nombre}}
-                        </td>
-                        <td>
+                        </x-index-div-table-tbody-tr-td>
+                        <x-index-div-table-tbody-tr-td>
                             {{$clasificacione->servicio->nombre}}
-                        </td>
-                        <td>
+                        </x-index-div-table-tbody-tr-td>
+                        <x-index-div-table-tbody-tr-td>
                             {{$clasificacione->microservicio->nombre}}
-                        </td>
-                        <x-table-td-actions
-                            ahref="{{route('admin.clasificaciones.edit', $clasificacione->id)}}"
-                            formaction="{{ route('admin.clasificaciones.destroy', $clasificacione->id) }}"
-                            formconfirm="¿Esta seguro de eliminar esta clasificación?"
-                        />
+                        </x-index-div-table-tbody-tr-td>
                     </tr>
                 @endforeach
             </x-index-div-table-tbody>
