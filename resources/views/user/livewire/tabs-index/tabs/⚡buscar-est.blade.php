@@ -33,20 +33,20 @@ new class extends Component {
 };
 ?>
 
-<div class="h-full pt-2">
+<div class="h-full">
     <div x-data="{ open: false }" class="relative">
         <div class="h-full">
             <x-input-form-label class="my-0" for="buscar">Buscar Establecimientos</x-input-form-label>
-            <div class="flex w-full justify-between items-center pt-2">
+            <div class="flex w-full justify-between items-center">
                 <input type="text"
-                      class="mb-0 w-full p-2 border rounded-md text-xs lg:text-lg focus:ring-green-700 focus:border-green-700"
+                      class="mb-0 w-full border rounded-md text-xs lg:text-lg focus:ring-green-700 focus:border-green-700"
                       placeholder="Escribe el nombre, numero o centro de costos de una tienda"
                       wire:model.live.debounce="busqueda"
                       x-on:focus="open = true"
                       x-on:click.away="open = false"
                 >
                 <button type="submit" wire:click="limpiar"
-                        class="bg-green-800 text-white rounded mx-1 p-2 lg:p-1  h-full">Limpiar
+                        class="bg-gradient-to-r from-green-700 to-green-900 hover:from-green-600 hover:to-green-800 text-white rounded mx-1 p-2 lg:p-1  h-full">Limpiar
                 </button>
             </div>
         </div>

@@ -39,13 +39,16 @@
 
         </header>
 
-        <div class="flex-1 grid-cols-12 py-4 bg-green-100 grid justify-center gap-12">
+        <div class="flex-1 grid-cols-12 py-4 bg-gray-100 grid justify-center gap-12">
 
-            <main class="flex col-span-7 col-start-2 h-full flex-col bg-white rounded-xl p-6">
+            <main class="flex col-span-7 col-start-2 h-full flex-col bg-white rounded-xl p-6 shadow-xl">
                 @yield('contenido')
+
+                {{$slot ?? ''}}
+
             </main>
 
-            <aside class="w-full flex-shrink-0 col-span-3 bg-white b-8 rounded-xl">
+            <aside class="w-full flex-shrink-0 col-span-3 bg-white rounded-xl shadow-xl">
                 <livewire:user::livewire.aside.aside-manager />
             </aside>
 

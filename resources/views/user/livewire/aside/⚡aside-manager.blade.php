@@ -2,10 +2,12 @@
 
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\Attributes\Session;
 
 new class extends Component
 {
-    public $componenteActivo = 'user::livewire.aside.components.documentos';
+    #[Session]
+    public $componenteActivo = 'user::livewire.aside.components.inc-generales';
 
     #[On('Cargar-componente')]
     public function cargarNuevoComponente($componente)

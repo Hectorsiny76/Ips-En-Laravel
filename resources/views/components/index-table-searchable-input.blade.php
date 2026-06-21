@@ -1,4 +1,4 @@
-@props(['title', 'variable'])
+@props(['title', 'variable', 'userSide' => false])
 
 <div {{$attributes->merge(['class'=>"mb-4 text-xs lg:text-lg"])}}>
     <x-input-form-label for="searchableInput" class="dark:text-gray-300">{{$title}}</x-input-form-label>
@@ -11,6 +11,10 @@
         wire:model.live.debounce="{{$variable}}"
         id="searchableInput"
         class="dark:text-gray-400 dark:bg-gray-800"
+        @class([
+            'focus:ring-green-700 focus:border-green-700' => $userSide,
+            'focus:ring-sky-700 focus:border-sky-700' => !$userSide,
+            ])
     />
 
 </div>

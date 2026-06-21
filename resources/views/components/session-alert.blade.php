@@ -3,7 +3,7 @@
         <div x-data="{show:true}"
              x-show="show"
              x-init="setTimeout(()=> show = false, 5000)"
-             class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between p-4 min-w-[320px] text-sm dark:border-green-600 dark:bg-green-900 dark:text-green-500 text-green-800 border border-green-300 rounded-lg bg-green-50 shadow-xl transition-all duration-300"
+             class="text-xs lg:text-lg fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between p-4 min-w-[160px] dark:border-green-600 dark:bg-green-900 dark:text-green-500 text-green-800 border border-green-300 rounded-lg bg-green-50 shadow-xl transition-all duration-300"
              role="alert"
         >
             <div>
@@ -17,7 +17,7 @@
         <div x-data="{show:true}"
              x-show="show"
              x-init="setTimeout(()=> show = false, 5000)"
-             class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between p-4 min-w-[320px] text-sm dark:border-red-600 dark:bg-red-900 dark:text-red-500 text-red-800 border border-red-300 rounded-lg bg-red-50 shadow-xl transition-all duration-300"
+             class="text-xs lg:text-lg fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center justify-between p-4 min-w-[160px] dark:border-red-600 dark:bg-red-900 dark:text-red-500 text-red-800 border border-red-300 rounded-lg bg-red-50 shadow-xl transition-all duration-300"
              role="alert"
         >
             <div>
