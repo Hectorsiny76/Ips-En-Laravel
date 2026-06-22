@@ -20,4 +20,18 @@ class Foliotipo extends Model
     public function folios(){
         return $this->hasMany(Folio::class);
     }
+
+    public function scopeSearch($query, string $opcion1, string $opcion2){
+
+        if(empty($opcion1) && empty($opcion2)){
+            return $query->whereRaw('0 = 1');
+        }
+
+        return Foliotipo::with(['folios'])
+            ->where( function ($query) use ($opcion1, $opcion2) {
+                $query->where('tipo', 'ilike', "%{$opcion1}%")
+                    ->orWhere('tipo', 'ilike', "%{$opcion2}%");
+            })->first();
+    }
+
 }

@@ -8,6 +8,8 @@
         </button>
     @else
         <a href="{{$href}}"
+           target="_blank"
+           rel="noopener noreferrer"
            class="p-2 w-full h-full"><span class="icon">{{$icon}}</span> {{$title}}</a>
     @endif
 </div>

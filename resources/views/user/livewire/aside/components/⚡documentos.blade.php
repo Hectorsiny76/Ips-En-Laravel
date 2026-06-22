@@ -28,13 +28,11 @@ new class extends Component
 };
 ?>
 
-<x-livewire-parent-div class="pr-0">
+<x-livewire-parent-div>
 
     <x-session-alert/>
 
-    <div class="bg-gradient-to-r from-green-700 to-green-900 border-transparent rounded-tr-xl rounded-tl-xl flex py-2 w-full items-center justify-center">
-        <h1 class="text-sm lg:text-lg font-bold text-white">📋 Documentos</h1>
-    </div>
+    <x-aside-header-user-card titulo="📋 Documentos"/>
 
     <div class="flex-1 w-full text-xs lg:text-lg">
         @foreach($this->documentos as $doc)
