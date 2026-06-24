@@ -25,7 +25,7 @@ new class extends Component
         <x-aside-header-user-div-list>
             @forelse($this->requerimientos as $ritm)
                 <x-aside-user-card-ul>
-                   <x-aside-user-card-ul-li-title class="font-semibold">{{$loop->iteration}} - {{$ritm->titulo}}</x-aside-user-card-ul-li-title>
+                   <x-aside-user-card-ul-li-title title="{{$loop->iteration}} - {{$ritm->titulo}}" class="font-semibold"/>
                 </x-aside-user-card-ul>
             @empty
                 <h1>No hay nada</h1>

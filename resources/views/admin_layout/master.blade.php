@@ -94,7 +94,9 @@
                     <x-link-aside href="{{route('admin.foliotipos.index')}}" :active="request()->routeIs('admin.foliotipos.*')">Tipos de Folios</x-link-aside>
                     <x-link-aside href="{{route('admin.areas.index')}}" :active="request()->routeIs('admin.areas.*')">Áreas</x-link-aside>
                     <x-link-aside href="{{route('admin.despliegues.index')}}" :active="request()->routeIs('admin.despliegues.*')">Despliegues</x-link-aside>
-                    <x-link-aside href="{{route('admin.archivo-tipo.index')}}" :active="request()->routeIs('admin.archivo-tipo.*')">Tipos de Archivo</x-link-aside>
+                        @can('delete-data-create-users')
+                            <x-link-aside href="{{route('admin.archivo-tipo.index')}}" :active="request()->routeIs('admin.archivo-tipo.*')">Tipos de Archivo</x-link-aside>
+                        @endcan
                     <x-link-aside href="{{route('admin.categorias.index')}}" :active="request()->routeIs('admin.categorias.*')">Categorías</x-link-aside>
                     <x-link-aside href="{{route('admin.subcategorias.index')}}" :active="request()->routeIs('admin.subcategorias.*')">Subcategorías</x-link-aside>
                     <x-link-aside href="{{route('admin.servicios.index')}}" :active="request()->routeIs('admin.servicios.*')">Servicios</x-link-aside>

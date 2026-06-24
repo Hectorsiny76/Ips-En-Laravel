@@ -20,6 +20,9 @@ new class extends Component
 ?>
 
 <x-livewire-parent-div>
+
+    <x-session-alert/>
+
     <x-aside-header-user-card titulo="❗ Incidentes Generales"/>
 
     <x-livewire-content-div>
@@ -27,7 +30,7 @@ new class extends Component
             @forelse($this->generales as $general)
                     <x-aside-user-card-ul>
 
-                        <x-aside-user-card-ul-li-title>{{$general->numero ?? ''}}</x-aside-user-card-ul-li-title>
+                        <x-aside-user-card-ul-li-title title="{{$general->numero ?? ''}}"></x-aside-user-card-ul-li-title>
                         <x-aside-user-card-ul-li class="font-semibold">{{$general->titulo ?? 'Sin titulo'}}</x-aside-user-card-ul-li>
                         <x-aside-user-card-ul-li>{{$general->descripcion ?? ''}}</x-aside-user-card-ul-li>
 

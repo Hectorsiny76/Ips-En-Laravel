@@ -25,7 +25,7 @@ new class extends Component {
         <x-aside-header-user-div-list>
             @forelse($this->problemas as $problema)
                 <x-aside-user-card-ul>
-                    <x-aside-user-card-ul-li-title>{{$problema->numero ?? ''}}</x-aside-user-card-ul-li-title>
+                    <x-aside-user-card-ul-li-title title="{{$problema->numero ?? ''}}"/>
                     <x-aside-user-card-ul-li class="font-semibold">{{$problema->titulo ?? ''}}</x-aside-user-card-ul-li>
                     <x-aside-user-card-ul-li>{{$problema->descripcion ?? ''}}</x-aside-user-card-ul-li>
                 </x-aside-user-card-ul>
