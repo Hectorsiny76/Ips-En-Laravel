@@ -1,8 +1,8 @@
 @extends('admin_layout.master')
 
-@section('title', 'Folios Tipo'.$folioTipo->tipo)
+@section('title', 'Folios Tipo '.$folioTipo->tipo)
 
-@section('page-title', 'Folios Tipo'.$folioTipo->tipo)
+@section('page-title', 'Folios Tipo '.$folioTipo->tipo)
 
 @section('content')
 

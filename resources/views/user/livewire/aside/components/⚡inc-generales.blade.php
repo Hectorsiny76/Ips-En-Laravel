@@ -25,13 +25,13 @@ new class extends Component
     <x-livewire-content-div>
         <x-aside-header-user-div-list>
             @forelse($this->generales as $general)
-                    <ul class="text-xs lg:text-lg p-2">
+                    <x-aside-user-card-ul>
 
-                        <li>{{$general->numero ?? ''}}</li>
-                        <li>{{$general->titulo ?? 'Sin titulo'}}</li>
-                        <li>{{$general->descripcion ?? ''}}</li>
+                        <x-aside-user-card-ul-li-title>{{$general->numero ?? ''}}</x-aside-user-card-ul-li-title>
+                        <x-aside-user-card-ul-li class="font-semibold">{{$general->titulo ?? 'Sin titulo'}}</x-aside-user-card-ul-li>
+                        <x-aside-user-card-ul-li>{{$general->descripcion ?? ''}}</x-aside-user-card-ul-li>
 
-                    </ul>
+                    </x-aside-user-card-ul>
             @empty
                 <div>
                     Sin generales

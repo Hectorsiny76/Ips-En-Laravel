@@ -34,7 +34,7 @@ new class extends Component
 
     <x-aside-header-user-card titulo="📋 Documentos"/>
 
-    <div class="flex-1 w-full text-xs lg:text-lg">
+    <div class="flex-1 w-full text-xs lg:text-lg p-2">
         @foreach($this->documentos as $doc)
                 <div class="flex-1 p-1">
                     @if($doc->archivotipo->es_link)

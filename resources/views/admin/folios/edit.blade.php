@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <x-div-edit-create-title>Actualizar el Folio {{$folio->titulo}}</x-div-edit-create-title>
+    <x-div-edit-create-title>Actualizar el Folio {{$folio->titulo}} del tipo {{$folio->foliotipo->tipo}}</x-div-edit-create-title>
 
     <x-div-form-create-edit>
         <x-form-errors/>
