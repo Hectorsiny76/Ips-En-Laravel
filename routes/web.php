@@ -31,7 +31,7 @@ use App\Http\Controllers\Admin\DespliegueController;
 use App\Http\Controllers\Admin\AsociadoController;
 use App\Http\Controllers\Admin\ArchivotipoController;
 
-Route::get('/establecimiento/{establecimiento}', [App\Http\Controllers\user\EstablecimientoController::class, 'show'])->name('user.main.show');
+//Route::get('/establecimiento/{establecimiento}', [App\Http\Controllers\user\EstablecimientoController::class, 'show'])->name('user.main.show');
 
 Route::get('/', [App\Http\Controllers\user\EstablecimientoController::class, 'index'])->name('main.index');
 

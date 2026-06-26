@@ -8,8 +8,8 @@ use Illuminate\Support\Str;
 class SucursalService
 {
 
-    private static string $tiendaString = 'tienda';
-    private static string $estacionString = 'estacion';
+    public static string $tiendaString = 'tienda';
+    public static string $estacionString = 'estacion';
 
 
     /**

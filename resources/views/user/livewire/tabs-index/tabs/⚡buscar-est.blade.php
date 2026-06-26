@@ -3,6 +3,7 @@
 use Livewire\Component;
 use App\Models\Establecimiento;
 use Livewire\Attributes\Session;
+use App\Services\SucursalService;
 
 new class extends Component {
 
@@ -22,6 +23,11 @@ new class extends Component {
     public function selectEst($id)
     {
         $this->selectedEst = Establecimiento::findOrFail($id);
+        $this->selectedEst->load([
+            'campogerente', 'campo', 'mercado', 'mercadogerente', 'estado', 'establecimientotipo',
+            'cluster', 'tidelprograma', 'tiendaformato', 'pilotoprogramas', 'cajatipoestablecimiento.cajatipo',
+            'avaloncontrato', 'binomioestacion', 'binomiotienda'
+        ]);
         $this->reset(['busqueda', 'ests']);
     }
 
@@ -33,7 +39,7 @@ new class extends Component {
 };
 ?>
 
-<div class="h-full">
+<div class="flex flex-col h-full ">
     <div x-data="{ open: false }" class="relative">
         <div class="h-full">
             <x-input-form-label class="my-0" for="buscar">Buscar Establecimientos</x-input-form-label>
@@ -71,10 +77,55 @@ new class extends Component {
 
     </div>
 
-    <div class="flex-1 min-h-0 flex overflow-auto flex-col">
+    <x-livewire-content-div class="p-2 pt-3">
         @if($selectedEst)
-            <p>{{$selectedEst->nombre}}</p>
+
+            <x-index-table-first-level-user :selected-est="$selectedEst"/>
+
+            <x-index-table-second-level-user
+                :selected-est="$selectedEst"
+                :tienda-string="SucursalService::$tiendaString"
+                :estacion-string="SucursalService::$estacionString"
+                :est-tipo-nombre="SucursalService::slug($selectedEst->establecimientotipo->nombre)"
+            />
+
+            <x-index-table-third-level-user :selected-est="$selectedEst"/>
+
+            @if($selectedEst->pilotoprogramas()->exists())
+                <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
+                    <x-index-div-table-thead-user>
+                        <x-index-div-table-thead-th-column-user>Titulo</x-index-div-table-thead-th-column-user>
+                        <x-index-div-table-thead-th-column-user>Descripción</x-index-div-table-thead-th-column-user>
+                    </x-index-div-table-thead-user>
+                    <x-index-div-table-tbody>
+                        @foreach($selectedEst->pilotoprogramas as $programa)
+                            <tr>
+                                <x-index-div-table-tbody-tr-td>{{$programa->titulo}}</x-index-div-table-tbody-tr-td>
+                                <x-index-div-table-tbody-tr-td>{{$programa->descripcion_corta}}</x-index-div-table-tbody-tr-td>
+                            </tr>
+                        @endforeach
+                    </x-index-div-table-tbody>
+                </x-index-div-table>
+            @endif
+
+            @if($selectedEst->cajatipoestablecimiento()->exists())
+                <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
+                    <x-index-div-table-thead-user>
+                        <x-index-div-table-thead-th-column-user>Tipo de Caja</x-index-div-table-thead-th-column-user>
+                        <x-index-div-table-thead-th-column-user>Número</x-index-div-table-thead-th-column-user>
+                    </x-index-div-table-thead-user>
+                    <x-index-div-table-tbody>
+                        @foreach($selectedEst->cajatipoestablecimiento as $caja)
+                            <tr>
+                                <x-index-div-table-tbody-tr-td>{{$caja->cajatipo->nombre}}</x-index-div-table-tbody-tr-td>
+                                <x-index-div-table-tbody-tr-td>{{$caja->numcaja}}</x-index-div-table-tbody-tr-td>
+                            </tr>
+                        @endforeach
+                    </x-index-div-table-tbody>
+                </x-index-div-table>
+            @endif
+
         @endif
-    </div>
+    </x-livewire-content-div>
 
 </div>
