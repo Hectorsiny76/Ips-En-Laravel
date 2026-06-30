@@ -27,7 +27,9 @@
 
             <div class="flex items-center pl-2">
                 <div class="mr-2 h-10 w-10 lg:h-20 lg:w-20">
-                    <a href="{{ route('main.index')}}"><img class="rounded-sm" src="{{ asset('images/descarga.png') }}" alt="Logo"></a>
+                    <a href="{{ route('main.index')}}">
+                        <img class="rounded-sm" src="{{ asset('images/descarga.png') }}" alt="Logo">
+                    </a>
                 </div>
                 <div class="text-xs lg:text-lg flex flex-col">
                     <span class="font-bold">Mesa de Servicio ICONN</span>

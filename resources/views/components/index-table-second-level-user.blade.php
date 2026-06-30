@@ -26,7 +26,7 @@
             @if($estTipoNombre === $estacionString)
                 <x-index-div-table-tbody-tr-td class="cursor-pointer hover:text-green-800 transition-colors duration-300" @click="$copy('{{$selectedEst->tel}}')">{{$selectedEst->tel ?? 'No asignado'}}</x-index-div-table-tbody-tr-td>
                 <x-index-div-table-tbody-tr-td class="cursor-pointer hover:text-green-800 transition-colors duration-300" @click="$copy('{{$selectedEst->correo}}')">{{$selectedEst->correo ?? 'No asignado'}}</x-index-div-table-tbody-tr-td>
-                <x-index-div-table-tbody-tr-td>{{$selectedEst->avaloncontrato ?? 'No asignado'}}</x-index-div-table-tbody-tr-td>
+                <x-index-div-table-tbody-tr-td>{{$selectedEst->avaloncontrato->numero ?? 'No asignado'}}</x-index-div-table-tbody-tr-td>
             @endif
         </tr>
     </x-index-div-table-tbody>
