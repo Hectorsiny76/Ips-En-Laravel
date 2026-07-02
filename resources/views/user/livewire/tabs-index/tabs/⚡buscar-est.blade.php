@@ -90,6 +90,8 @@ new class extends Component {
     <x-livewire-content-div class="p-2 pt-3">
         @if($selectedEst)
 
+            <x-index-table-result-divider-h2>Información Principal</x-index-table-result-divider-h2>
+
             <x-index-table-first-level-user :selected-est="$selectedEst"/>
 
             <x-index-table-second-level-user
@@ -101,26 +103,21 @@ new class extends Component {
 
             <x-index-table-third-level-user :selected-est="$selectedEst"/>
 
-            @if($selectedEst->pilotoprogramas()->exists())
-                <x-index-table-fourth-level-user :selected-est="$selectedEst"/>
-            @endif
-
-            @if($selectedEst->cajatipoestablecimiento()->exists())
-                <x-index-table-fifth-level-user :selected-est="$selectedEst"/>
-            @endif
-
             @if($this->establecimientosRelacionados > 0)
+
+                <x-index-table-result-divider-h2>Establecimientos Relacionados</x-index-table-result-divider-h2>
+
                 <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
                     <x-index-div-table-thead-user>
-                        <x-index-div-table-thead-th-column-user>Establecimientos relacionados</x-index-div-table-thead-th-column-user>
+                        <x-index-div-table-thead-th-column-user>Número</x-index-div-table-thead-th-column-user>
                     </x-index-div-table-thead-user>
                     <x-index-div-table-tbody>
                         <tr>
                             <td>
-                                <div class="flex justify-evenly w-full">
+                                <div class="flex justify-evenly w-full flex-row divide-x-2 divide-gray-200">
                                     @foreach($this->establecimientosRelacionados as $numero)
                                         @if($selectedEst->numero !== $numero)
-                                            <span>{{$numero}}</span>
+                                            <span class="w-full text-center">{{$numero}}</span>
                                         @endif
                                     @endforeach
                                 </div>
@@ -128,6 +125,22 @@ new class extends Component {
                         </tr>
                     </x-index-div-table-tbody>
                 </x-index-div-table>
+            @endif
+
+            @if($selectedEst->pilotoprogramas()->exists())
+
+                <x-index-table-result-divider-h2>Programas Piloto</x-index-table-result-divider-h2>
+
+                <x-index-table-fourth-level-user :selected-est="$selectedEst"/>
+
+            @endif
+
+            @if($selectedEst->cajatipoestablecimiento()->exists())
+
+                <x-index-table-result-divider-h2>Tipos de Caja</x-index-table-result-divider-h2>
+
+                <x-index-table-fifth-level-user :selected-est="$selectedEst"/>
+
             @endif
 
         @else
