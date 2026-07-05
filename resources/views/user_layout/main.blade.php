@@ -49,7 +49,7 @@
 
             </main>
 
-            <aside class="w-full flex-shrink-0 col-span-3 bg-white rounded-xl shadow-xl">
+            <aside class="w-full h-full flex-shrink-0 col-span-3 bg-white rounded-xl shadow-xl">
 
                 <x-session-alert/>
 

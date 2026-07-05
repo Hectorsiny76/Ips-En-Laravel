@@ -5,6 +5,7 @@ use App\Models\Establecimiento;
 use Livewire\Attributes\Session;
 use App\Services\SucursalService;
 use Livewire\Attributes\Computed;
+use App\Models\Mercado;
 
 new class extends Component {
 
@@ -41,6 +42,18 @@ new class extends Component {
             ->toArray();
     }
 
+    #[Computed]
+    public function encargados()
+    {
+        $mercado = Mercado::where('id', $this->selectedEst->mercado->id)->first()->get();
+
+        // dd($mercado);
+
+        //$encargados = $mercado->encargados;
+
+        return [];
+    }
+
     public function limpiar()
     {
         $this->reset(['ests', 'selectedEst', 'busqueda']);
@@ -67,17 +80,17 @@ new class extends Component {
             </div>
         </div>
 
-        <div x-cloak x-show="open" class="border-gray-300 bg-white rounded border absolute z-50 max-h-60 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">
+        <div x-cloak x-show="open" class="p-1 border-gray-300 bg-white rounded border absolute z-50 max-h-80 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">
             @forelse ($ests as $est)
                 <div wire:key="est-{{$est->id}}"
                      class="w-full mt-1"
                      x-on:click="open = false"
                     >
-                    <p wire:click="selectEst({{ $est->id }})"
-                        class="cursor-pointer w-full pb-2 pl-2 hover:text-blue-800"
+                    <button wire:click="selectEst({{ $est->id }})"
+                        class="text-left w-full p-2 hover:text-blue-800"
                         >
                             {{ $est->numero }} {{ $est->nombre }} {{ $est->centrodecostos ?: '' }}
-                    </p>
+                    </button>
                 </div>
             @empty
                 <p class="w-full text-gray-800 p-2">No se encontraron resultados</p>
@@ -140,6 +153,14 @@ new class extends Component {
                 <x-index-table-result-divider-h2>Tipos de Caja</x-index-table-result-divider-h2>
 
                 <x-index-table-fifth-level-user :selected-est="$selectedEst"/>
+
+            @endif
+
+            @if($this->encargados > 0)
+
+                @foreach($this->encargados as $encargado)
+                    {{$encargado->nombre}}
+                @endforeach
 
             @endif
 

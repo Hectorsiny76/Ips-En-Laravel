@@ -19,14 +19,14 @@ new class extends Component
 };
 ?>
 
-<x-livewire-parent-div>
+<x-livewire-parent-div class="h-full">
 
     <x-session-alert/>
 
     <x-aside-header-user-card titulo="❗ Incidentes Generales"/>
 
-    <x-livewire-content-div>
-        <x-aside-header-user-div-list>
+    <x-livewire-content-div class="h-full">
+        <x-aside-header-user-div-list class="h-full">
             @forelse($this->generales as $general)
                     <x-aside-user-card-ul>
 
@@ -36,9 +36,7 @@ new class extends Component
 
                     </x-aside-user-card-ul>
             @empty
-                <div>
-                    Sin generales
-                </div>
+                <x-index-aside-forelse-empty title="No hay generales reportados."/>
             @endforelse
         </x-aside-header-user-div-list>
     </x-livewire-content-div>

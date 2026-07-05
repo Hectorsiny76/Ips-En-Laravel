@@ -83,7 +83,8 @@ new class extends Component {
                     </tr>
                 @empty
                     <tr>
-                        <x-index-div-table-tbody-tr-td class="font-bold" colspan="5">No hay nada
+                        <x-index-div-table-tbody-tr-td colspan="5">
+                            <x-index-search-table-no-results/>
                         </x-index-div-table-tbody-tr-td>
                     </tr>
                 @endforelse

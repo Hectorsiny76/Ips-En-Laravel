@@ -17,6 +17,6 @@ new class extends Component
 };
 ?>
 
-<div>
+<div class="h-full">
     <livewire:dynamic-component :is="$componenteActivo" :key="$componenteActivo" />
 </div>

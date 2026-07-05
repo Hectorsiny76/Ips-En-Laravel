@@ -62,7 +62,7 @@ new class extends Component {
                 </x-index-div-table-thead-th-column-user>
             </x-index-div-table-thead-user>
             <x-index-div-table-tbody>
-                @foreach($clasificaciones as $clasificacione)
+                @forelse($clasificaciones as $clasificacione)
                     <tr>
                         <x-index-div-table-tbody-tr-td>
                             {{$loop->iteration}}
@@ -80,7 +80,13 @@ new class extends Component {
                             {{$clasificacione->microservicio->nombre}}
                         </x-index-div-table-tbody-tr-td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <x-index-div-table-tbody-tr-td colspan="5">
+                            <x-index-search-table-no-results/>
+                        </x-index-div-table-tbody-tr-td>
+                    </tr>
+                @endforelse
             </x-index-div-table-tbody>
         </x-index-div-table>
     </x-livewire-content-div>

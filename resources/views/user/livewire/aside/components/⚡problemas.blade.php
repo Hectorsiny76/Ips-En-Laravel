@@ -30,7 +30,7 @@ new class extends Component {
                     <x-aside-user-card-ul-li>{{$problema->descripcion ?? ''}}</x-aside-user-card-ul-li>
                 </x-aside-user-card-ul>
             @empty
-                <h1>No hay nada</h1>
+                <x-index-aside-forelse-empty title="No hay problemas reportados."/>
             @endforelse
         </x-aside-header-user-div-list>
     </x-livewire-content-div>

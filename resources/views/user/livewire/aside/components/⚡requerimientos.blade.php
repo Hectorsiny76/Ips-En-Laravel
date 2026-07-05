@@ -28,7 +28,7 @@ new class extends Component
                    <x-aside-user-card-ul-li-title title="{{$loop->iteration}} - {{$ritm->titulo}}" class="font-semibold"/>
                 </x-aside-user-card-ul>
             @empty
-                <h1>No hay nada</h1>
+                <x-index-aside-forelse-empty title="No hay requerimientos registrados"/>
             @endforelse
         </x-aside-header-user-div-list>
     </x-livewire-content-div>
