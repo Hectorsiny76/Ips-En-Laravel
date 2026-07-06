@@ -10,7 +10,7 @@ new class extends Component
 
 <div class="drop-shadow-mg  text-xs lg:text-lg flex items-center justify-between">
 
-    <x-user-navbar-div-button dispatch="$dispatch('Cargar-componente', {componente:'user::livewire.aside.components.documentos'})" icon="📋" title="Documentos"/>
+    <x-user-navbar-div-button dispatch="$dispatch('Cargar-componente', {componente:'user::livewire.aside.components.documentos'})" icon="📋" title="Archivos"/>
 
     <x-user-navbar-div-button dispatch="$dispatch('Cargar-componente', {componente:'user::livewire.aside.components.inc-generales'})" icon="❗" title="Generales"/>
 

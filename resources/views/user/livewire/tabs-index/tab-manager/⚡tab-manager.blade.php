@@ -39,7 +39,7 @@ new class extends Component
                     ])
         >Despliegues</button>
     </div>
-    <div class="border border-green-800 rounded-bl-md rounded-br-md rounded-tr-md p-2">
+    <div class="border border-green-800 rounded-bl-md rounded-br-md rounded-tr-md p-2" wire:transition>
         <livewire:dynamic-component :is="$activeTab" :key="$activeTab"/>
     </div>
 </div>

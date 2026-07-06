@@ -4,16 +4,19 @@ use App\Models\Foliotipo;
 use Livewire\Component;
 
 new class extends Component {
-    public $problemas = [];
-
-    public function mount()
+    public function render()
     {
         $opcion1 = 'problemas';
         $opcion2 = 'problem';
 
         $problema = Foliotipo::search($opcion1, $opcion2);
 
-        $this->problemas = $problema->folios;
+        $problemas = $problema->folios;
+
+        return view('user.livewire.aside.components.⚡problemas',
+            [
+               'problemas' => $problemas
+            ]);
     }
 };
 ?>
@@ -23,7 +26,7 @@ new class extends Component {
 
     <x-livewire-content-div>
         <x-aside-header-user-div-list>
-            @forelse($this->problemas as $problema)
+            @forelse($problemas as $problema)
                 <x-aside-user-card-ul>
                     <x-aside-user-card-ul-li-title title="{{$problema->numero ?? ''}}"/>
                     <x-aside-user-card-ul-li class="font-semibold">{{$problema->titulo ?? ''}}</x-aside-user-card-ul-li>

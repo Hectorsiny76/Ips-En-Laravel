@@ -5,16 +5,20 @@ use App\Models\Foliotipo;
 
 new class extends Component
 {
-    public $requerimientos = [];
 
-    public function mount()
+    public function render()
     {
         $opcion1 = 'requerimiento';
         $opcion2 = 'ritm';
 
         $requerimiento = Foliotipo::search($opcion1, $opcion2);
 
-        $this->requerimientos = $requerimiento->folios;
+        $requerimientos = $requerimiento->folios;
+
+        return view('user.livewire.aside.components.⚡requerimientos',
+        [
+            'requerimientos' => $requerimientos
+        ]);
     }
 };
 ?>
@@ -23,7 +27,7 @@ new class extends Component
     <x-aside-header-user-card titulo="📑 RITM"/>
     <x-livewire-content-div>
         <x-aside-header-user-div-list>
-            @forelse($this->requerimientos as $ritm)
+            @forelse($requerimientos as $ritm)
                 <x-aside-user-card-ul>
                    <x-aside-user-card-ul-li-title title="{{$loop->iteration}} - {{$ritm->titulo}}" class="font-semibold"/>
                 </x-aside-user-card-ul>

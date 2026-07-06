@@ -80,7 +80,7 @@ new class extends Component {
             </div>
         </div>
 
-        <div x-cloak x-show="open" class="p-1 border-gray-300 bg-white rounded border absolute z-50 max-h-80 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">
+        <div wire:transition x-cloak x-show="open" class="p-1 border-gray-300 bg-white rounded border absolute z-50 max-h-80 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">
             @forelse ($ests as $est)
                 <div wire:key="est-{{$est->id}}"
                      class="w-full mt-1"
@@ -100,59 +100,66 @@ new class extends Component {
 
     </div>
 
-    <x-livewire-content-div class="p-2 pt-3">
+    <x-livewire-content-div class="p-2 pt-3" wire:transition>
         @if($selectedEst)
 
-            <x-index-table-result-divider-h2>Información Principal</x-index-table-result-divider-h2>
+            <x-index-user-table-card-dropdown titulo="Información Principal" opened="true">
 
-            <x-index-table-first-level-user :selected-est="$selectedEst"/>
+                <x-index-table-first-level-user :selected-est="$selectedEst"/>
 
-            <x-index-table-second-level-user
-                :selected-est="$selectedEst"
-                :tienda-string="SucursalService::$tiendaString"
-                :estacion-string="SucursalService::$estacionString"
-                :est-tipo-nombre="SucursalService::slug($selectedEst->establecimientotipo->nombre)"
-            />
+                <x-index-table-second-level-user
+                    :selected-est="$selectedEst"
+                    :tienda-string="SucursalService::$tiendaString"
+                    :estacion-string="SucursalService::$estacionString"
+                    :est-tipo-nombre="SucursalService::slug($selectedEst->establecimientotipo->nombre)"
+                />
 
-            <x-index-table-third-level-user :selected-est="$selectedEst"/>
+                <x-index-table-third-level-user :selected-est="$selectedEst"/>
+
+            </x-index-user-table-card-dropdown>
 
             @if($this->establecimientosRelacionados > 0)
 
-                <x-index-table-result-divider-h2>Establecimientos Relacionados</x-index-table-result-divider-h2>
+                <x-index-user-table-card-dropdown titulo="Establecimientos Relacionados">
+                    <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
+                        <x-index-div-table-thead-user :primary="false">
+                            <x-index-div-table-thead-th-column-user>Número</x-index-div-table-thead-th-column-user>
+                        </x-index-div-table-thead-user>
+                        <x-index-div-table-tbody>
+                            <tr>
+                                <td>
+                                    <div class="flex justify-evenly w-full flex-row divide-x-2 divide-gray-200">
+                                        @foreach($this->establecimientosRelacionados as $numero)
+                                            @if($selectedEst->numero !== $numero)
+                                                <span class="w-full text-center">{{$numero}}</span>
+                                            @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+                            </tr>
+                        </x-index-div-table-tbody>
+                    </x-index-div-table>
+                </x-index-user-table-card-dropdown>
 
-                <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
-                    <x-index-div-table-thead-user>
-                        <x-index-div-table-thead-th-column-user>Número</x-index-div-table-thead-th-column-user>
-                    </x-index-div-table-thead-user>
-                    <x-index-div-table-tbody>
-                        <tr>
-                            <td>
-                                <div class="flex justify-evenly w-full flex-row divide-x-2 divide-gray-200">
-                                    @foreach($this->establecimientosRelacionados as $numero)
-                                        @if($selectedEst->numero !== $numero)
-                                            <span class="w-full text-center">{{$numero}}</span>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            </td>
-                        </tr>
-                    </x-index-div-table-tbody>
-                </x-index-div-table>
             @endif
 
             @if($selectedEst->pilotoprogramas()->exists())
 
-                <x-index-table-result-divider-h2>Programas Piloto</x-index-table-result-divider-h2>
+                <x-index-user-table-card-dropdown titulo="Programas Piloto">
 
-                <x-index-table-fourth-level-user :selected-est="$selectedEst"/>
+                    <x-index-table-fourth-level-user :selected-est="$selectedEst"/>
+
+                </x-index-user-table-card-dropdown>
 
             @endif
 
             @if($selectedEst->cajatipoestablecimiento()->exists())
 
-                <x-index-table-result-divider-h2>Tipos de Caja</x-index-table-result-divider-h2>
+                <x-index-user-table-card-dropdown titulo="Tipos de Caja">
 
-                <x-index-table-fifth-level-user :selected-est="$selectedEst"/>
+                    <x-index-table-fifth-level-user :selected-est="$selectedEst"/>
+
+                </x-index-user-table-card-dropdown>
 
             @endif
 

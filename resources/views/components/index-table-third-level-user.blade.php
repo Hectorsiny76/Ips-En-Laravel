@@ -1,7 +1,7 @@
 @props(['$selectedEst' => null])
 
 <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
-    <x-index-div-table-thead-user>
+    <x-index-div-table-thead-user :primary="false">
         <x-index-div-table-thead-th-column-user>Gerente de Campo</x-index-div-table-thead-th-column-user>
         <x-index-div-table-thead-th-column-user>Campo</x-index-div-table-thead-th-column-user>
         <x-index-div-table-thead-th-column-user>Mercado</x-index-div-table-thead-th-column-user>
