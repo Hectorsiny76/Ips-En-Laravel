@@ -16,7 +16,7 @@ new class extends Component {
 
     public function render()
     {
-        $query = Cajatipoestablecimiento::with('cajatipo', 'establecimiento');
+        $query = Cajatipoestablecimiento::with('cajatipo', 'establecimiento.establecimientotipo');
 
         if ($this->search !== '') {
             $query->search($this->search);
@@ -52,6 +52,9 @@ new class extends Component {
                     Establecimiento
                 </x-index-div-table-thead-th-column>
                 <x-index-div-table-thead-th-column>
+                    Tipo Est.
+                </x-index-div-table-thead-th-column>
+                <x-index-div-table-thead-th-column>
                     Tipo de Caja
                 </x-index-div-table-thead-th-column>
                 <x-index-div-table-thead-th-column>
@@ -66,7 +69,10 @@ new class extends Component {
                             {{$loop->iteration}}
                         </td>
                         <td>
-                            {{$estCajatipo->establecimiento->nombre}}
+                            {{$estCajatipo->establecimiento->numero}} - {{$estCajatipo->establecimiento->nombre}}
+                        </td>
+                        <td>
+                            {{$estCajatipo->establecimiento->establecimientotipo->nombre}}
                         </td>
                         <td>
                             {{$estCajatipo->cajatipo->nombre}}

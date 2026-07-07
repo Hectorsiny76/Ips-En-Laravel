@@ -11,6 +11,10 @@ new class extends Component
     public $fieldToUpdate; // Campo a actualizar Ej: 'estado_id'
     public $placeholder = 'Buscar...';
 
+    public $secondSearchColumn = null;
+    public $relationship = null;
+    public $relColumn = null;
+
     // Estado a cambiar de este componente
 
     public $search = '';
@@ -49,9 +53,15 @@ new class extends Component
         $results = [];
 
         if (strlen($this->search) >= 2){
-            $results = $this->model::whereRaw('LOWER('.$this->searchColumn.') like ?', ['%'.strtolower($this->search).'%'])
-                ->take(5)
-                ->get();
+            if(!empty($this->relationship) && !empty($this->relColumn)){
+                $results = $this->model::with($this->relationship)->whereRaw('LOWER('.$this->searchColumn.') like ?', ['%'.strtolower($this->search).'%'])
+                    ->take(5)
+                    ->get();
+            } else {
+                $results = $this->model::whereRaw('LOWER('.$this->searchColumn.') like ?', ['%'.strtolower($this->search).'%'])
+                    ->take(5)
+                    ->get();
+            }
         }
 
         return view('admin.livewire.global.⚡searchable-dropdown',[
@@ -91,11 +101,17 @@ new class extends Component
                         @foreach($results as $result)
                             <li
                                 wire:key="item-{{$fieldToUpdate}}-{{$result->id}}"
-                                wire:click="selectItem({{$result->id}}, '{{ $result->{$searchColumn} }}')"
+                                wire:click="selectItem({{$result->id}}, '{{ $secondSearchColumn ? $result->{$searchColumn}.' - '.$result->{$secondSearchColumn} : $result->{$searchColumn} }}')"
                                 x-on:click="open = false"
                                 class="p-2 border-transparent rounded cursor-pointer dark:text-gray-300 dark:hover:bg-blue-900/50 hover:bg-blue-500 hover:text-white"
                             >
-                                {{ $result->{$searchColumn} }}
+                                @if(!empty($this->relationship) && !empty($this->relColumn) && !empty($secondSearchColumn))
+                                    {{ $result->{$secondSearchColumn} }} - {{ $result->{$searchColumn} }} - {{ $result->{$relationship}?->{$relColumn} }}
+                                @elseif(!empty($this->relationship) && !empty($this->relColumn))
+                                    {{ $result->{$searchColumn} }} - {{ $result->{$relationship}?->{$relColumn} }}
+                                @else
+                                    {{ $result->{$searchColumn} }}
+                                @endif
                             </li>
                         @endforeach
                     </ul>

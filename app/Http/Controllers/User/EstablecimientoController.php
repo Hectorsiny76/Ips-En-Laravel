@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\user;
+namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Establecimiento;
@@ -17,13 +17,4 @@ class EstablecimientoController extends Controller
         return view('user.main.index');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $est = Establecimiento::findOrFail($id);
-
-        return view('user.main.show', compact('est'));
-    }
 }

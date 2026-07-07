@@ -53,6 +53,9 @@ new class extends Component {
                 searchColumn="nombre"
                 fieldToUpdate="establecimiento_id"
                 placeholder="Busca un establecimiento por su nombre"
+                relationship="establecimientotipo"
+                rel-column="nombre"
+                second-search-column="numero"
             />
 
             <x-input-form-label for="">Tipo de Caja</x-input-form-label>

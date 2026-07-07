@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AreaController;
 use App\Http\Controllers\Admin\AvaloncontratoController;
 use App\Http\Controllers\Admin\BinomioestablecimientoController;
@@ -18,7 +19,6 @@ use App\Http\Controllers\Admin\TiendaformatoController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\CajatipoController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\EstadoController;
 use App\Http\Controllers\Admin\MercadogerenteController;
@@ -31,12 +31,16 @@ use App\Http\Controllers\Admin\DespliegueController;
 use App\Http\Controllers\Admin\AsociadoController;
 use App\Http\Controllers\Admin\ArchivotipoController;
 
-//Route::get('/establecimiento/{establecimiento}', [App\Http\Controllers\user\EstablecimientoController::class, 'show'])->name('user.main.show');
 
-Route::get('/', [App\Http\Controllers\user\EstablecimientoController::class, 'index'])->name('main.index');
+// Rua index / home del lado del usuario
+Route::get('/', [App\Http\Controllers\User\EstablecimientoController::class, 'index'])->name('main.index');
 
-
+// Ruta de registro de Laravel Breeze, no sin uso actual (Julio 2026)
 //Route::post('/', [RegisteredUserController::class, 'index'])->name('register');
+
+
+// Todas la rutas del endpoint admin, las cuales están debajo el prefijo admin, empiezan con admin.
+// y están bajo el middleware de Laravel Breeze
 
 Route::middleware('auth')
     ->prefix('admin')

@@ -14,6 +14,8 @@ class ArchivotipoController extends AdminController
      */
     public function index()
     {
+        Gate::authorize('delete-data-create-users');
+
         $archivotipos = Archivotipo::all();
 
         return view('admin.archivo-tipos.index', compact('archivotipos'));
@@ -24,6 +26,8 @@ class ArchivotipoController extends AdminController
      */
     public function create()
     {
+        Gate::authorize('delete-data-create-users');
+
         return view('admin.archivo-tipos.create');
     }
 
@@ -32,6 +36,8 @@ class ArchivotipoController extends AdminController
      */
     public function store(Request $request)
     {
+        Gate::authorize('delete-data-create-users');
+
         $validacion = $request->validate([
             'nombre' => 'required|string|min:3',
             'es_link' => 'required|boolean',
@@ -57,6 +63,8 @@ class ArchivotipoController extends AdminController
      */
     public function edit($id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $archivoTipo = Archivotipo::findOrFail($id);
 
         return view('admin.archivo-tipos.edit', compact('archivoTipo'));
@@ -67,6 +75,8 @@ class ArchivotipoController extends AdminController
      */
     public function update(Request $request, $id)
     {
+        Gate::authorize('delete-data-create-users');
+
         $validacion = $request->validate([
             'nombre' => 'required|string|min:3',
             'es_link' => 'required|boolean',

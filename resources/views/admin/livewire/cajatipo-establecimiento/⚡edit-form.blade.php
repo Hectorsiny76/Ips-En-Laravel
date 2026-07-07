@@ -65,6 +65,9 @@ new class extends Component {
                 placeholder="Busca un establecimiento por su nombre"
                 initialId="{{$this->estCajaTipo->establecimiento->id}}"
                 initialName="{{$this->estCajaTipo->establecimiento->nombre}}"
+                relationship="establecimientotipo"
+                rel-column="nombre"
+                second-search-column="numero"
             />
 
             <x-input-form-label for="">Tipo de Caja</x-input-form-label>

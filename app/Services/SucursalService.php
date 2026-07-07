@@ -11,85 +11,11 @@ class SucursalService
     public static string $tiendaString = 'tienda';
     public static string $estacionString = 'estacion';
 
-
     /**
      * Función de apoyo para cambiar un string a tipo slug (Ej. tienda, tiendas-de-empeño, esto para mantener el orden y poder manejar los ifs)
      */
     public static function slug(string $value): string {
         return Str::slug($value);
-    }
-
-    /**
-     * Arregla las columnas de la página principal
-     */
-    public static function columnasIndex(Establecimientotipo $estTipo): array
-    {
-
-        $estTipoNombre = self::slug($estTipo->nombre);
-
-        $secciones = [];
-
-        $secciones['primerNivel'] = [
-            'titulo' => 'Datos Principales',
-            'layout' => 'col-span-1 lg:col-span-2',
-            'columnas' => [
-                'numero' => 'Numero',
-                'nombre' => 'Nombre',
-                'ip' => 'Ip'
-            ],
-        ];
-
-        if($estTipoNombre == self::$estacionString){
-            $secciones['base']['columnas'][] = ['centrodecostos' => 'Centro de costos'];
-        }
-
-        $segundoNivel = [];
-
-        if($estTipoNombre == self::$tiendaString){
-            $segundoNivel[] = ['cajas_tpvs' => 'Cajas'];
-        } else if($estTipoNombre == self::$estacionString){
-            $segundoNivel[] = ['cajas_tpvs' => 'TPVs'];
-        }
-
-        $segundoNivel[] = [
-            'campogerente.nombre' => 'Gerente de Campo',
-            'campo.numero' => 'Campo',
-            'mercado.numero' => 'Mercado',
-            'mercadogerente.nombre' => 'Gerente de Mercado',
-            ];
-
-        $secciones['segundoNivel'] = [
-            'titulo' => 'Datos Secundarios',
-            'layout' => 'col-span-1',
-            'columnas' => $segundoNivel,
-        ];
-
-        $tercerNivel = [];
-
-        if($estTipoNombre == self::$tiendaString){
-            $tercerNivel[] = [
-                'tiendaformato.nombre' => 'Formato de Tienda',
-                'tidelprograma.ip' => 'Programa Tidel',
-                'cluster.nombre' => 'Cluster',
-            ];
-        } else if($estTipoNombre == self::$estacionString){
-            $tercerNivel[] = [
-                'tel' => 'Telefono',
-                'correo' => 'Correo',
-            ];
-        }
-
-        $secciones['tercerNivel'] = [
-            'titulo' => 'Datos Extra del establecimiento',
-            'layout' => 'col-span-1',
-            'columnas' => $tercerNivel,
-        ];
-
-        $cuartoNivel = [
-            ''
-        ];
-
-        return $secciones;
     }
 
     /**
