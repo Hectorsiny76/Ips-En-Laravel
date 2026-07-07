@@ -27,7 +27,7 @@
 
             <div class="flex items-center pl-2">
                 <div class="mr-2 h-10 w-10 lg:h-20 lg:w-20">
-                    <a href="{{ route('main.index')}}">
+                    <a href="{{ route('admin.admin_layout.dashboard')}}">
                         <img class="rounded-sm" src="{{ asset('images/descarga.png') }}" alt="Logo">
                     </a>
                 </div>

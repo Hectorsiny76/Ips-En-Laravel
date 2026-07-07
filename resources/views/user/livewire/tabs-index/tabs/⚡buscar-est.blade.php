@@ -5,7 +5,7 @@ use App\Models\Establecimiento;
 use Livewire\Attributes\Session;
 use App\Services\SucursalService;
 use Livewire\Attributes\Computed;
-use App\Models\Mercado;
+use App\Models\Asociado;
 
 new class extends Component {
 
@@ -26,7 +26,7 @@ new class extends Component {
     {
         $this->selectedEst = Establecimiento::findOrFail($id);
         $this->selectedEst->load([
-            'campogerente', 'campo', 'mercado', 'mercadogerente', 'estado', 'establecimientotipo',
+            'campogerente', 'campo', 'mercado.encargados.area', 'mercadogerente', 'estado', 'establecimientotipo',
             'cluster', 'tidelprograma', 'tiendaformato', 'pilotoprogramas', 'cajatipoestablecimiento.cajatipo',
             'avaloncontrato', 'binomioestacion', 'binomiotienda'
         ]);
@@ -45,13 +45,11 @@ new class extends Component {
     #[Computed]
     public function encargados()
     {
-        $mercado = Mercado::where('id', $this->selectedEst->mercado->id)->first()->get();
+        $encargados = Asociado::whereHas('mercado', function ($mercadoQuery) {
+           $mercadoQuery->where('id', $this->selectedEst->mercado->id);
+        })->get();
 
-        // dd($mercado);
-
-        //$encargados = $mercado->encargados;
-
-        return [];
+        return $encargados;
     }
 
     public function limpiar()
@@ -163,12 +161,28 @@ new class extends Component {
 
             @endif
 
-            @if($this->encargados > 0)
+            @if($selectedEst->mercado->encargados()->exists())
 
-                @foreach($this->encargados as $encargado)
-                    {{$encargado->nombre}}
-                @endforeach
-
+                <x-index-user-table-card-dropdown titulo="Encargados">
+                    <x-index-div-table class="border-transparent rounded-tr-md rounded-tl-md">
+                        <x-index-div-table-thead-user :primary="false">
+                            <x-index-div-table-thead-th-column-user>Nombre</x-index-div-table-thead-th-column-user>
+                            <x-index-div-table-thead-th-column-user>Correo</x-index-div-table-thead-th-column-user>
+                            <x-index-div-table-thead-th-column-user>Tel</x-index-div-table-thead-th-column-user>
+                            <x-index-div-table-thead-th-column-user>Area</x-index-div-table-thead-th-column-user>
+                        </x-index-div-table-thead-user>
+                        <x-index-div-table-tbody>
+                            @foreach($selectedEst->mercado->encargados as $encargado)
+                            <tr>
+                                <x-index-div-table-tbody-tr-td>{{$encargado->nombre}}</x-index-div-table-tbody-tr-td>
+                                <x-index-div-table-tbody-tr-td>{{$encargado->email}}</x-index-div-table-tbody-tr-td>
+                                <x-index-div-table-tbody-tr-td>{{$encargado->tel}}</x-index-div-table-tbody-tr-td>
+                                <x-index-div-table-tbody-tr-td>{{$encargado->area->nombre ?? 'Sin área'}}</x-index-div-table-tbody-tr-td>
+                            </tr>
+                            @endforeach
+                        </x-index-div-table-tbody>
+                    </x-index-div-table>
+                </x-index-user-table-card-dropdown>
             @endif
 
         @else
