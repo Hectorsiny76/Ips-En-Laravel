@@ -7,7 +7,7 @@
 
     <div
         @class([
-            'border border-transparent flex p-2 w-full justify-between',
+            'border border-transparent p-2',
             'bg-gradient-to-r from-green-700 to-green-900' => $primary,
             'bg-gradient-to-r from-orange-500 to-orange-700' => !$primary,
         ])
@@ -15,9 +15,10 @@
         'rounded-tr-xl rounded-tl-xl': show,
         'rounded-md': !show,
         }">
-        <h1 class="text-sm lg:text-lg font-bold text-white">{{$titulo}}</h1>
 
-        <button type="button" class="text-center text-white" @click = "show = !show">
+        <button type="button" class="text-center text-white flex w-full justify-between" @click = "show = !show">
+
+            <h1 class="text-sm lg:text-lg font-bold text-white">{{$titulo}}</h1>
 
             <template x-if="show">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 lg:size-6">

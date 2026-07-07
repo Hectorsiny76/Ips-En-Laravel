@@ -17,6 +17,8 @@ new class extends Component {
 
     public $ests = [];
 
+    public $showWarningModal = false;
+
     public function updatedBusqueda()
     {
         $this->ests = Establecimiento::search($this->busqueda)->take(5)->get();
@@ -31,6 +33,10 @@ new class extends Component {
             'avaloncontrato', 'binomioestacion', 'binomiotienda'
         ]);
 
+        if($this->selectedEst->pilotoprogramas()->exists()){
+            $this->showWarningModal = true;
+        }
+
         $this->reset(['busqueda', 'ests']);
     }
 
@@ -40,16 +46,6 @@ new class extends Component {
         return Establecimiento::where('campogerente_id', $this->selectedEst->campogerente_id)
             ->pluck('numero')
             ->toArray();
-    }
-
-    #[Computed]
-    public function encargados()
-    {
-        $encargados = Asociado::whereHas('mercado', function ($mercadoQuery) {
-           $mercadoQuery->where('id', $this->selectedEst->mercado->id);
-        })->get();
-
-        return $encargados;
     }
 
     public function limpiar()
@@ -100,6 +96,10 @@ new class extends Component {
 
     <x-livewire-content-div class="p-2 pt-3" wire:transition>
         @if($selectedEst)
+
+            @if($selectedEst->pilotoprogramas()->exists())
+                <x-index-search-show-warning-user :programas="$selectedEst->pilotoprogramas" mensaje="Antes de proceder, si tienes dudas, ácercate con un supervisor."/>
+            @endif
 
             <x-index-user-table-card-dropdown titulo="Información Principal" opened="true">
 
