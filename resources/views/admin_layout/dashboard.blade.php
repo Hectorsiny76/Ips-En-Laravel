@@ -5,7 +5,7 @@
 @section('page-title', 'Dashboard')
 
 @section('content')
-    <div  class="w-full flex flex-col min-h-0 flex-1">
+    <div class="w-full flex flex-col min-h-0 flex-1">
 
         <x-div-index-title-create-button title="Bienvenido, estos son los datos actuales" url="/" button="Página Principal"/>
 

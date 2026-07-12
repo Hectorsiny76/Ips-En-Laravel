@@ -8,7 +8,7 @@ use App\Models\Campo;
 uses(RefreshDatabase::class);
 
 test('Un gerente de campo puede existir en la base de datos sin campo', function(){
-    Campogerente::create([
+    Campogerente::factory()->create([
         'nombre'=>'Henry Wong',
         'tel'=>'8181818181',
     ]);

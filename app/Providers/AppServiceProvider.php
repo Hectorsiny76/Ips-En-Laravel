@@ -25,13 +25,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (Schema::hasTable('establecimientotipos')) {
-            View::share('navEstablecimientos', Establecimientotipo::all());
-        }
+
+        View::composer('admin_layout.master', function ($view) {
+            $view->with('navEstablecimientos', Establecimientotipo::all());
+        });
+
+//        if (Schema::hasTable('establecimientotipos')) {
+//            View::share('navEstablecimientos', Establecimientotipo::all());
+//        }
 
         Gate::define('delete-admins', function (User $currentUser, User $targetUser) {
 
-            // No se puede eliminar a sí mismo desde desde el controlador UserController
+            // No se puede eliminar a sí mismo desde el controlador UserController
             if($currentUser->id === $targetUser->id){
                 return false;
             }
