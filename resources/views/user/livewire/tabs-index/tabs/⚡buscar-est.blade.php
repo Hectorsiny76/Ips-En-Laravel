@@ -137,7 +137,7 @@ new class extends Component {
                         <x-index-div-table-tbody>
                             <tr>
                                 <td>
-                                    <div class="flex justify-evenly w-full flex-row divide-x-2 divide-gray-200">
+                                    <div class="flex justify-evenly w-full flex-row divide-x-2 divide-secondary-500 dark:divide-secondary-900">
                                         @foreach($this->establecimientosRelacionados as $numero)
                                             @if($selectedEst->numero !== $numero)
                                                 <span class="w-full text-center">{{$numero}}</span>
@@ -186,8 +186,8 @@ new class extends Component {
                             @foreach($selectedEst->mercado->encargados as $encargado)
                             <tr>
                                 <x-index-div-table-tbody-tr-td>{{$encargado->nombre}}</x-index-div-table-tbody-tr-td>
-                                <x-index-div-table-tbody-tr-td>{{$encargado->email}}</x-index-div-table-tbody-tr-td>
-                                <x-index-div-table-tbody-tr-td>{{$encargado->tel}}</x-index-div-table-tbody-tr-td>
+                                <x-index-div-table-tbody-tr-td :copy="true" @click="$copy('{{$encargado->email}}')">{{$encargado->email}}</x-index-div-table-tbody-tr-td>
+                                <x-index-div-table-tbody-tr-td :copy="true" @click="$copy('{{$encargado->tel}}')">{{$encargado->tel}}</x-index-div-table-tbody-tr-td>
                                 <x-index-div-table-tbody-tr-td>{{$encargado->area->nombre ?? 'Sin área'}}</x-index-div-table-tbody-tr-td>
                             </tr>
                             @endforeach

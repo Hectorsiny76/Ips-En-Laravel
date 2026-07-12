@@ -33,14 +33,14 @@
          x-transition.opacity.duration.300ms
          x-cloak
          :class="{
-              'dark:border-green-600 dark:bg-green-900 dark:text-green-500 text-green-800 border border-green-300 bg-green-50': type === 'success',
-              'dark:border-red-600 dark:bg-red-900 dark:text-red-500 text-red-800 border border-red-300 bg-red-50': type === 'error',
+              'dark:border-primary-600 dark:bg-primary-900 dark:text-primary-200 text-primary-800 border border-primary-300 bg-primary-50': type === 'success',
+              'dark:border-terciary-600 dark:bg-terciary-900 dark:text-terciary-200 text-terciary-800 border border-terciary-300 bg-terciary-50': type === 'error',
          }"
          class="text-xs lg:text-lg fixed top-6 left-1/2 transform -translate-x-1/2 z-50 flex items-center rounded-lg justify-between p-4 min-w-[160px] shadow-xl transition-all duration-300"
          role="alert"
         >
             <div>
-                <span class="font-medium">Hecho!</span> <span x-text="message"></span>
+                <span class="font-medium" x-text="type.toUpperCase()"></span> <span x-text="message"></span>
             </div>
         <button
             @click="show = false"
