@@ -12,7 +12,7 @@
         id="searchableInput"
         class="dark:text-gray-400 dark:bg-gray-800"
         @class([
-            'focus:ring-green-700 focus:border-green-700' => $userSide,
+            'focus:ring-primary-700 focus:border-primary-700' => $userSide,
             'focus:ring-sky-700 focus:border-sky-700' => !$userSide,
             ])
     />

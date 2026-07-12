@@ -8,15 +8,15 @@
     <div
         @class([
             'border border-transparent p-2',
-            'bg-gradient-to-r from-green-700 to-green-900' => $primary,
-            'bg-gradient-to-r from-orange-500 to-orange-700' => !$primary,
+            'bg-gradient-to-r from-primary-700 to-primary-900 dark:from-primary-900 dark:to-primary-900' => $primary,
+            'bg-gradient-to-r from-secondary-600 to-secondary-700 dark:from-secondary-900 dark:to-secondary-900' => !$primary,
         ])
         :class="{
         'rounded-tr-xl rounded-tl-xl': show,
         'rounded-md': !show,
         }">
 
-        <button type="button" class="text-center text-white flex w-full justify-between" @click = "show = !show">
+        <button type="button" class="text-center text-white dark:text-gray-200 flex w-full justify-between" @click = "show = !show">
 
             <h1 class="text-sm lg:text-lg font-bold text-white">{{$titulo}}</h1>
 
@@ -35,7 +35,7 @@
         </button>
     </div>
 
-    <div class="p-2 border rounded-b-xl grid grid-flow-cols gap-2" x-show="show" x-transition>
+    <div class="p-2 border rounded-b-xl grid grid-flow-cols gap-2 dark:border-gray-500 dark:text-gray-300" x-show="show" x-transition>
         {{$slot ?? ''}}
     </div>
 

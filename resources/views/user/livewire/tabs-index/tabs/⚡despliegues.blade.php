@@ -39,7 +39,7 @@ new class extends Component {
 
 <x-livewire-parent-div>
 
-    <x-index-table-searchable-input title="Buscar Despliegues" variable="search"/>
+    <x-index-table-searchable-input :user-side="true" title="Buscar Despliegues" variable="search"/>
 
     <x-index-table-pagination :variable="$despliegues"/>
 

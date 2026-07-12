@@ -15,9 +15,11 @@ new class extends Component {
     #[Session]
     public ?Establecimiento $selectedEst = null;
 
+    #[Session]
     public $ests = [];
 
-    public $showWarningModal = false;
+    #[Session]
+    public $programas = [];
 
     public function updatedBusqueda()
     {
@@ -34,7 +36,10 @@ new class extends Component {
         ]);
 
         if($this->selectedEst->pilotoprogramas()->exists()){
-            $this->showWarningModal = true;
+
+            $this->programas = $this->selectedEst->pilotoprogramas()->pluck('titulo')->toArray();
+
+            $this->dispatch('open-warning-modal', lista: $this->programas);
         }
 
         $this->reset(['busqueda', 'ests']);
@@ -61,33 +66,39 @@ new class extends Component {
         <div class="h-full">
             <x-input-form-label class="my-0" for="buscar">Buscar Establecimientos</x-input-form-label>
             <div class="flex w-full justify-between items-center">
-                <input type="text"
-                      class="mb-0 w-full border rounded-md text-xs lg:text-lg focus:ring-green-700 focus:border-green-700"
-                      placeholder="Escribe el nombre, numero o centro de costos de una tienda"
-                      wire:model.live.debounce="busqueda"
-                      x-on:focus="open = true"
-                      x-on:click.away="open = false"
-                >
+
+                <x-input-form
+                    type="text"
+                    name="search"
+                    placeholder="Escribe el nombre, numero o centro de costos de una tienda"
+                    value=""
+                    wire:model.live.debounce="busqueda"
+                    class="focus:ring-primary-800 focus:border-primary-800 dark:focus:ring-primary-900 dark:border-primary-800"
+                    />
                 <button type="submit" wire:click="limpiar"
-                        class="bg-gradient-to-r from-green-700 to-green-900 hover:from-green-600 hover:to-green-800 text-white rounded mx-1 p-2 lg:p-1  h-full">Limpiar
+                        class="bg-gradient-to-r from-primary-700 to-primary-900 hover:from-primary-600 hover:to-primary-800 text-white
+                          dark:text-gray-200 dark:from-primary-900 dark:to-primary-900 dark:hover:from-primary-800 dark:hover:to-primary-800 dark:focus:ring-primary-800 dark:hover:text-gray-200
+                          rounded mx-1 p-2 lg:p-1 h-full"
+                >
+                    Limpiar
                 </button>
             </div>
         </div>
 
-        <div wire:transition x-cloak x-show="open" class="p-1 border-gray-300 bg-white rounded border absolute z-50 max-h-80 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">
+        <div wire:transition x-cloak x-show="open" class="dark:bg-gray-800 dark:text-gray-300 dark:border-primary-900 border-primary-800 bg-white p-1 rounded border-2 absolute z-[99] max-h-80 overflow-auto w-full {{ !empty($busqueda) ? 'block' : 'hidden' }}">
             @forelse ($ests as $est)
                 <div wire:key="est-{{$est->id}}"
                      class="w-full mt-1"
                      x-on:click="open = false"
                     >
                     <button wire:click="selectEst({{ $est->id }})"
-                        class="text-left w-full p-2 hover:text-blue-800"
+                        class="text-left w-full p-2 hover:text-secondary-700 dark:hover:text-secondary-800"
                         >
                             {{ $est->numero }} {{ $est->nombre }} {{ $est->centrodecostos ?: '' }}
                     </button>
                 </div>
             @empty
-                <p class="w-full text-gray-800 p-2">No se encontraron resultados</p>
+                <p class="w-full p-2 dark:text-gray-200 text-gray-800 ">No se encontraron resultados</p>
             @endforelse
 
         </div>
@@ -98,7 +109,7 @@ new class extends Component {
         @if($selectedEst)
 
             @if($selectedEst->pilotoprogramas()->exists())
-                <x-index-search-show-warning-user :programas="$selectedEst->pilotoprogramas" mensaje="Antes de proceder, si tienes dudas, ácercate con un supervisor."/>
+                <x-index-search-show-warning-user :programas="$this->programas"/>
             @endif
 
             <x-index-user-table-card-dropdown titulo="Información Principal" opened="true">
@@ -186,7 +197,7 @@ new class extends Component {
             @endif
 
         @else
-            <div class="flex flex-col p-8 items-center justify-center text-gray-700">
+            <div class="flex flex-col p-8 items-center justify-center text-gray-700 dark:text-gray-400">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
                 </svg>

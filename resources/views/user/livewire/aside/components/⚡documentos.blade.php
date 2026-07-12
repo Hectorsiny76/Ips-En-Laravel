@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Storage;
 
 new class extends Component
 {
-    private $docString = 'doc';
-    private $linkBool = true;
-
     public function downloadFile($filePath, $title)
     {
         $disk = 'local';
@@ -27,11 +24,11 @@ new class extends Component
         $documentos = Archivo::with('archivotipo')->orderBy('archivotipo_id')->get();
 
         $docs = Archivo::whereHas('archivotipo', function ($query) {
-           $query->where('nombre','ilike', $this->docString);
+           $query->where('es_link', false);
         })->get();
 
         $links = Archivo::whereHas('archivotipo', function ($query) {
-            $query->where('es_link', $this->linkBool);
+            $query->where('es_link', true);
         })->get();
 
         return view ('user.livewire.aside.components.⚡documentos',[
@@ -48,7 +45,7 @@ new class extends Component
 
     <x-aside-header-user-card titulo="📋 Archivos"/>
 
-    <div class="grid grid-flow-cols gap-2 w-full text-xs lg:text-lg p-2">
+    <div class="grid grid-flow-cols gap-2 w-full h-full text-xs lg:text-lg p-2">
 
         <x-index-user-table-card-dropdown :primary="false" titulo="Documentos" :opened="true">
 

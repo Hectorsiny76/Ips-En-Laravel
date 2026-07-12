@@ -20,20 +20,20 @@
     @livewireStyles
 </head>
 
-<body>
+<body class="bg-gray-100 dark:bg-gray-900">
 
     <div class="flex flex-col h-dvh relative">
-        <header class="flex items-center justify-between p-2 bg-green-800 text-white border-b">
+        <header class="flex items-center justify-between p-2 border-b bg-primary-800 text-white dark:text-gray-200 dark:border-transparent dark:bg-primary-900">
 
             <div class="flex items-center pl-2">
                 <div class="mr-2 h-10 w-10 lg:h-20 lg:w-20">
                     <a href="{{ route('admin.admin_layout.dashboard')}}">
-                        <img class="rounded-sm" src="{{ asset('images/descarga.png') }}" alt="Logo">
+                        <img class="rounded-sm dark:brightness-75" src="{{ asset('images/descarga.png') }}" alt="Logo">
                     </a>
                 </div>
                 <div class="text-xs lg:text-lg flex flex-col">
                     <span class="font-bold">Mesa de Servicio ICONN</span>
-                    <span class="">Soluciones para TI</span>
+                    <span>Soluciones para TI</span>
                 </div>
             </div>
 
@@ -41,17 +41,15 @@
 
         </header>
 
-        <div class="flex-1 grid-cols-12 py-4 bg-gray-100 grid justify-center gap-12">
+        <div class="flex-1 grid-cols-12 py-4 bg-gray-100 dark:bg-gray-900 grid justify-center gap-12">
 
-            <main class="flex col-span-7 col-start-2 h-full flex-col bg-white rounded-xl p-6 shadow-xl">
+            <main class="flex col-span-7 col-start-2 h-full flex-col rounded-xl p-6 shadow-xl bg-white  dark:bg-gray-800">
 
                 @yield('contenido')
 
             </main>
 
-            <aside class="w-full h-full flex-shrink-0 col-span-3 bg-white rounded-xl shadow-xl">
-
-                <x-session-alert/>
+            <aside class="w-full h-full flex-shrink-0 col-span-3 bg-white dark:bg-gray-800 rounded-xl shadow-xl">
 
                 {{$slot ?? ''}}
 
@@ -61,22 +59,42 @@
 
         </div>
 
-        <div class="h-2 fixed bottom-12 right-5">
+        <div class="
+            h-auto w-[40px] lg:w-[60px] flex fixed bottom-6 right-6 border dark:border-gray-400
+            border-gray-800 rounded-full
+            "
+             :class="{
+                    'justify-end': darkMode,
+                    'justify-start': !darkMode,
+             }"
+        >
             <button
                 type="button"
-                class="flex items-center gap-2 px-3 py-2 rounded-full dark:text-gray-300 dark:bg-transparent dark:hover:bg-gray-600/50 dark:hover:text-gray-100 hover:bg-gray-800 hover:text-white border border-green-700 transition-colors"
+                class="relative w-7 h-5 lg:h-6 flex items-center px-3 py-2 rounded-full text-gray-800 dark:text-gray-200 dark:bg-transparent dark:hover:bg-white dark:hover:text-black hover:bg-gray-800 hover:text-white transition-colors"
                 @click="darkMode = !darkMode"
             >
-                <svg x-cloak x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-                </svg>
+                <div
+                    :class=" darkMode ? 'translate-x-2 lg:translate-x-1' : 'translate-x-0'"
+                    class=" absolute left-1 top-1 transition-transform duration-300 ease-in-out">
+                    <svg x-cloak x-show="!darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                         stroke-width="1.5" stroke="currentColor" class="size-3 lg:size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z"/>
+                    </svg>
 
-                <svg x-cloak x-show="darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-                </svg>
+                    <svg x-cloak x-show="darkMode" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                         stroke-width="1.5" stroke="currentColor" class="size-3 lg:size-4">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                              d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/>
+                    </svg>
+                </div>
 
             </button>
         </div>
+
+        <x-session-alert/>
+
+        <x-index-modal-warning-user/>
 
     </div>
     @livewireScripts

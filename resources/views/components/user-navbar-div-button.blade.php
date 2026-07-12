@@ -1,6 +1,6 @@
 @props(['dispatch' => '', 'title', 'icon', 'link' => false, 'href' => ''])
 
-<div class=" border border-green-700 rounded-lg {{!$link ? '' : 'py-2' }} shadow-xl/20 m-0.5 hover:bg-green-700 transition-colors duration-300">
+<div class="transition-colors duration-300 shadow-xl/20 m-0.5 rounded-lg {{!$link ? '' : 'py-2' }} border-2 border-primary-700 hover:bg-primary-700 dark:border-primary-800 dark:hover:bg-primary-800">
     @if(!$link)
         <button wire:click="{{$dispatch}}"
                 class="p-2 w-full h-full">
